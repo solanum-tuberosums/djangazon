@@ -3,7 +3,7 @@ from django import forms
 
 
 class UserForm(forms.ModelForm):
-	"""
+    """
     This class represents an HTML form to login and authenticate users.
 
     ----Fields----
@@ -21,4 +21,3 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password', 'first_name', 'last_name',)
 
-        
