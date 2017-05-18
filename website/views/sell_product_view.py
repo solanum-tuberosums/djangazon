@@ -18,6 +18,7 @@ def sell_product(request):
             description = form_data['description'],
             price = form_data['price'],
             quantity = form_data['quantity'],
+            product_category_id = form_data['product_category']
         )
         p.save()
         template_name = 'product/success.html'
