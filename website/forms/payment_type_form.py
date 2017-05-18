@@ -2,7 +2,7 @@ from django import forms
 from website.models import PaymentType
 
 class PaymentTypeForm(forms.ModelForm):
-	"""
+    """
     This class represents an HTML form to login and authenticate users.
 
     ----Fields----
