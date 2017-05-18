@@ -26,7 +26,7 @@ class Product (models.Model):
         User,
         on_delete=models.CASCADE,
     )
-    product_category_id = models.ForeignKey(ProductCategory)
+    product_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     price = models.IntegerField()
