@@ -14,4 +14,3 @@ class PaymentTypeForm(forms.ModelForm):
 	class Meta:
 		model = PaymentType
 		fields = ('account_number',)
-		
