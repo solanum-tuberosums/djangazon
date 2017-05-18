@@ -1,5 +1,5 @@
 from django import forms
-from website.models.payment_type_model import PaymentType
+from website.models import PaymentType
 
 class PaymentTypeForm(forms.ModelForm):
 
