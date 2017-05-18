@@ -1,0 +1,19 @@
+
+
+<nav>
+    <a class='navbar-brand' href='#'>Bangazon</a>
+    <ul class="navbar-nav">
+    {% if user.is_authenticated %}
+      <li class='nav-item'>
+        <a class='nav-link' href="{% url 'website:logout' %}">Logout</a>
+      </li>
+    {% else %}
+    <li class='nav-item'>
+      <a class='nav-link' href="{% url 'website:register' %}">Register</a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link' href="{% url 'website:login' %}">Login</a>
+    </li>
+    {% endif %}
+    </ul>
+  </nav>

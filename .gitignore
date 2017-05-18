@@ -6,5 +6,8 @@ bin
 obj
 *.db
 *.sqlite3
+static/
 /.github
-/migrations
+migrations/
+settings.py
+
