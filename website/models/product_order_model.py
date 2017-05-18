@@ -5,6 +5,7 @@ djangazon model configuration for the product_order joining table
 from django.db import models
 
 from website.models.product_model import Product
+from website.models.order_model import Order
 
 
 class ProductOrder (models.Model):
@@ -14,9 +15,11 @@ class ProductOrder (models.Model):
 
     ----Fields----
     product_id(foreign key): Links to Product(ProductID) with a foreign key
-    ETC . . . 
+    order_id(foreign key): Links to Order(OrderID) with a foreign key
+   
 
-    Author: ?
+    Author: Jessica Younker
     """
 
     product_id = models.ForeignKey(Product)
+    order_id = models.ForeignKey(Order)
