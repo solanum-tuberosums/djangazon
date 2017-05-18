@@ -1,19 +1,20 @@
 """
-djangazon model configuration for category
+djangazon model configuration for product category
 """
 
 from django.db import models
 
 
-class Category (models.Model):
+class ProductCategory (models.Model):
     """
     This class models a product category in the database.
 
     ----Fields----
-    label(character): a category's title
-    ETC . . . 
+    label(character): a product category's title
 
-    Author: ?
+
+    Author: Jeremy Bakker
     """
 
     label = models.CharField(max_length=255)
+
