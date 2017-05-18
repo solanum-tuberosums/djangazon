@@ -7,4 +7,6 @@ obj
 *.db
 *.sqlite3
 static/
-migrations/
+/.github
+/migrations
+

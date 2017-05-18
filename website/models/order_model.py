@@ -1,8 +1,10 @@
 """
 djangazon model configuration for order
 """
-
 from django.db import models
+
+from website.models.payment_type_model import PaymentType
+from website.models.profile_model import Profile
 
 
 class Order (models.Model):
@@ -10,12 +12,15 @@ class Order (models.Model):
     This class models an order in the database.
 
     ----Fields----
+    payment_type_id(foreign key): a foreign key attached to the payment type ID
     order_date(date): an order's date
-    ETC . . . 
+    profile_id(foreign key): a foreign key attached to the user profile ID
 
-    Author: ?
+    Author: Jeremy Bakker
     """
 
+    payment_type_id = models.ForeignKey(PaymentType)
     order_date = models.DateField()
+    profile_id = models.ForeignKey(Profile)
 
 
