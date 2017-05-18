@@ -8,6 +8,6 @@ obj
 *.sqlite3
 static/
 /.github
-/migrations
+migrations/
 settings.py
 
