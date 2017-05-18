@@ -3,6 +3,8 @@ from django.contrib.auth import login, authenticate
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 
+from website.forms.login_form import LoginForm
+
 def login_user(request):
     '''Handles the creation of a new user for authentication
 
@@ -32,4 +34,8 @@ def login_user(request):
             return HttpResponse("Invalid login details supplied.")
 
 
-    return render(request, 'login.html', {}, context)
+        return render(request, 'login.html', {}, context)
+    elif request.method == 'GET':
+        login_form = LoginForm()
+        template_name = "login.html"
+        return render(request, template_name, {"login_form":login_form})
