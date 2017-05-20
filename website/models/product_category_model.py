@@ -16,7 +16,7 @@ class ProductCategory (models.Model):
     Author: Jeremy Bakker
     """
 
-    label = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
 
     def __str__(self):
-    	return self.label
+    	return self.title
