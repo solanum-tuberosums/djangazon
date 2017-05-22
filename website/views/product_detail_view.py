@@ -24,4 +24,4 @@ def product_detail(request, product_id):
 	new_product = [("Seller", seller_name), ("Description", product.description), ("Price", product.price), ("Quantity", product.quantity), ("Date Listed", product.date_added)]
 
 	
-	return render(request, template_name, {'object_to_display': new_product, "page_title":product.title})
+	return render(request, template_name, {'object_to_display': new_product, "page_title":product.title, "product_id": product_id})

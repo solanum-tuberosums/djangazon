@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <h1>{{ page_title }}</h1>
+
+
+
+    <ul>
+    {% for item in items %}
+        <li><a href="/product-categories/{{ item.0.id }}">{{ item.0 }}</a></li>
+
+        <ol>
+            {% for x in item.1 %}
+                <li>{{ x }}</li>
+            {% endfor %}
+        </ol>
+
+
+    {% empty %}
+        <h3> Sorry! No products</h3>
+    {% endfor %}
+    </ul>
+    
+{% endblock %}
