@@ -21,7 +21,7 @@ def product_detail(request, product_id):
 
 	# This part can probably be refactored, I just wanted to get something that works merged in
 	# (manually extracting the product data and creating a list of tuples is probably resource expensive)
-	new_product = [("Seller", seller_name), ("Description", product.description), ("Price", product.price), ("Quantity", product.quantity), ("Date Added", product.date_added)]
+	new_product = [("Seller", seller_name), ("Description", product.description), ("Price", product.price), ("Quantity", product.quantity), ("Date Listed", product.date_added)]
 
 	
 	return render(request, template_name, {'object_to_display': new_product, "page_title":product.title})
