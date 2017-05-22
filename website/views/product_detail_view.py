@@ -13,10 +13,10 @@ def product_detail(request, product_id):
 	"""
 
 	template_name = 'product/detail.html'
-	product = Product.objects.get(id=product_id)
+	product = Product.objects.get(pk=product_id)
 
 	# Get seller object
-	seller = User.objects.get(id=product.seller_id)
+	seller = User.objects.get(pk=product.seller_id)
 	seller_name = " ".join([seller.first_name.title(), seller.last_name.title()])
 
 	# This part can probably be refactored, I just wanted to get something that works merged in
