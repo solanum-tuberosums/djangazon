@@ -32,4 +32,3 @@ class Product (models.Model):
     price = models.IntegerField()
     quantity = models.IntegerField()
     date_added = models.DateField()
-    
