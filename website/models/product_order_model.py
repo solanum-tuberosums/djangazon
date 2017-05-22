@@ -21,5 +21,5 @@ class ProductOrder (models.Model):
     Author: Jessica Younker
     """
 
-    product_id = models.ForeignKey(Product)
-    order_id = models.ForeignKey(Order)
+    product = models.ForeignKey(Product)
+    order = models.ForeignKey(Order)

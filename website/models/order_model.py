@@ -19,8 +19,8 @@ class Order (models.Model):
     Author: Jeremy Bakker
     """
 
-    payment_type_id = models.ForeignKey(PaymentType)
+    payment_type = models.ForeignKey(PaymentType)
     order_date = models.DateField()
-    profile_id = models.ForeignKey(Profile)
+    profile = models.ForeignKey(Profile)
 
 

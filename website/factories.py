@@ -73,7 +73,7 @@ class PaymentTypeFactory(factory.django.DjangoModelFactory):
     account_nickname = factory.Faker('word')
     account_type = factory.Faker('credit_card_provider')
     account_number = factory.Faker('credit_card_number')
-    profile_id = factory.Iterator(Profile.objects.all())
+    cardholder_id = factory.Iterator(Profile.objects.all())
 
 class OrderFactory(factory.django.DjangoModelFactory):
     """
