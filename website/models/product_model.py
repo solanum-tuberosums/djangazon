@@ -31,4 +31,4 @@ class Product (models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.FloatField()
     quantity = models.IntegerField()
-    date_added = models.DateTimeField()
+    date_added = models.DateField()
