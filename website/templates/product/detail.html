@@ -18,4 +18,7 @@
 		
 	    {% endfor %}
     </ul>
+    {% if type == "product" %}
+        <button action="{% url 'website:product_detail' %}" method="post">Add to Cart</button>
+    {% endif %}
 {% endblock %}
