@@ -15,9 +15,9 @@ class Command(BaseCommand):
     load our data to them via Faker. These commands are, in order:
     1. python manage.py makemigrations website
     2. python manage.py migrate
-    3. (Factory Calls): Department, Customer, Computer, TrainingProgram, ProductType, Employee,
-        Supervisor, Product, PaymentType, Order, OrderProduct, EmployeeComputer, EmployeeTraining,
-        CustomerSupportSpecialist, CustomerSupportTicket
+    3. (Factory Calls): User, Profile, ProductCategory, Product, PaymentType, 
+                        Order, OrderProduct
+        
 
 
     Author: Jeremy Bakker
@@ -26,6 +26,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         management.call_command('makemigrations', 'website')
         management.call_command('migrate')
+        UserFactory.create_batch(size=100)
         ProfileFactory.create_batch(size=100)
         ProductCategoryFactory.create_batch(size=10)
         ProductFactory.create_batch(size=50)

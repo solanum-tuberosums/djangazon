@@ -3,6 +3,10 @@ bangazon factory to create sample data to seed a database using Faker in lieu of
 fixtures
 """
 
+import factory
+import datetime
+from django.utils import timezone
+
 from django.contrib.auth.models import User
 from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
@@ -11,7 +15,38 @@ from website.models.product_model import Product
 from website.models.product_order_model import ProductOrder
 from website.models.profile_model import Profile
 
-import factory
+
+class UserFactory(factory.django.DjangoModelFactory):
+    """
+    This class creates data for the user table in the API's database.
+
+    ----Fields----
+    password('uuid4'): a fake user password
+    last_login(django timezone.now()): a fake date of last login
+    is_superuser(hard-coded "0"): indicating a non-super user
+    first_name('first_name'): fake first name of a user
+    last_name('last_name'): fake last name of a user
+    email('email'): fake email address of a user
+    is_staff(hard-coded "0"): indicating non-staff
+    is_active: indicating an active user
+    date_joined(django timezone.now()): fake date on which user joined
+    username('uuid4'): fake username
+
+    Author: Jeremy Bakker
+    """
+
+    class Meta:
+        model = User
+    password = factory.Faker('uuid4')
+    last_login = timezone.now()
+    is_superuser = "0"
+    first_name = factory.Faker('first_name')
+    last_name = factory.Faker('last_name')
+    email = factory.Faker('email')
+    is_staff = "0"
+    is_active = "1"
+    date_joined = timezone.now()
+    username = factory.Faker('uuid4')
 
 
 class ProductCategoryFactory(factory.django.DjangoModelFactory):
@@ -27,7 +62,6 @@ class ProductCategoryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = ProductCategory
     title = factory.Faker('word')
-
 
 class ProductFactory(factory.django.DjangoModelFactory):
     """
@@ -53,7 +87,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     quantity = factory.Faker('random_int')
     date_added = factory.Faker('date')
     product_category = factory.Iterator(ProductCategory.objects.all())
-    seller_id = User.objects.get(id="1").pk
+    seller = factory.Iterator(User.objects.all())
 
 class PaymentTypeFactory(factory.django.DjangoModelFactory):
     """
@@ -73,7 +107,7 @@ class PaymentTypeFactory(factory.django.DjangoModelFactory):
     account_nickname = factory.Faker('word')
     account_type = factory.Faker('credit_card_provider')
     account_number = factory.Faker('credit_card_number')
-    profile_id = factory.Iterator(Profile.objects.all())
+    cardholder = factory.Iterator(User.objects.all())
 
 class OrderFactory(factory.django.DjangoModelFactory):
     """
@@ -90,8 +124,8 @@ class OrderFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Order
     order_date = factory.Faker('date')
-    payment_type_id = factory.Iterator(PaymentType.objects.all())
-    profile_id = factory.Iterator(Profile.objects.all())
+    payment_type = factory.Iterator(PaymentType.objects.all())
+    profile = factory.Iterator(Profile.objects.all())
 
 class ProductOrderFactory(factory.django.DjangoModelFactory):
     """
@@ -106,8 +140,8 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
     
     class Meta:
         model = ProductOrder
-    order_id = factory.Iterator(Order.objects.all())
-    product_id = factory.Iterator(Product.objects.all())
+    order = factory.Iterator(Order.objects.all())
+    product = factory.Iterator(Product.objects.all())
 
 class ProfileFactory(factory.django.DjangoModelFactory):
     """
@@ -129,4 +163,4 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     city = factory.Faker('city')
     state = factory.Faker('state')
     postal_code = factory.Faker('zipcode')
-    user_id = User.objects.get(id="1")
+    user = User.objects.get(id="1")

@@ -21,7 +21,7 @@ class Profile (models.Model):
     Author: Jeremy Bakker
     """
 
-    user_id = models.ForeignKey(User)
+    user = models.ForeignKey(User)
     street_address = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=20)
