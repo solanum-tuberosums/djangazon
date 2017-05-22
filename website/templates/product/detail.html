@@ -6,8 +6,16 @@
     <ul>
 	    {% for key_val_pair in object_to_display %}
 
-		    <li>{{ key_val_pair.0 }}: {{ key_val_pair.1 }}</li>
-		    
+	    	{% if key_val_pair.0 == "Price" %}
+
+			    <li><strong>{{ key_val_pair.0 }}</strong>: ${{ key_val_pair.1 }}</li>
+
+			{% else %}
+			   
+				<li><strong>{{ key_val_pair.0 }}</strong>: {{ key_val_pair.1 }}</li>
+
+	    	{% endif %}
+		
 	    {% endfor %}
     </ul>
 {% endblock %}

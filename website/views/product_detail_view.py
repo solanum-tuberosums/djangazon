@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from website.models.product_model import Product
+from django.contrib.auth.models import User
 
 def product_detail(request, product_id):
 	"""
@@ -14,8 +15,13 @@ def product_detail(request, product_id):
 	template_name = 'product/detail.html'
 	product = Product.objects.get(id__exact=product_id)
 
+	# Get seller object
+	seller = User.objects.get(id__exact=product.id)
+	seller_name = " ".join([seller.first_name.title(), seller.last_name.title()])
+
 	# This part can probably be refactored, I just wanted to get something that works merged in
 	# (manually extracting the product data and creating a list of tuples is probably resource expensive)
-	new_product = [("Description", product.description), ("Price", product.price), ("Quantity", product.quantity)]
+	new_product = [("Seller", seller_name), ("Description", product.description), ("Price", product.price), ("Quantity", product.quantity)]
+
 	
 	return render(request, template_name, {'object_to_display': new_product, "page_title":product.title})
