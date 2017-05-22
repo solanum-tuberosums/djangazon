@@ -2,6 +2,8 @@ from django.shortcuts import render
 from website.forms import ProductForm
 from website.models.product_model import Product
 
+from datetime import datetime
+
 def sell_product(request):
     if request.method == 'GET':
         product_form = ProductForm()
@@ -17,7 +19,8 @@ def sell_product(request):
             description = form_data['description'],
             price = form_data['price'],
             quantity = form_data['quantity'],
-            product_category_id = form_data['product_category']
+            product_category_id = form_data['product_category'],
+            date_added = datetime.now(),
         )
         p.save()
         template_name = 'product/success.html'

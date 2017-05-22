@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
   {% block content %}
-
+	
+	<div class="jumbotron">
     <h1>Welcome to Bangazon!</h1>
     {% if user.is_authenticated %}
     <h1>Bangazon says... hello {{ user.username }}!</h1>
     {% else %}
     <h1>Bangazon says...</h1>
     {% endif %}
-
+	</div>
+	
   {% endblock %}
