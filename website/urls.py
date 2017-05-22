@@ -4,11 +4,13 @@ from . import views
 
 app_name = "website"
 urlpatterns = [
-    url(r'^$', views.index_view.index, name='index'),
-    url(r'^login$', views.login_user_view.login_user, name='login'),
-    url(r'^logout$', views.user_logout_view.user_logout, name='logout'),
-    url(r'^register$', views.register_view.register, name='register'),
-    url(r'^sell$', views.sell_product_view.sell_product, name='sell'),
-    url(r'^products$', views.list_products_view.list_products, name='list_products'),
-    # url(r'^product_categories$', views.list_product_categories_view.list_product_categories, name='list_product_categories'),
+    url(r'^$', views.index, name='index'),
+    url(r'^login$', views.login_user, name='login'),
+    url(r'^logout$', views.user_logout, name='logout'),
+    url(r'^register$', views.register, name='register'),
+    url(r'^sell$', views.sell_product, name='sell'),
+    url(r'^products$', views.list_products, name='list_products'),
+    url(r'^product-categories$', views.list_product_categories, name='list_product_categories'),
+    url(r'^products/(?P<product_id>[0-9]+)/$', views.product_detail, name="product_detail"),
+    url(r'^product-categories/(?P<category_id>[0-9]+)/$', views.product_category_detail, name="product_category_detail")
 ]

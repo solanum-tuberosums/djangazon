@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content%}
-    <h1>Products</h1>
+    <h1>{{ page_title }}</h1>
 
-    <ol>
-    {% for product in products %}
-        <li>{{ product.title }}</li>
-    {% endfor %}
-    </ol>
 
+    <!-- PRODUCT CATEGORIES LIST -->
+    {% if page_title == "Product Categories" %}
+        <ol>
+        {% for item in items %}
+            <li><a href="/product-categories/{{ item.id }}">{{ item.title }}</a></li>
+        {% empty %}
+            <h3> Sorry! No products</h3>
+        {% endfor %}
+        </ol>
+    {% endif %}
+
+    <!-- PRODUCTS LIST -->
+    {% if page_title == "Products" %}
+        <ol>
+        {% for item in items %}
+            <li><a href="/products/{{ item.id }}">{{ item.title }}</a></li>
+        {% empty %}
+            <h3> Sorry! No products</h3>
+        {% endfor %}
+        </ol>
+    {% endif %}
 {% endblock %}

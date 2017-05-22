@@ -26,3 +26,6 @@ class Profile (models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=20)
     postal_code = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.user_id
