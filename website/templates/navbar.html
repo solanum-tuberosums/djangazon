@@ -1,19 +1,42 @@
 
 
-<nav class='navbar navbar-default'>
+<nav class='navbar navbar-default' style="background-color: #e3f2fd">
+  <div class="container-fluid">
     <a class='navbar-brand' href='#'>Bangazon</a>
     <ul class="nav navbar-nav">
     {% if user.is_authenticated %}
-      <li class='nav-item navbar-right'>
-        <a class='nav-link' href="{% url 'website:logout' %}">Logout</a>
+      <li>
+        <a href="{% url 'website:logout' %}">Logout</a>
       </li>
-    {% else %}
-    <li class='nav-item'>
-      <a class='nav-link' href="{% url 'website:register' %}">Register</a>
-    </li>
-    <li class='nav-item navbar-right'>
-      <a class='nav-link navbar-right' href="{% url 'website:login' %}">Login</a>
-    </li>
-    {% endif %}
+    </ul>  
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="{% url 'website:logout' %}">My Account</a>
+      </li>
+      <li>
+        <a href="{% url 'website:sell' %}">Sell Product</a>
+      </li>
+      <li>
+        <a href="{% url 'website:logout' %}">My Products</a>
+      </li>
+      <li>
+        <a href="{% url 'website:logout' %}">Shopping Cart</a>
+      </li>
     </ul>
-  </nav>
+
+    {% else %}
+      <li>
+        <a href="{% url 'website:register' %}">Register</a>
+      </li>
+      <li>
+        <a href="{% url 'website:login' %}">Login</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="{% url 'website:login' %}">Categories</a>
+      </li>
+    </ul>
+    {% endif %}
+ </div> 
+</nav>
