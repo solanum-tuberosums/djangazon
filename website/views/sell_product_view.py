@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from website.forms import ProductForm
-from django.shortcuts import render
 from website.models.product_model import Product
 
 def sell_product(request):
