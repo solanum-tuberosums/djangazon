@@ -3,10 +3,19 @@
 {% block content%}
     <h1>{{ page_title }}</h1>
 
-    <ol>
-    {% for x in things %}
-        <li><a href="/products/{{ x.id }}">{{ x.title }}</a></li>
-    {% endfor %}
-    </ol>
+    {% if page_title == "Product Categories" %}
+	    <ol>
+	    {% for x in things %}
+	        <li><a href="/product-categories/{{ x.id }}">{{ x.title }}</a></li>
+	    {% endfor %}
+	    </ol>
+    {% endif %}
 
+    {% if page_title == "Products" %}
+	    <ol>
+	    {% for x in things %}
+	        <li><a href="/products/{{ x.id }}">{{ x.title }}</a></li>
+	    {% endfor %}
+	    </ol>
+    {% endif %}
 {% endblock %}
