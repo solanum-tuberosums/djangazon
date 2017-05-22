@@ -3,7 +3,9 @@ bangazon factory to create sample data to seed a database using Faker in lieu of
 fixtures
 """
 
-from random import randint
+import factory
+import datetime
+from django.utils import timezone
 
 from django.contrib.auth.models import User
 from website.models.order_model import Order
@@ -13,7 +15,21 @@ from website.models.product_model import Product
 from website.models.product_order_model import ProductOrder
 from website.models.profile_model import Profile
 
-import factory
+
+class UserFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = User
+    password = factory.Faker('uuid4')
+    last_login = timezone.now()
+    is_superuser = "0"
+    first_name = factory.Faker('first_name')
+    last_name = factory.Faker('last_name')
+    email = factory.Faker('email')
+    is_staff = "0"
+    is_active = "0"
+    date_joined = timezone.now()
+    username = factory.Faker('uuid4')
 
 
 class ProductCategoryFactory(factory.django.DjangoModelFactory):
@@ -55,7 +71,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     quantity = factory.Faker('random_int')
     date_added = factory.Faker('date')
     product_category = factory.Iterator(ProductCategory.objects.all())
-    seller = User.objects.get(pk="1")
+    seller = factory.Iterator(User.objects.all())
 
 class PaymentTypeFactory(factory.django.DjangoModelFactory):
     """
@@ -75,8 +91,7 @@ class PaymentTypeFactory(factory.django.DjangoModelFactory):
     account_nickname = factory.Faker('word')
     account_type = factory.Faker('credit_card_provider')
     account_number = factory.Faker('credit_card_number')
-    cardholder = User.objects.get(pk="1")
-
+    cardholder = factory.Iterator(User.objects.all())
 class OrderFactory(factory.django.DjangoModelFactory):
     """
     This class creates data for the order table in the API's database.
@@ -92,7 +107,7 @@ class OrderFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Order
     order_date = factory.Faker('date')
-    payment_type = PaymentType.objects.get(pk=str(randint(1,100)))
+    payment_type = factory.Iterator(PaymentType.objects.all())
     profile = factory.Iterator(Profile.objects.all())
 
 class ProductOrderFactory(factory.django.DjangoModelFactory):
@@ -108,8 +123,8 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
     
     class Meta:
         model = ProductOrder
-    order = Order.objects.get(pk=str(randint(1,20)))
-    product = Product.objects.get(pk=str(randint(1,50)))
+    order = factory.Iterator(Order.objects.all())
+    product = factory.Iterator(Product.objects.all())
 
 class ProfileFactory(factory.django.DjangoModelFactory):
     """
