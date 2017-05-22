@@ -14,7 +14,9 @@ class ProductForm(forms.ModelForm):
     Author: Will Sims
     """
 
+    price = forms.FloatField(min_value=0.01, max_value=100000000)
+    quantity = forms.IntegerField(min_value=1, max_value=100000)
     class Meta:
         model = Product
-        fields = ('title', 'description', 'price', 'quantity')
+        fields = ('title', 'description', 'price', 'quantity', 'product_category')
 
