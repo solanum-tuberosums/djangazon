@@ -3,6 +3,8 @@ bangazon factory to create sample data to seed a database using Faker in lieu of
 fixtures
 """
 
+from random import randint
+
 from django.contrib.auth.models import User
 from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
@@ -53,7 +55,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     quantity = factory.Faker('random_int')
     date_added = factory.Faker('date')
     product_category = factory.Iterator(ProductCategory.objects.all())
-    seller_id = User.objects.get(id="1").pk
+    seller = User.objects.get(pk="1")
 
 class PaymentTypeFactory(factory.django.DjangoModelFactory):
     """
@@ -73,7 +75,7 @@ class PaymentTypeFactory(factory.django.DjangoModelFactory):
     account_nickname = factory.Faker('word')
     account_type = factory.Faker('credit_card_provider')
     account_number = factory.Faker('credit_card_number')
-    cardholder_id = factory.Iterator(Profile.objects.all())
+    cardholder = User.objects.get(pk="1")
 
 class OrderFactory(factory.django.DjangoModelFactory):
     """
@@ -90,8 +92,8 @@ class OrderFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Order
     order_date = factory.Faker('date')
-    payment_type_id = factory.Iterator(PaymentType.objects.all())
-    profile_id = factory.Iterator(Profile.objects.all())
+    payment_type = PaymentType.objects.get(pk=str(randint(1,100)))
+    profile = factory.Iterator(Profile.objects.all())
 
 class ProductOrderFactory(factory.django.DjangoModelFactory):
     """
@@ -106,8 +108,8 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
     
     class Meta:
         model = ProductOrder
-    order_id = factory.Iterator(Order.objects.all())
-    product_id = factory.Iterator(Product.objects.all())
+    order = Order.objects.get(pk=str(randint(1,20)))
+    product = Product.objects.get(pk=str(randint(1,50)))
 
 class ProfileFactory(factory.django.DjangoModelFactory):
     """
@@ -129,4 +131,4 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     city = factory.Faker('city')
     state = factory.Faker('state')
     postal_code = factory.Faker('zipcode')
-    user_id = User.objects.get(id="1")
+    user = User.objects.get(id="1")
