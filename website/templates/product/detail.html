@@ -5,7 +5,9 @@
 
     <ul>
 	    {% for key_val_pair in object_to_display %}
+
 		    <li>{{ key_val_pair.0 }}: {{ key_val_pair.1 }}</li>
+		    
 	    {% endfor %}
     </ul>
 {% endblock %}
