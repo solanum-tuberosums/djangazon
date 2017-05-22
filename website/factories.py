@@ -17,6 +17,23 @@ from website.models.profile_model import Profile
 
 
 class UserFactory(factory.django.DjangoModelFactory):
+    """
+    This class creates data for the user table in the API's database.
+
+    ----Fields----
+    password('uuid4'): a fake user password
+    last_login(django timezone.now()): a fake date of last login
+    is_superuser(hard-coded "0"): indicating a non-super user
+    first_name('first_name'): fake first name of a user
+    last_name('last_name'): fake last name of a user
+    email('email'): fake email address of a user
+    is_staff(hard-coded "0"): indicating non-staff
+    is_active: indicating an active user
+    date_joined(django timezone.now()): fake date on which user joined
+    username('uuid4'): fake username
+
+    Author: Jeremy Bakker
+    """
 
     class Meta:
         model = User
@@ -27,7 +44,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     last_name = factory.Faker('last_name')
     email = factory.Faker('email')
     is_staff = "0"
-    is_active = "0"
+    is_active = "1"
     date_joined = timezone.now()
     username = factory.Faker('uuid4')
 
@@ -45,7 +62,6 @@ class ProductCategoryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = ProductCategory
     title = factory.Faker('word')
-
 
 class ProductFactory(factory.django.DjangoModelFactory):
     """
@@ -92,6 +108,7 @@ class PaymentTypeFactory(factory.django.DjangoModelFactory):
     account_type = factory.Faker('credit_card_provider')
     account_number = factory.Faker('credit_card_number')
     cardholder = factory.Iterator(User.objects.all())
+
 class OrderFactory(factory.django.DjangoModelFactory):
     """
     This class creates data for the order table in the API's database.
