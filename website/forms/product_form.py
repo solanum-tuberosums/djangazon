@@ -18,5 +18,5 @@ class ProductForm(forms.ModelForm):
     quantity = forms.IntegerField(min_value=1, max_value=100000)
     class Meta:
         model = Product
-        fields = ('title', 'description', 'price', 'quantity')
+        fields = ('title', 'description', 'price', 'quantity', 'product_category')
 
