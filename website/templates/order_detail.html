@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+  {% block content %}
+	
+  {% for order in order %}
+	<div class="jumbotron">
+    <h1>Order # {{ order.id }}</h1>
+	</div>
+  <h3>Products on Order</h3>
+  <table class="table">
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price/Unit</th>
+      <th>Subtotal</th>
+    </tr>
+    {% for product in orderproducts %}
+    <tr>
+      <td>{{ product.title }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.price*product.quantity }}</td>
+    </tr>
+    {% endfor%}
+  </table>
+  
+  {% empty %}
+  <div class="jumbotron">
+    <h3>You have no active order</h3>
+  </div>
+	{% endfor %}
+
+  {% endblock %}
+
+  {% block footer %}
+
+  {% endblock %}
