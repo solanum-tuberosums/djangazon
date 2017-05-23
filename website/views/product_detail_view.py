@@ -40,7 +40,7 @@ def product_detail(request, product_id=None):
 			"product_id": product.pk})
 
 	elif request.method == 'POST':
-		order = Order.objects.filter(profile_id=request.user.id, payment_type_id=None)
+		order = Order.objects.filter(user_id=request.user.id, payment_type_id=None)
 		po = ProductOrder(
 			order_id = order.latest('id').id,
 			product_id = product_id
