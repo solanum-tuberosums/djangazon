@@ -10,8 +10,8 @@ def my_account(request, user_id):
 
     Author: Blaise Roberts
     """
-  
+
     template_name = 'my_account.html'
     payment_types = PaymentType.objects.filter(cardholder=user_id)
-  
+
     return render(request, template_name, {"payment_types": payment_types})
