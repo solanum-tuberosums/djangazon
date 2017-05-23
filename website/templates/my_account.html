@@ -3,5 +3,9 @@
 	{% block content %}
 		<p>My Account</p>
 		<p>for {{ request.user.first_name }} {{ request.user.last_name }}</p>
+
+
+
+		<a href="{% url 'website:payment_type' %}">Create Payment Type</a>
 	{% endblock %}
 
