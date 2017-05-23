@@ -18,10 +18,12 @@
 		
 	    {% endfor %}
     </ul>
-    {% if type == "product" %}
-        <form action="{% url 'website:product_detail' product_id %}" method="post">
-            {% csrf_token %}
-            <input type="submit"  value = "Add to Cart"/>
-        </form>
+    {% if user.is_authenticated %}
+        {% if type == "product" %}
+            <form action="{% url 'website:product_detail' product_id %}" method="post">
+                {% csrf_token %}
+                <input type="submit"  value = "Add to Cart"/>
+            </form>
+        {% endif %}
     {% endif %}
 {% endblock %}
