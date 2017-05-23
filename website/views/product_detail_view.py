@@ -51,7 +51,7 @@ def product_detail(request, product_id=None):
 		order = Order.objects.latest('id')
 		po = ProductOrder(
 			order_id = order.pk,
-			product_id = request.path[10:-1]
+			product_id = product_id
 		)
 		po.save()
 		template_name = 'product/success.html'
