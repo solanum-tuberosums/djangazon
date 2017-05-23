@@ -4,7 +4,8 @@ djangazon model configuration for order
 from django.db import models
 
 from website.models.payment_type_model import PaymentType
-from website.models.profile_model import User
+from django.contrib.auth.models import User
+
 
 
 class Order (models.Model):
