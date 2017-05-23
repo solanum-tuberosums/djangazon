@@ -8,6 +8,9 @@ def index(request):
 		order = Order.objects.get(user=request.user)
 	except:
 		order = 'fail'
-    template_name = 'index.html'
-    products = Product.objects.all()
-    return render(request, template_name, {'order':order, 'products': products})
+	template_name = 'index.html'
+	products = Product.objects.all().order_by('-id')[:20]
+	product_title_list = list()
+	for product in products:
+		product_title_list.append(product.title)
+	return render(request, template_name, {'order':order, 'product_title_list': product_title_list})
