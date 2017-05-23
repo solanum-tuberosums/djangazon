@@ -14,7 +14,7 @@ class Order (models.Model):
     ----Fields----
     payment_type_id(foreign key): a foreign key attached to the payment type ID
     order_date(date): an order's date
-    profile_id(foreign key): a foreign key attached to the user profile ID
+    userforeign key): a foreign key attached to the user profile ID
 
     Author: Jeremy Bakker
     """

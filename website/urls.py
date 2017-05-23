@@ -15,4 +15,7 @@ urlpatterns = [
     url(r'^products/(?P<product_id>[0-9]+)/$', views.product_detail, name="product_detail"),
     url(r'^product-categories/(?P<category_id>[0-9]+)/$', views.product_category_detail, name="product_category_detail"),
     url(r'^completeorder$', views.complete_order, name='complete_order')
+    url(r'^order/(?P<order_id>[0-9]+)/$', views.order_detail, name="order_detail"), 
+    url(r'^order/$', views.no_order, name='no_order')
+
 ]

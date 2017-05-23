@@ -7,6 +7,8 @@ from website.views.user_logout_view import user_logout
 from website.views.payment_type_view import add_payment_type
 from website.views.list_product_categories_view import list_product_categories
 from website.views.product_detail_view import product_detail
+from website.views.order_detail_view import order_detail
+from website.views.no_order_view import no_order
 from website.views.product_category_detail_view import product_category_detail
 from website.views.complete_order_view import complete_order
 
