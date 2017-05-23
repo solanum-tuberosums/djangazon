@@ -50,9 +50,8 @@ def product_detail(request, product_id=None):
 				user = request.user
 				)
 			order.save()
-		order = Order.objects.filter(user=request.user, payment_type = None)
 		po = ProductOrder(
-			order_id = order.latest('id').id,
+			order_id = order.pk,
 			product_id = product_id
 		)
 		po.save()
