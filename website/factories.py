@@ -125,7 +125,7 @@ class OrderFactory(factory.django.DjangoModelFactory):
         model = Order
     order_date = factory.Faker('date')
     payment_type = None
-    profile = factory.Iterator(Profile.objects.all())
+    user = factory.Iterator(User.objects.all())
 
 class ProductOrderFactory(factory.django.DjangoModelFactory):
     """

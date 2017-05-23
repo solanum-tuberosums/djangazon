@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 from website.models.product_model import Product
 from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
 from website.models.product_order_model import ProductOrder
-from django.contrib.auth.models import User
 
 
 def product_detail(request, product_id=None):
@@ -40,7 +41,17 @@ def product_detail(request, product_id=None):
 			"product_id": product.pk})
 
 	elif request.method == 'POST':
-		order = Order.objects.filter(user_id=request.user.id, payment_type_id=None)
+		try: 
+			order = Order.objects.filter(user=request.user, payment_type_id = \
+				None)
+		except:
+			order = Order(
+				order_date = timezone.now(),
+				payment_type = PaymentType.objects.get(cardholder_id = \
+				    request.user),
+				user = request.user
+				)
+			o.save()
 		po = ProductOrder(
 			order_id = order.latest('id').id,
 			product_id = product_id
