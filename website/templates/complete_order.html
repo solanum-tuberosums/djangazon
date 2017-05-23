@@ -8,6 +8,7 @@
         <option value="{{ payment_type.id }}">{{ payment_type.account_nickname }}</option>
     {% endfor %}
     </select>
+    <a href="{% url 'website:complete_order' %}">Submit</a>
 </form>  
 
 <h2>- or -</h3>

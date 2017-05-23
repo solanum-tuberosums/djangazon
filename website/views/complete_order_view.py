@@ -10,17 +10,18 @@ def complete_order(request):
         payment_types = PaymentType.objects.filter(cardholder=request.user)
         return render(request, template_name, {'payment_types': payment_types})
 
-    # elif request.method == 'POST':
-    #     form_data = request.POST
-    #     co= CompleteOrder(
-    #         payment_type = form_data['payment_type'],
-    #         order_date = form_data['order_date'],
-    #         profile = request.user,
-    #         )
-    #     co.save()
-    #     template_name = 'index.html'
-    #     #should redirect back to thank you/success page
-    #     return render(request, template_name, {})
+    elif request.method == 'POST':
+        form_data = request.POST
+        #verify payment_type
+        o= Order(
+            payment_type = form_data['payment_type'],
+            order_date = form_data['order_date'],
+            profile = request.user,
+            )
+        o.save()
+        template_name = 'index.html'
+        #should redirect back to thank you/success page
+        return render(request, template_name, {})
 
 
         
