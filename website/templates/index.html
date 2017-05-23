@@ -11,8 +11,8 @@
     {% endif %}
 	</div>
   <div>
-    {% for title in product_title_list %}
-      <li> {{title}} </li>
+    {% for product in product_dict_list %}
+      <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
     {% endfor %}
   </div>
 	

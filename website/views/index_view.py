@@ -10,8 +10,12 @@ def index(request):
 		order = 'fail'
 	template_name = 'index.html'
 	products = Product.objects.all().order_by('-id')[:20]
-	product_title_list = list()
+	product_dict_list = list()
 	for product in products:
-		product_title_list.append(product.title)
-	return render(request, template_name, {'order':order, 'product_title_list'\
-		: product_title_list})
+		product_dict = dict()
+		product_dict["title"] = product.title
+		product_dict["id"] = product.id
+		product_dict_list.append(product_dict)
+	print("product_dict", product_dict)
+	return render(request, template_name, {'order':order, 'product_dict_list'\
+		: product_dict_list})
