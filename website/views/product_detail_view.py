@@ -5,7 +5,6 @@ from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
 from website.models.product_order_model import ProductOrder
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 
 def product_detail(request, product_id=None):
@@ -41,16 +40,9 @@ def product_detail(request, product_id=None):
 			"product_id": product.pk})
 
 	elif request.method == 'POST':
-		o = Order(
-			order_date = timezone.now(),
-			payment_type = PaymentType.objects.get(cardholder_id = \
-				request.user.id),
-			profile_id = request.user.id
-			)
-		o.save()
-		order = Order.objects.latest('id')
+		order = Order.objects.filter(profile_id=request.user.id, payment_type_id=None)
 		po = ProductOrder(
-			order_id = order.pk,
+			order_id = order.latest('id').id,
 			product_id = product_id
 		)
 		po.save()
