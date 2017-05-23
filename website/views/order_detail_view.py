@@ -17,9 +17,15 @@ def order_detail(request, order_id):
 	order = Order.objects.get(pk=order_id)
 
 	# Get seller object
-	line_items = ProductOrder.objects.filter(order=order_id)
-	products = Product.objects.filter(pk=line_items)
+	line_items = ProductOrder.objects.filter(order=order_id).values_list('product_id').distinct()
+	product_list = list()
+	total = int()
+	for x in line_items:
+		product = Product.objects.filter(pk=x[0])
+		product_count = ProductOrder.objects.filter(product_id=x[0], order=order_id).count()
+		subtotal = product[0].price * product_count
+		total += subtotal
+		product_list.append((product, product_count, subtotal))
 
-	
-	
-	return render(request, template_name, {'order': order, "orderproducts":products})
+
+	return render(request, template_name, {'order': order, "orderproducts":product_list, "total":total})
