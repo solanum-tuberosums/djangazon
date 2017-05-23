@@ -11,16 +11,16 @@
     </ul>  
     <ul class="nav navbar-nav navbar-right">
       <li>
-        <a href="{% url 'website:login' %}">Categories</a>
+        <a href="{% url 'website:list_product_categories' %}">Categories</a>
       </li>
       <li>
-        <a href="{% url 'website:logout' %}">My Account</a>
+        <a href="my-account/{{ user.id }}">My Account</a>
       </li>
       <li>
         <a href="{% url 'website:sell' %}">Sell Product</a>
       </li>
       <li>
-        <a href="{% url 'website:logout' %}">My Products</a>
+        <a href="my-products/{{ user.id }}">My Products</a>
       </li>
       <li>
         <a href="/order/{{ order.id }}">Shopping Cart</a>
@@ -37,7 +37,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li>
-        <a href="{% url 'website:login' %}">Categories</a>
+        <a href="{% url 'website:list_product_categories' %}">Categories</a>
       </li>
     </ul>
     {% endif %}

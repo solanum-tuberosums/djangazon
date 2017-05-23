@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+	{% block content %}
+		<p>My Account</p>
+		<p>for {{ request.user.first_name }} {{ request.user.last_name }}</p>
+	{% endblock %}
+

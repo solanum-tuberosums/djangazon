@@ -25,4 +25,16 @@
         {% endfor %}
         </ol>
     {% endif %}
+
+    <!-- MY PRODUCTS LIST -->
+    {% if page_title == "My Products" %}
+        <ol>
+        {% for item in items %}
+            <li><a href="/products/{{ item.id }}">{{ item.title }}</a></li>
+        {% empty %}
+            <h3> Sorry! No products</h3>
+        {% endfor %}
+        </ol>
+    {% endif %}
+
 {% endblock %}
