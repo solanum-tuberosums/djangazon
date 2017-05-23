@@ -10,5 +10,10 @@
     <h1>Bangazon says...</h1>
     {% endif %}
 	</div>
+  <div>
+    {% for product in product_dict_list %}
+      <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
+    {% endfor %}
+  </div>
 	
   {% endblock %}
