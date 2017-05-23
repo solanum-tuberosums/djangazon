@@ -16,5 +16,4 @@ def product_category_detail(request, category_id):
 	
 	products_in_category = Product.objects.filter(product_category=category_id)
 	
-	# return render(request, template_name, {'object_to_display': new_category, "page_title": my_product_category.title, "items":items})
 	return render(request, template_name, {'items': products_in_category, "page_title": my_product_category.title})

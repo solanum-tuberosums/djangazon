@@ -4,22 +4,28 @@ from website.models.product_model import ProductCategory
 from website.models import Product
 
 def list_product_categories(request):
+    """
+    Name: list_product_categories()
+    Purpose: grabs the 3 most recent items added for each product category
+    Author: Will Sims
+    """
     all_product_categories = ProductCategory.objects.all()
     template_name = 'product/product_category_list.html'
 
-    print(type(all_product_categories))
+    # This is the list that will eventually be returned
+    final_three_products = list()
 
-    stuff = list()
-
+    # For each category
     for category in all_product_categories:
+        # Get top 3 proeducrs
     	temp_top_three_products = Product.objects.filter(product_category=category.id).order_by('-id')[:3]
-    	print("CATEGORY: {}".format(category))
-    	formatted_top_three_products = list()
+        # Make a list
+    	placeholder_list = list()
+        # For each product in each category:
+    	for product in temp_top_three_products:
+            # Add each the top 3 products to a placeholder list
+    		placeholder_list.append(product.title)
+        # After the second loop, create a tuple with a length of 2 (0 = CategoryName, 1 = Top3Products)
+    	final_three_products.append((category, placeholder_list))
 
-    	for x in temp_top_three_products:
-    		formatted_top_three_products.append(x.title)
-
-    	stuff.append((category, formatted_top_three_products))
-
-
-    return render(request, template_name, {'items': stuff, "page_title": "Product Categories"})
+    return render(request, template_name, {'items': final_three_products, "page_title": "Product Categories"})
