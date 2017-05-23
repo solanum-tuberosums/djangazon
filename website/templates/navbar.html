@@ -2,7 +2,7 @@
 
 <nav class='navbar navbar-default' style="background-color: #e3f2fd">
   <div class="container-fluid">
-    <a class='navbar-brand' href='#'>Bangazon</a>
+    <a class='navbar-brand' href='/'>Bangazon</a>
     <ul class="nav navbar-nav">
     {% if user.is_authenticated %}
       <li>
@@ -10,6 +10,9 @@
       </li>
     </ul>  
     <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="{% url 'website:login' %}">Categories</a>
+      </li>
       <li>
         <a href="{% url 'website:logout' %}">My Account</a>
       </li>
@@ -20,7 +23,7 @@
         <a href="{% url 'website:logout' %}">My Products</a>
       </li>
       <li>
-        <a href="#">Shopping Cart</a>
+        <a href="/order/{{ order.id }}">Shopping Cart</a>
       </li>
     </ul>
 
