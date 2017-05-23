@@ -1,11 +1,33 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 	{% block content %}
 		<p>My Account</p>
 		<p>for {{ request.user.first_name }} {{ request.user.last_name }}</p>
 
+        {% if payment_types %}
+            <h4>Payment Types</h4>
 
+        {% else %}
+
+        {% endif %}
+
+        <ol class="container row">
+            {% for payment_type in payment_types  %}
+                <li class="col-sm-12">
+                    <span class="col-sm-4">{{ payment_type }}</span>
+
+
+                    <input type="button" class="btn btn-sm btn-danger col-sm-1" value="Delete"></input>
+
+
+                    <div class="col-sm-7"></div>
+                </li>
+            {% empty %}
+                <h4>No Payment Types!</h4>
+                <span><p>Add a payment type below</p></span>
+            {% endfor %}
+        </ol>
 
 		<a href="{% url 'website:payment_type' %}">Create Payment Type</a>
 	{% endblock %}
-

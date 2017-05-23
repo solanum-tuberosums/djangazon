@@ -17,9 +17,9 @@ def add_payment_type(request):
             cardholder = request.user
             )
         pt.save()
-        template_name = 'index.html'
+        template_name = 'product/success.html'
         #should redirect back to list of payment types
-        return render(request, template_name, {})
+        return render(request, template_name, {"posted_object":"Payment Type", "posted_object_identifier": pt.account_nickname})
 
     
 

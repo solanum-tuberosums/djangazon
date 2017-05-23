@@ -22,7 +22,7 @@ class Product (models.Model):
 
     Author: Jessica Younker
     """
-    seller = models.ForeignKey(User,on_delete=models.CASCADE,)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE,)
     product_category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name="category_products")
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
