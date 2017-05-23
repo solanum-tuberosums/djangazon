@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from website.models.product_model import ProductCategory
+from website.models.product_model import ProductCategory, Product
 
 def product_category_detail(request, category_id):
 	"""
@@ -11,15 +11,9 @@ def product_category_detail(request, category_id):
 	Author: Will Sims
 	"""
 
-	template_name = 'product/detail.html'
-	product_category = ProductCategory.objects.get(id__exact=category_id)
-
-	# This part can probably be refactored, I just wanted to get something that works merged in
-	# (manually extracting the product data and creating a list of tuples is probably resource expensive)
-
+	template_name = 'product/list.html'
+	my_product_category = ProductCategory.objects.get(pk=category_id)
 	
-
+	products_in_category = Product.objects.filter(product_category=category_id)
 	
-	new_category = [("id: ", product_category.id), ("Title: ", product_category.title)]
-	
-	return render(request, template_name, {'object_to_display': new_category, "page_title":product_category.title})
+	return render(request, template_name, {'items': products_in_category, "page_title": my_product_category.title})
