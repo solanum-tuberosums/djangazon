@@ -22,4 +22,4 @@ class ProductOrder (models.Model):
     """
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="fk_order")
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)

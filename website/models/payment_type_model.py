@@ -18,7 +18,7 @@ class PaymentType(models.Model):
     Author: Jeremy Bakker  
     """
         
-    cardholder = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_payment_types")
+    cardholder = models.ForeignKey(User, on_delete=models.CASCADE)
     account_nickname = models.CharField(max_length=20)
     account_type = models.CharField(max_length=20)
     account_number = models.DecimalField(max_digits=20, decimal_places=0)
