@@ -57,4 +57,4 @@ def product_detail(request, product_id=None):
 		po.save()
 		template_name = 'product/success.html'
 		
-		return render(request, template_name, {})
+		return render(request, template_name, {"order": order})
