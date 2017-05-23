@@ -9,7 +9,7 @@
             <h4>Payment Types</h4>
 
         {% else %}
-            
+
         {% endif %}
 
         <ol class="container row">
@@ -31,9 +31,3 @@
 
 		<a href="{% url 'website:payment_type' %}">Create Payment Type</a>
 	{% endblock %}
-
-    <script
-            src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
-    <script src="{% static 'bootstrap.js' %}"></script>
