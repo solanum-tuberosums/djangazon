@@ -34,7 +34,6 @@ def product_detail(request, product_id=None):
 		return render(request, template_name, {'object_to_display': new_product, "page_title":product.title, "type": "product", "product_id": product.pk})
 
 	elif request.method == 'POST':
-		print('request.user.id', request.user.id)
 		o = Order(
 			order_date = timezone.now(),
 			payment_type = PaymentType.objects.get(cardholder_id=request.user.id),
@@ -42,10 +41,9 @@ def product_detail(request, product_id=None):
 			)
 		o.save()
 		order = Order.objects.latest('id')
-		print("dir(order_pk)", dir(order))
 		po = ProductOrder(
 			order_id = order.pk,
-			product_id = request.path[-2:-1]
+			product_id = request.path[10:-1]
     	)
 		po.save()
 		template_name = 'index.html'
