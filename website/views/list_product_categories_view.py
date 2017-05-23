@@ -19,7 +19,6 @@ def list_product_categories(request):
 
 
 
-
 	# For each category
 	for category in all_product_categories:
 		# Get top 3 proeducrs
@@ -29,7 +28,7 @@ def list_product_categories(request):
 		# For each product in each category:
 		for product in temp_top_three_products:
 			# Add each the top 3 products to a placeholder list
-			placeholder_list.append(product.title)
+			placeholder_list.append((product.id, product.title))
 
 		# Get count for each category
 		this_category_product_count = category.category_products.count()
