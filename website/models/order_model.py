@@ -6,9 +6,6 @@ from django.db import models
 from website.models.payment_type_model import PaymentType
 from django.contrib.auth.models import User
 
-
-from django.contrib.auth.models import User
-
 class Order (models.Model):
     """
     This class models an order in the database.
