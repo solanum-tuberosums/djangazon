@@ -7,6 +7,7 @@ from website.models.payment_type_model import PaymentType
 from django.contrib.auth.models import User
 
 
+
 class Order (models.Model):
     """
     This class models an order in the database.
@@ -14,7 +15,7 @@ class Order (models.Model):
     ----Fields----
     payment_type_id(foreign key): a foreign key attached to the payment type ID
     order_date(date): an order's date
-    profile_id(foreign key): a foreign key attached to the user profile ID
+    userforeign key): a foreign key attached to the user profile ID
 
     Author: Jeremy Bakker
     """
