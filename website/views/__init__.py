@@ -8,4 +8,5 @@ from website.views.payment_type_view import add_payment_type
 from website.views.list_product_categories_view import list_product_categories
 from website.views.product_detail_view import product_detail
 from website.views.product_category_detail_view import product_category_detail
+from website.views.complete_order_view import complete_order
 
