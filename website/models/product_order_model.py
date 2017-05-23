@@ -21,5 +21,5 @@ class ProductOrder (models.Model):
     Author: Jessica Younker
     """
 
-    product = models.ForeignKey(Product)
-    order = models.ForeignKey(Order)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="fk_order")
