@@ -35,6 +35,7 @@ def product_detail(request, product_id=None):
 			product.description), ("Price", product.price), ("Quantity", \
 			product.quantity), ("Date Listed", product.date_added)]
 
+
 		
 		return render(request, template_name, {'object_to_display': \
 			new_product, "page_title":product.title, "type": "product", \
@@ -58,3 +59,4 @@ def product_detail(request, product_id=None):
 		template_name = 'product/success.html'
 		
 		return render(request, template_name, {"order": order})
+
