@@ -12,7 +12,8 @@ def product_detail(request, product_id=None):
 	"""
 	This function renders the request using:
 		- TEMPLATE: product/detail.html
-		- OBJECT: The Product that was clicked on is the data that this view returns
+		- OBJECT: The Product that was clicked on is the data that this view 
+			returns
 
 	Author: Will Sims
 	"""
@@ -24,19 +25,26 @@ def product_detail(request, product_id=None):
 
 		# Get seller object
 		seller = User.objects.get(pk=product.seller_id)
-		seller_name = " ".join([seller.first_name.title(), seller.last_name.title()])
+		seller_name = " ".join([seller.first_name.title(), seller.last_name.\
+			title()])
 
-		# This part can probably be refactored, I just wanted to get something that works merged in
-		# (manually extracting the product data and creating a list of tuples is probably resource expensive)
-		new_product = [("Seller", seller_name), ("Description", product.description), ("Price", product.price), ("Quantity", product.quantity), ("Date Listed", product.date_added)]
+		# This part can probably be refactored, I just wanted to get something 
+		# that works merged in (manually extracting the product data and 
+		# creating a list of tuples is probably resource expensive)
+		new_product = [("Seller", seller_name), ("Description", \
+			product.description), ("Price", product.price), ("Quantity", \
+			product.quantity), ("Date Listed", product.date_added)]
 
 		
-		return render(request, template_name, {'object_to_display': new_product, "page_title":product.title, "type": "product", "product_id": product.pk})
+		return render(request, template_name, {'object_to_display': \
+			new_product, "page_title":product.title, "type": "product", \
+			"product_id": product.pk})
 
 	elif request.method == 'POST':
 		o = Order(
 			order_date = timezone.now(),
-			payment_type = PaymentType.objects.get(cardholder_id=request.user.id),
+			payment_type = PaymentType.objects.get(cardholder_id = \
+				request.user.id),
 			profile_id = request.user.id
 			)
 		o.save()
@@ -44,7 +52,7 @@ def product_detail(request, product_id=None):
 		po = ProductOrder(
 			order_id = order.pk,
 			product_id = request.path[10:-1]
-    	)
+		)
 		po.save()
 		template_name = 'product/success.html'
 		
