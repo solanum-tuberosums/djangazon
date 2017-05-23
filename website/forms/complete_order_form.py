@@ -11,8 +11,9 @@ class CompleteOrderForm(forms.ModelForm):
     Author: Jessica Younker
     """
 
-    payment_type = forms.CharField(label="Select a payment type")
+    # account_nickname = forms.ChoiceField(label="Select a payment type")
 
     class Meta:
         model = Order
         fields = ('payment_type', )
+
