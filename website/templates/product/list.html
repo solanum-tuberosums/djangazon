@@ -4,25 +4,13 @@
     <h1>{{ page_title }}</h1>
 
 
-    <!-- PRODUCT CATEGORIES LIST -->
-    {% if page_title == "Product Categories" %}
-        <ol>
-        {% for item in items %}
-            <li><a href="/product-categories/{{ item.id }}">{{ item.title }}</a></li>
-        {% empty %}
-            <h3> Sorry! No products</h3>
-        {% endfor %}
-        </ol>
-    {% endif %}
 
-    <!-- PRODUCTS LIST -->
-    {% if page_title == "Products" %}
-        <ol>
+    <ul>
         {% for item in items %}
             <li><a href="/products/{{ item.id }}">{{ item.title }}</a></li>
         {% empty %}
             <h3> Sorry! No products</h3>
         {% endfor %}
-        </ol>
-    {% endif %}
+    </ul>
+
 {% endblock %}

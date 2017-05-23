@@ -6,7 +6,6 @@ from django.db import models
 from website.models.payment_type_model import PaymentType
 from django.contrib.auth.models import User
 
-
 class Order (models.Model):
     """
     This class models an order in the database.
@@ -19,7 +18,8 @@ class Order (models.Model):
     Author: Jeremy Bakker
     """
 
-    payment_type = models.ForeignKey(PaymentType, null=True)
+    payment_type = models.ForeignKey(PaymentType, on_delete=models.CASCADE)
+    payment_type = models.ForeignKey(PaymentType, null=True, on_delete=models.CASCADE)
     order_date = models.DateField()
     user = models.ForeignKey(User)
 
