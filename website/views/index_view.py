@@ -13,4 +13,5 @@ def index(request):
 	product_title_list = list()
 	for product in products:
 		product_title_list.append(product.title)
-	return render(request, template_name, {'order':order, 'product_title_list': product_title_list})
+	return render(request, template_name, {'order':order, 'product_title_list'\
+		: product_title_list})
