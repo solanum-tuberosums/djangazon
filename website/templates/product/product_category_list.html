@@ -7,7 +7,7 @@
 
     <ul>
     {% for item in items %}
-        <li><a href="/product-categories/{{ item.0.id }}">{{ item.0 }}</a></li>
+        <li><a href="/product-categories/{{ item.0.id }}">{{ item.0 }} ({{ item.2 }})</a></li>
 
         <ol>
             {% for x in item.1 %}
