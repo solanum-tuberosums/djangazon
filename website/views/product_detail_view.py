@@ -46,6 +46,6 @@ def product_detail(request, product_id=None):
 			product_id = request.path[10:-1]
     	)
 		po.save()
-		template_name = 'index.html'
-		#should redirect back to list of payment types
+		template_name = 'product/success.html'
+		
 		return render(request, template_name, {})
