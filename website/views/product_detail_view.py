@@ -41,17 +41,16 @@ def product_detail(request, product_id=None):
 			"product_id": product.pk})
 
 	elif request.method == 'POST':
-		try: 
-			order = Order.objects.filter(user=request.user, payment_type_id = \
-				None)
-		except:
+		try:
+			order = Order.objects.get(user=request.user, payment_type=None)
+		except Order.DoesNotExist:
 			order = Order(
 				order_date = timezone.now(),
-				payment_type = PaymentType.objects.get(cardholder_id = \
-				    request.user),
+				payment_type = None,
 				user = request.user
 				)
-			o.save()
+			order.save()
+		order = Order.objects.filter(user=request.user, payment_type = None)
 		po = ProductOrder(
 			order_id = order.latest('id').id,
 			product_id = product_id
