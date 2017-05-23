@@ -1,10 +1,14 @@
 from django.shortcuts import render
 
 from website.models.product_model import Product
+from website.models.order_model import Order
+from website.models.payment_type_model import PaymentType
+from website.models.product_order_model import ProductOrder
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-def product_detail(request, product_id):
+
+def product_detail(request, product_id=None):
 	"""
 	This function renders the request using:
 		- TEMPLATE: product/detail.html
@@ -30,17 +34,18 @@ def product_detail(request, product_id):
 		return render(request, template_name, {'object_to_display': new_product, "page_title":product.title, "type": "product", "product_id": product.pk})
 
 	elif request.method == 'POST':
-		print('post')
+		print('request.user.id', request.user.id)
 		o = Order(
-			date = timezone.now(),
-			payment_type = None,
-			profile_id = request.user
+			order_date = timezone.now(),
+			payment_type = PaymentType.objects.get(cardholder_id=request.user.id),
+			profile_id = request.user.id
 			)
 		o.save()
-		order_pk = Order.objects.latest('id')
+		order = Order.objects.latest('id')
+		print("dir(order_pk)", dir(order))
 		po = ProductOrder(
-			order_id = order_pk,
-			product_id = Product.objects.get(pk=product_id)
+			order_id = order.pk,
+			product_id = request.path[-2:-1]
     	)
 		po.save()
 		template_name = 'index.html'

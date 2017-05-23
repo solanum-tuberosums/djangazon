@@ -19,6 +19,9 @@
 	    {% endfor %}
     </ul>
     {% if type == "product" %}
-        <button action="{% url 'website:product_detail' %}" method="post">Add to Cart</button>
+        <form action="{% url 'website:product_detail' product_id %}" method="post">
+            {% csrf_token %}
+            <input type="submit"  value = "Add to Cart"/>
+        </form>
     {% endif %}
 {% endblock %}
