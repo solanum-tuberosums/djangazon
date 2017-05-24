@@ -1,20 +1,17 @@
+{% extends 'base.html' %}
 
-<h2>Please select a payment type for this order:</h2>
+	 {% block content %}
+		<h2>Please select a payment type for this order:</h2>
 
-<form id="complete_order_form" action="{% url 'website:complete_order' %}" method="POST">
-    {% csrf_token %}
-    <!-- <select name="payment_type">
-    {% for payment_type in payment_types %}
-        <option value="{{ payment_type }}">{{ payment_type.account_nickname }}</option>
-    {% endfor %}
-    </select> -->
-    {{ complete_order_form.as_p }}
-    <input type="submit" value="Submit"></input>
-</form>  
+		<form id="complete_order_form" action="{% url 'website:complete_order' %}" method="POST">
+		    {% csrf_token %}
+		    {{ complete_order_form.as_p }}
+		    <input type="submit" value="Submit"></input>
+		</form>  
 
-<h2>- or -</h3>
-<a href="{% url 'website:payment_type' %}">Add New Payment Type</a>
+		<h2>- or -</h3>
+		<a href="{% url 'website:payment_type' %}">Add New Payment Type</a>
 
-
+	{% endblock %}
 
 

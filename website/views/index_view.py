@@ -5,7 +5,7 @@ from website.models.product_model import Product
 
 def index(request):
 	try:
-		order = Order.objects.get(user=request.user)
+		order = Order.objects.get(user=request.user, payment_type=None)
 	except:
 		order = 'fail'
 	template_name = 'index.html'
