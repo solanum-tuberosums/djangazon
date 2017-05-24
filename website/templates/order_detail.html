@@ -38,7 +38,10 @@
     </tr>
 
   </table>
+  {% if total > 0 %}
 	<a href="/completeorder" class="btn btn-info">Complete Order</a>
+  {% endif %}
+  
   <a href="/deleteorder" class ="btn btn-danger">Cancel Order</a>
 
   {% endblock %}

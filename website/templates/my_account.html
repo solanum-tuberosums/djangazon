@@ -2,9 +2,11 @@
 {% load staticfiles %}
 
 	{% block content %}
-		<p>My Account</p>
-		<p>for {{ request.user.first_name }} {{ request.user.last_name }}</p>
+		<h1 class="text-center">My Account</h1>
+		<p class="text-center lead">for {{ request.user.first_name }} {{ request.user.last_name }}</p>
+        
 
+        <div class="col-xs-6 col-xs-offset-3">
         {% if payment_types %}
             <h4>Payment Types</h4>
 
@@ -12,23 +14,25 @@
 
         {% endif %}
 
-        <ol class="container row">
+        <ol class="list-group">
             {% for payment_type in payment_types  %}
-                <li class="col-sm-12">
-                    <span class="col-sm-4">{{ payment_type }}</span>
-                    <form method="POST" action="{% url 'website:delete_payment_type' payment_type.id %}">
-                        {% csrf_token %}
-                        <input  type="submit" class="btn btn-sm btn-danger col-sm-1" value="Delete" name="delete_payment_type"></input>
-                    </form>
-
-
-                    <div class="col-sm-7"></div>
+                <li class="list-group-item lead">
+                    {{ payment_type }}
+                    <span style="float: right">
+                        <form style="display: inline" method="POST" action="{% url 'website:delete_payment_type' payment_type.id %}">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-sm btn-danger" value="Delete" name="delete_payment_type"></input>
+                        </form>
+                    </span>
                 </li>
             {% empty %}
+                <div class="text-center">
                 <h4>No Payment Types!</h4>
                 <span><p>Add a payment type below</p></span>
+                </div>
             {% endfor %}
         </ol>
-
-		<a href="{% url 'website:payment_type' %}">Create Payment Type</a>
+        <div class="text-center">
+		<a class="btn btn-primary" href="{% url 'website:payment_type' %}">Create Payment Type</a>
+        </div>
 	{% endblock %}

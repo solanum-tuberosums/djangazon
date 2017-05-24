@@ -2,18 +2,23 @@
 
   {% block content %}
 	
-	<div class="jumbotron">
+	<div class="jumbotron text-center">
     <h1>Welcome to Bangazon!</h1>
     {% if user.is_authenticated %}
-    <h1>Bangazon says... hello {{ user.username }}!</h1>
+    <p class="lead">Bangazon says... hello {{ user.username }}!</p>
     {% else %}
-    <h1>Bangazon says...</h1>
+    <p class="lead">Bangazon says...</p>
     {% endif %}
 	</div>
-  <div>
+  <h2 class="text-center">Recently Added 20 Products</h2>
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="list-group">
     {% for product in product_dict_list %}
-      <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
+      
+      <a class="list-group-item list-group-item-info lead" href="/products/{{ product.id }}">{{ product.title }} <span style="float: right">for ${{product.price}}0/unit</span></a>
+
     {% endfor %}
+    </div>
   </div>
 	
   {% endblock %}

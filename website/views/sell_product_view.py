@@ -23,5 +23,5 @@ def sell_product(request):
             date_added = datetime.now(),
         )
         p.save()
-        template_name = 'success.html'
-        return render(request, template_name, {})
+        template_name = 'success/product_added_to_sell_links.html'
+        return render(request, template_name, {'posted_object': 'Your Product added to Sell', 'posted_object_identifier': p.title})

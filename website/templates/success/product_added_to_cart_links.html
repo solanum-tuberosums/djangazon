@@ -1,0 +1,6 @@
+{% extends 'success/success.html' %}
+
+{% block links %}
+    <a class="btn btn-info" href="{% url 'website:list_product_categories' %}">Categories</a>
+	<a class="btn btn-primary" href="/order/{{ request.user.profile.get_user_order }}">Shopping Cart</a>
+{% endblock %}
