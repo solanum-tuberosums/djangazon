@@ -12,7 +12,7 @@ def list_product_categories(request):
 	Author: Will Sims
 	"""
 	all_product_categories = ProductCategory.objects.all()
-	template_name = 'product/product_category_list.html'
+	template_name = 'product_category_list.html'
 
 	# This is the list that will eventually be returned
 	final_three_products = list()

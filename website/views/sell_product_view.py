@@ -7,7 +7,7 @@ from datetime import datetime
 def sell_product(request):
     if request.method == 'GET':
         product_form = ProductForm()
-        template_name = 'product/create.html'
+        template_name = 'create.html'
         return render(request, template_name, {'product_form': product_form})
 
     elif request.method == 'POST':
@@ -23,5 +23,5 @@ def sell_product(request):
             date_added = datetime.now(),
         )
         p.save()
-        template_name = 'product/success.html'
+        template_name = 'success.html'
         return render(request, template_name, {})

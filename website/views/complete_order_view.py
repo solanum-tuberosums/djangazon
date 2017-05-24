@@ -6,7 +6,7 @@ from website.models.payment_type_model import PaymentType
 def complete_order(request):
     if request.method == 'GET':
         complete_order_form = CompleteOrderForm()
-        complete_order_form.fields['payment_type'].queryset = PaymentType.objects.filter(cardholder=request.user)
+        complete_order_form.fields['payment_type'].queryset = PaymentType.objects.filter(cardholder=request.user, is_active=1)
         template_name = 'complete_order.html'
         payment_types = PaymentType.objects.filter(cardholder=request.user)
         return render(request, template_name, {'payment_types': payment_types, "complete_order_form": complete_order_form})

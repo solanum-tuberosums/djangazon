@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 def order_detail(request, order_id):
 	"""
 	This function renders the request using:
-		- TEMPLATE: product/order_detail.html
+		- TEMPLATE: order_detail.html
 		- OBJECT: The Product that was clicked on is the data that this view returns
 
 	Author: Blaise Roberts

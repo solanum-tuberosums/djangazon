@@ -5,8 +5,9 @@
         <h1>{{ posted_object }} Added</h1>
         <h4>{{ posted_object_identifier }}</h4>
     {% else %}
-        <h1>Product Adde</h1>
+        <h1>Product Added</h1>
     {% endif %}
-    <a href="{% url 'website:list_products' %}">List Products</a>
+    <a href="{% url 'website:my_account' request.user.id %}">My Account</a>
     
 {% endblock %}
+
