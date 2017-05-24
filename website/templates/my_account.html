@@ -26,11 +26,13 @@
                     </span>
                 </li>
             {% empty %}
+                <div class="text-center">
                 <h4>No Payment Types!</h4>
                 <span><p>Add a payment type below</p></span>
+                </div>
             {% endfor %}
         </ol>
-
+        <div class="text-center">
 		<a class="btn btn-primary" href="{% url 'website:payment_type' %}">Create Payment Type</a>
         </div>
 	{% endblock %}
