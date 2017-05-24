@@ -25,7 +25,6 @@ def complete_order(request):
             user = request.user,
             order_date = open_order_date
             )
-        print("o printed", o.payment_type)
         o.save()
         template_name = 'success/order_links.html'
         
