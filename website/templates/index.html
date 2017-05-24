@@ -10,10 +10,15 @@
     <h1>Bangazon says...</h1>
     {% endif %}
 	</div>
-  <div>
+  <h2 class="text-center">Recently Added 20 Products</h2>
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="list-group">
     {% for product in product_dict_list %}
-      <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
+      
+      <a class="list-group-item list-group-item-info lead" href="/products/{{ product.id }}">{{ product.title }} <span style="float: right">for ${{product.price}}0/unit</span></a>
+
     {% endfor %}
+    </div>
   </div>
 	
   {% endblock %}

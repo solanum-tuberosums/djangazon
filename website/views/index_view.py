@@ -11,6 +11,7 @@ def index(request):
 		product_dict = dict()
 		product_dict["title"] = product.title
 		product_dict["id"] = product.id
+		product_dict["price"] = product.price
 		product_dict_list.append(product_dict)
 	return render(request, template_name, {'product_dict_list'\
 		: product_dict_list})
