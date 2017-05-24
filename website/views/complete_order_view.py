@@ -27,9 +27,10 @@ def complete_order(request):
             )
         print("o printed", o.payment_type)
         o.save()
-        template_name = 'index.html'
+        template_name = 'success/order_links.html'
+        
         #should redirect back to thank you/success page
-        return render(request, template_name, {})
+        return render(request, template_name, {'posted_object': 'Order Complete', 'posted_object_identifier': o.id})
 
 
         
