@@ -27,7 +27,7 @@ class Command(BaseCommand):
         management.call_command('makemigrations', 'website')
         management.call_command('migrate')
         UserFactory.create_batch(size=100)
-        ProfileFactory.create_batch(size=100)
+        # ProfileFactory.create_batch(size=100)
         ProductCategoryFactory.create_batch(size=10)
         ProductFactory.create_batch(size=50)
         PaymentTypeFactory.create_batch(size=100)
