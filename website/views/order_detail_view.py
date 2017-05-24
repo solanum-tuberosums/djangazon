@@ -4,6 +4,8 @@ from website.models.order_model import Order
 from website.models.product_order_model import ProductOrder
 from website.models.product_model import Product
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+
 
 def order_detail(request, order_id):
 	"""
@@ -29,3 +31,12 @@ def order_detail(request, order_id):
 
 
 	return render(request, template_name, {'order': order, "orderproducts":product_list, "total":total})
+
+def delete_product_from_order(request, product_id, order_id):
+
+	ProductOrder.objects.filter(product_id=product_id, order_id=order_id).delete()
+	return render(request, 'success.html', {"deleted_object":"Product"})
+
+
+
+
