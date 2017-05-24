@@ -108,6 +108,7 @@ class PaymentTypeFactory(factory.django.DjangoModelFactory):
     account_type = factory.Faker('credit_card_provider')
     account_number = factory.Faker('credit_card_number')
     cardholder = factory.Iterator(User.objects.all())
+    is_active = factory.Faker('boolean')
 
 class OrderFactory(factory.django.DjangoModelFactory):
     """
@@ -143,24 +144,24 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
     order = factory.Iterator(Order.objects.all())
     product = factory.Iterator(Product.objects.all())
 
-class ProfileFactory(factory.django.DjangoModelFactory):
-    """
-    This class creates data for the customer table in the API's database.
+# class ProfileFactory(factory.django.DjangoModelFactory):
+#     """
+#     This class creates data for the customer table in the API's database.
 
-    ----Fields----
-    street_address('street_address'): fake street address for a customer
-    city('city'): fake city for a customer
-    state('state'): fake state for a customer
-    postal_code('zipcode'): fake zip code for a customer
-    user_id(Iterator[User]): fake foreign key linked to the user table
+#     ----Fields----
+#     street_address('street_address'): fake street address for a customer
+#     city('city'): fake city for a customer
+#     state('state'): fake state for a customer
+#     postal_code('zipcode'): fake zip code for a customer
+#     user_id(Iterator[User]): fake foreign key linked to the user table
 
-    Author: Jeremy Bakker
-    """
+#     Author: Jeremy Bakker
+#     """
     
-    class Meta:
-        model = Profile
-    street_address = factory.Faker('street_address')
-    city = factory.Faker('city')
-    state = factory.Faker('state')
-    postal_code = factory.Faker('zipcode')
-    user = User.objects.get(id="1")
+#     class Meta:
+#         model = Profile
+#     street_address = factory.Faker('street_address')
+#     city = factory.Faker('city')
+#     state = factory.Faker('state')
+#     postal_code = factory.Faker('zipcode')
+#     user = factory.Iterator(User.objects.get(id="1"))

@@ -3,3 +3,4 @@ from website.models.product_category_model import ProductCategory
 from website.models.product_model import Product
 from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
+from website.models.profile_model import Profile
