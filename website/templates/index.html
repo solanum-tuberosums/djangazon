@@ -13,6 +13,8 @@
   <div>
     {% for product in product_dict_list %}
       <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
+    {% empty %}
+      <h4>{{ error }}</h4>
     {% endfor %}
   </div>
 	
