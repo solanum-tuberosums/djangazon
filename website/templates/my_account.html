@@ -16,9 +16,10 @@
             {% for payment_type in payment_types  %}
                 <li class="col-sm-12">
                     <span class="col-sm-4">{{ payment_type }}</span>
-
-
-                    <input type="button" class="btn btn-sm btn-danger col-sm-1" value="Delete"></input>
+                    <form method="POST" action="{% url 'website:delete_payment_type' payment_type.id %}">
+                        {% csrf_token %}
+                        <input  type="submit" class="btn btn-sm btn-danger col-sm-1" value="Delete" name="delete_payment_type"></input>
+                    </form>
 
 
                     <div class="col-sm-7"></div>

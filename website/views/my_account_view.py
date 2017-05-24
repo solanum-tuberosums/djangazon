@@ -12,6 +12,6 @@ def my_account(request, user_id):
     """
 
     template_name = 'my_account.html'
-    payment_types = PaymentType.objects.filter(cardholder=user_id)
+    payment_types = PaymentType.objects.filter(cardholder=user_id, is_active=True)
 
     return render(request, template_name, {"payment_types": payment_types})

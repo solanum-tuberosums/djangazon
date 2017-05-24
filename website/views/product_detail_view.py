@@ -11,7 +11,7 @@ from website.models.product_order_model import ProductOrder
 def product_detail(request, product_id=None):
 	"""
 	This function renders the request using:
-		- TEMPLATE: product/detail.html
+		- TEMPLATE: detail.html
 		- OBJECT: The Product that was clicked on is the data that this view 
 			returns
 
@@ -20,7 +20,7 @@ def product_detail(request, product_id=None):
 	
 	if request.method == 'GET':
 
-		template_name = 'product/detail.html'
+		template_name = 'detail.html'
 		product = Product.objects.get(pk=product_id)
 
 		# Get seller object
@@ -56,7 +56,7 @@ def product_detail(request, product_id=None):
 			product_id = product_id
 		)
 		po.save()
-		template_name = 'product/success.html'
+		template_name = 'success.html'
 		
 		return render(request, template_name, {"order": order})
 
