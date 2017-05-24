@@ -23,6 +23,7 @@ class PaymentType(models.Model):
     account_nickname = models.CharField(max_length=20)
     account_type = models.CharField(max_length=20)
     account_number = models.DecimalField(max_digits=20, decimal_places=0)
+    is_active = models.BooleanField()
 
     def __str__(self):
         return self.account_nickname

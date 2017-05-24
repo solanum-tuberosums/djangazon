@@ -4,7 +4,7 @@ from website.views.login_user_view import login_user
 from website.views.register_view import register
 from website.views.sell_product_view import sell_product
 from website.views.user_logout_view import user_logout
-from website.views.payment_type_view import add_payment_type
+from website.views.payment_type_view import add_payment_type, delete_payment_type
 from website.views.list_product_categories_view import list_product_categories
 from website.views.product_detail_view import product_detail
 from website.views.order_detail_view import order_detail

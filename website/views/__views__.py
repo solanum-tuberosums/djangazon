@@ -11,3 +11,4 @@ from website.views.no_order_view import no_order
 from website.views.my_account_view import my_account
 from website.views.list_my_products_view import list_my_products
 from website.views.product_category_detail_view import product_category_detail
+from website.views.payment_type_view import delete_payment_type, add_payment_type

@@ -10,6 +10,8 @@ urlpatterns = [
     url(r'^register$', views.register, name='register'),
     url(r'^sell$', views.sell_product, name='sell'),
     url(r'^paymenttype$', views.payment_type_view.add_payment_type, name='payment_type'),
+    url(r'^paymenttype/delete/(?P<payment_type_id>[0-9]+)/$', views.delete_payment_type, name="delete_payment_type"),
+
     url(r'^products$', views.list_products, name='list_products'),
     url(r'^my-account/(?P<user_id>[0-9]+)/$', views.my_account, name='my_account'),
     url(r'^my-products/(?P<user_id>[0-9]+)/$', views.list_my_products, name='my_products'),    

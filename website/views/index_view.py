@@ -16,6 +16,5 @@ def index(request):
 		product_dict["title"] = product.title
 		product_dict["id"] = product.id
 		product_dict_list.append(product_dict)
-	print("product_dict", product_dict)
 	return render(request, template_name, {'order':order, 'product_dict_list'\
 		: product_dict_list})
