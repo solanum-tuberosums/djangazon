@@ -21,7 +21,11 @@
       <td>{{ object.1 }}</td>
       <td>{{ product.price }}</td>
       <td>{{ object.2 }}</td>
-      <td><button class="btn btn-xs btn-danger">delete</button></td>
+      <form method="POST" action="{% url 'website:delete_product_from_order' product.id order.id %}">
+      {% csrf_token %}
+    <td>
+      <input type="submit" value="Delete" class="btn btn-xs btn-danger"></input></td>
+      </form>
       {% endfor%}
     </tr>
     {% endfor%}
@@ -34,7 +38,11 @@
     </tr>
 
   </table>
+  {% if total > 0 %}
 	<a href="/completeorder" class="btn btn-info">Complete Order</a>
+  {% endif %}
+  
+  <a href="/deleteorder" class ="btn btn-danger">Cancel Order</a>
 
   {% endblock %}
 

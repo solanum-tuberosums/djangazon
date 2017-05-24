@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content%}
-        <h1>Add New Payment Type</h1>
-
-        <form method="post" action="{% url 'website:payment_type' %}">
+        <h1 class="text-center" style="margin-bottom:1em">Add New Payment Type</h1>
+		
+        <form class="col-xs-6 col-xs-offset-3" method="post" action="{% url 'website:payment_type' %}">
             {% csrf_token %}
 
             {{ payment_type_form.as_p }}
-
-            <input type="submit" value="submit" />
+            <div class="text-center">
+            <input class="btn btn-success" style="margin-top:1em" type="submit" value="Submit" />
+            </div>
         </form>
+        
 {% endblock %}

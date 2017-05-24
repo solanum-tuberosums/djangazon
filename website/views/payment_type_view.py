@@ -20,9 +20,9 @@ def add_payment_type(request):
             is_active = True,
             )
         pt.save()
-        template_name = 'success.html'
+        template_name = 'success/payment_type_links.html'
         #should redirect back to list of payment types
-        return render(request, template_name, {"posted_object":"Payment Type", "posted_object_identifier": pt.account_nickname})
+        return render(request, template_name, {"posted_object":"Payment Type Added", "posted_object_identifier": pt.account_nickname})
 
     
 
@@ -33,4 +33,4 @@ def delete_payment_type(request, payment_type_id):
             pt = PaymentType.objects.get(pk=payment_type_id)
             pt.is_active = 0
             pt.save()
-            return render(request, 'delete.html', {"deleted_object":"Payment Type"})
+            return render(request, 'success/payment_type_links.html', {'posted_object': 'Payment Type Deleted', 'posted_object_identifier': pt.account_nickname})

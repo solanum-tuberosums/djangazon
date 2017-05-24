@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content%}
-        <h1>Register with Bangazon</h1>
-
+        <div class="jumbotron text-center">
+            <h1>Register with Bangazon</h1>
+        </div>
         {% if registered %}
-        <strong>Thank you for registering!</strong>
-        <a href="{% url 'website:index' %}">Return to the homepage.</a><br />
+        <div class="text-center">
+            <strong>Thank you for registering!</strong>
+            <a href="{% url 'website:index' %}">Return to the homepage.</a><br />
+        </div>
         {% else %}
-        <strong>Register here!</strong><br />
+        <p class="text-center lead">Register here!</p>
 
-        <form id="user_form" method="post" action="{% url 'website:register' %}"
+        <form class="col-xs-4 col-xs-offset-4" id="user_form" method="post" action="{% url 'website:register' %}"
                 enctype="multipart/form-data">
 
             {% csrf_token %}
@@ -20,7 +23,9 @@
             {{ user_form.as_p }}
 
             <!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="Register" />
+            <div class="text-center">
+                <input class="btn btn-primary" type="submit" name="submit" value="Register" />
+            </div>
         </form>
         {% endif %}
 {% endblock %}

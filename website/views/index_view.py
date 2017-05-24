@@ -17,3 +17,4 @@ def index(request):
 		return render(request, template_name, {'product_dict_list': my_product_list})
 	else:
 		return render(request, template_name, {'product_dict_list': [], "error": "No products are available."})
+

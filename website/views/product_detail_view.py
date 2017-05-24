@@ -42,6 +42,7 @@ def product_detail(request, product_id=None):
 			"product_id": product.pk})
 
 	elif request.method == 'POST':
+		product = Product.objects.get(pk=product_id)
 		try:
 			order = Order.objects.get(user=request.user, payment_type=None)
 		except Order.DoesNotExist:
@@ -56,7 +57,7 @@ def product_detail(request, product_id=None):
 			product_id = product_id
 		)
 		po.save()
-		template_name = 'success.html'
+		template_name = 'success/product_added_to_cart_links.html'
 		
-		return render(request, template_name, {"order": order})
+		return render(request, template_name, {'posted_object': 'Product Added to Cart', 'posted_object_identifier': product.title})
 
