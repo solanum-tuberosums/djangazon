@@ -108,6 +108,7 @@ class PaymentTypeFactory(factory.django.DjangoModelFactory):
     account_type = factory.Faker('credit_card_provider')
     account_number = factory.Faker('credit_card_number')
     cardholder = factory.Iterator(User.objects.all())
+    is_active = factory.Faker('boolean')
 
 class OrderFactory(factory.django.DjangoModelFactory):
     """
