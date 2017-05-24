@@ -2,12 +2,12 @@
 
   {% block content %}
 	
-	<div class="jumbotron">
+	<div class="jumbotron text-center">
     <h1>Welcome to Bangazon!</h1>
     {% if user.is_authenticated %}
-    <h1>Bangazon says... hello {{ user.username }}!</h1>
+    <p class="lead">Bangazon says... hello {{ user.username }}!</p>
     {% else %}
-    <h1>Bangazon says...</h1>
+    <p class="lead">Bangazon says...</p>
     {% endif %}
 	</div>
   <h2 class="text-center">Recently Added 20 Products</h2>
