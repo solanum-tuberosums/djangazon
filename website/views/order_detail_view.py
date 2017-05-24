@@ -34,7 +34,7 @@ def order_detail(request, order_id):
 
 		return render(request, template_name, {'order': order, "orderproducts":product_list, "total":total})
 	else:
-		return HttpResponseNotFound('<h1>Page not found</h1>')
+		return HttpResponseNotFound('<h1>Not your order, bruh!</h1>')
 
 def delete_product_from_order(request, product_id, order_id):
 	order = Order.objects.get(pk=order_id)
