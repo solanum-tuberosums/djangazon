@@ -18,19 +18,21 @@ from django.contrib.auth.models import User
 def create_user():
     return User.objects.create_user('admin', 'admin@test.com', 'pass')
 
+def login_user(username, password):
+    return authenticate(username=username, password=password)
+
 def create_product_category():
     return ProductCategory.objects.create(title="Test Category")
 
-def create_product():
+def create_product(name="Test Product", user=None):
     """
     Creates a product to be used within the test cases
     """
     time = timezone.now()
-    user = create_user()
     category = create_product_category()
     return Product.objects.create(  seller=user, \
                                     product_category=category, \
-                                    title="Test Product", \
+                                    title=name, \
                                     description="Test Description", \
                                     price=9.99, \
                                     quantity=5, \
@@ -45,6 +47,10 @@ def create_product():
 
 class WebsiteViewTests(TestCase):
 
+    ##################
+    ###   INDEX   ####
+    ##################
+
     def test_index_view_with_no_products(self):
         """
         If no products exist, an appropriate message should be displayed.
@@ -58,7 +64,26 @@ class WebsiteViewTests(TestCase):
         """
         Products should be displayed on the index page.
         """
-        create_product()
+        create_product(user=create_user())
         response = self.client.get(reverse('website:index'))
         self.assertQuerysetEqual(
             response.context['product_dict_list'],['<Product: Product object>'])
+
+    #######################
+    ###   CATEGORIES   ####
+    #######################
+
+    def test_list_product_categories_without_products(self):
+
+        response = self.client.get(reverse('website:list_product_categories'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response,  "No categories are available.")
+        self.assertQuerysetEqual(response.context["items"], [])
+
+    def test_list_product_categories_with_products(self):
+        my_user = create_user()
+        create_product(user=my_user)
+        create_product("Red Ball", user=my_user)
+        response = self.client.get(reverse('website:list_product_categories'))
+        # CategoryName, Top3, Count
+        self.assertQuerysetEqual(response.context['items'], ["(<ProductCategory: Test Category>, [(1, 'Test Product'), (2, 'Red Ball')], 1)"])
