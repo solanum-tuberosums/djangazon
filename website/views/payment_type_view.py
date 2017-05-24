@@ -28,9 +28,6 @@ def add_payment_type(request):
 
 def delete_payment_type(request, payment_type_id):
 
-    print("\n\n\nHELLO WORLD\n\n")
-
-
     if request.method == 'POST':
         if 'delete_payment_type' in request.POST:
             pt = PaymentType.objects.get(pk=payment_type_id)
