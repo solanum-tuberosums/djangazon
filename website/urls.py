@@ -20,7 +20,10 @@ urlpatterns = [
     url(r'^product-categories$', views.list_product_categories, name='list_product_categories'),
     url(r'^completeorder$', views.complete_order, name='complete_order'),
     url(r'^order/(?P<order_id>[0-9]+)/$', views.order_detail, name="order_detail"), 
-    url(r'^order/$', views.no_order, name='no_order')
+    url(r'^order/$', views.no_order, name='no_order'),
+    url(r'^deleteorder/$', views.delete_order, name='delete_order')
+    
+
 
 
 ]

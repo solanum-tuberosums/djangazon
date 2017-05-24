@@ -18,7 +18,6 @@ class Order (models.Model):
     Author: Jeremy Bakker
     """
 
-    payment_type = models.ForeignKey(PaymentType, on_delete=models.CASCADE)
     payment_type = models.ForeignKey(PaymentType, null=True, on_delete=models.CASCADE)
     order_date = models.DateField()
     user = models.ForeignKey(User)
