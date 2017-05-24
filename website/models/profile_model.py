@@ -36,10 +36,8 @@ class Profile (models.Model):
     postal_code = models.CharField(max_length=20)
 
     def get_user_order(self):
-
         try:
             order = Order.objects.get(user=self.user, payment_type=None)
-            print("\n\n\n\n\n\nsuccess{}".format(order))
             return order.id
         except:
             return ""
@@ -55,3 +53,24 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

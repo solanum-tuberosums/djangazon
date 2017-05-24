@@ -163,4 +163,4 @@ class ProductOrderFactory(factory.django.DjangoModelFactory):
 #     city = factory.Faker('city')
 #     state = factory.Faker('state')
 #     postal_code = factory.Faker('zipcode')
-#     user = User.objects.get(id="1")
+#     user = factory.Iterator(User.objects.get(id="1"))
