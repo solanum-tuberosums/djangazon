@@ -34,7 +34,7 @@ def create_product():
                                     description="Test Description", \
                                     price=9.99, \
                                     quantity=5, \
-                                    date_added=timezone.now())
+                                    date_added=time)
 
 
 
