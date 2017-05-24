@@ -15,4 +15,7 @@ class LoginForm(forms.ModelForm):
 
     class Meta:
         model = User
+        help_texts = {
+            'username':None,
+        }
         fields = ('username', 'password',)

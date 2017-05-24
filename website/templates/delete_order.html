@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
      {% block content %}
-        <h2>Please confirm </h2>
-
+     	<div class="jumbotron text-center">
+        	<h1>Danger, Danger...</h1>
+        	<p class="lead">Please Confirm </p>
+		</div>
+		<div class="text-center">
         <form id="delete_order_form" action="{% url 'website:delete_order' %}" method="POST">
             {% csrf_token %}
             <input type="submit" value="Confirm Deletion" class ="btn btn-danger"></input>
         </form>  
-
+		</div>
     {% endblock %}

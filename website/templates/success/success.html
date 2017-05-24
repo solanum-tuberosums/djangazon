@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <h1>{{ posted_object }}</h1>
-    <h4>{{ posted_object_identifier }}</h4>
-    
+	<div class="jumbotron text-center">
+    	<h1>{{ posted_object }}</h1>
+    	<h2>{{ posted_object_identifier }}</h2>
+    </div>
+    <div class="text-center">
     {% block links %}
     {% endblock %}
-    
+    </div>
     
 {% endblock %}
 

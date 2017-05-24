@@ -11,4 +11,4 @@ def delete_order(request):
         order_number = order.id
         order.delete()
         template_name = "success/order_links.html"
-        return render(request, template_name, {'deleted_object': order_number})
+        return render(request, template_name, {'posted_object': 'Your Order was Deleted', 'posted_object_identifier': order_number})
