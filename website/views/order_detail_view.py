@@ -56,3 +56,5 @@ def delete_product_from_order(request, product_id, order_id):
 		return render(request, template_name, {'order': order, "orderproducts":product_list, "total":total})
 	else:
 		return HttpResponseForbidden('<h1>Not your order, bruh!</h1><img src="/website/static/other.jpg">')
+
+
