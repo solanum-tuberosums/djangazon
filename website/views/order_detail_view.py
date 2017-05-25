@@ -19,7 +19,6 @@ def order_detail(request, order_id):
 	order = Order.objects.get(pk=order_id)
 
 	if request.user == order.user:
-
 		# Get seller object
 		line_items = ProductOrder.objects.filter(order=order_id).values_list('product_id').distinct()
 		product_list = list()
