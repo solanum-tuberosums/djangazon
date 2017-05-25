@@ -31,15 +31,27 @@ def create_product(name="Test Product", user=None, category=None):
     if category == None:
         category = create_product_category()
     time = timezone.now()
-    return Product.objects.create(  seller=user, \
-                                    product_category=category, \
-                                    title=name, \
-                                    description="Test Description", \
-                                    price=9.99, \
-                                    quantity=5, \
+    return Product.objects.create(  seller=user, 
+                                    product_category=category, 
+                                    title=name, 
+                                    description="Test Description", 
+                                    price=9.99, 
+                                    quantity=5, 
                                     date_added=time)
 
+def create_order(user):
+    return Order.objects.create(user=user, order_date=timezone.now())
 
+def create_product_order(order_id, product_id):
+    return ProductOrder.objects.create(order_id=order_id, product_id=product_id)
+
+def create_payment_type(user):
+    return PaymentType.objects.create(
+        account_nickname = "Test Payment Type",
+        account_type = "Visa",
+        account_number = "1223 1223 1233 1231",
+        is_active = 1,
+        cardholder=user)
 
 
 ####################
@@ -109,6 +121,21 @@ class WebsiteViewTests(TestCase):
         response = self.client.get('/product-categories/{}/'.format(category.id))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['items'].order_by('pk'), ['<Product: Product object>', '<Product: Product object>'])
+
+
+    #################################
+    ###   ORDER SUMMARY VIEW     ####
+    #################################
+
+    def order_summary_view_has_correct_number_of_products_in_response_context(self):
+        my_user = create_user()
+        category = create_product_category()
+        create_product(user=my_user, category=category)
+        create_product(name="Red Ball", user=my_user, category=category)
+        create_product(name='Blue Ball', user=my_user)
+
+
+
 
 
 
