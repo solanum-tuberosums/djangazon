@@ -36,4 +36,4 @@ def delete_payment_type(request, payment_type_id):
                 pt.save()
                 return render(request, 'success/payment_type_links.html', {'posted_object': 'Payment Type Deleted', 'posted_object_identifier': pt.account_nickname})
 
-    return HttpResponseNotFound('<h1>Page not found</h1>')
+    return HttpResponseNotFound('<h1>Not your payment type, dawg.</h1>')

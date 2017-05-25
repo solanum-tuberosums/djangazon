@@ -17,4 +17,4 @@ def my_account(request, user_id):
 
         return render(request, template_name, {"payment_types": payment_types})
     else:
-        return HttpResponseNotFound('<h1>Page not found</h1>')
+        return HttpResponseNotFound('<h1>Not your account, homie.</h1>')
