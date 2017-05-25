@@ -17,4 +17,4 @@ def list_my_products(request, user_id):
     	template_name = 'list.html'
     	return render(request, template_name, {'items': user_products, "page_title":"My Products"})
     else:
-        return HttpResponseNotFound('<h1>Page not found</h1>')
+        return HttpResponseNotFound('<h1>Page not found</h1><img src="/website/static/other.jpg">')
