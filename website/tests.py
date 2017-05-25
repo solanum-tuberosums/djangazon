@@ -105,9 +105,10 @@ class WebsiteViewTests(TestCase):
         category = create_product_category()
         create_product(user=my_user, category=category)
         create_product(name="Red Ball", user=my_user, category=category)
+        create_product(name='Blue Ball', user=my_user)
         response = self.client.get('/product-categories/{}/'.format(category.id))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['items'], ['<Product: Product object>', '<Product: Product object>'])
+        self.assertQuerysetEqual(response.context['items'].order_by('pk'), ['<Product: Product object>', '<Product: Product object>'])
 
 
 
