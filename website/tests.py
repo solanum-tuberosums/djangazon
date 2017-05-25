@@ -150,15 +150,28 @@ class WebsiteViewTests(TestCase):
             '(<QuerySet [<Product: Product object>]>, 1, 10.0)'])
 
 
+    #################################
+    ###   PRODUCT DETAIL VIEW    ####
+    #################################
 
+    def test_product_detail_view_has_correct_product(self):
+        my_user = create_user()
+        product = create_product(user=my_user)
+        response = self.client.get(reverse('website:product_detail', args=[product.id])) 
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['product_id'], product.id)
 
+    # def test_product_detail_has_title_description_price_quant(self):
+    #     my_user = create_user()
+    #     product = create_product(user=my_user)
+    #     response = self.client.get(reverse('website:product_detail', args=[product.id])) 
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertQuerysetEqual(response.context['object']
+            
 
-
-
-
-
-
-
+        # return render(request, template_name, {'object_to_display': \
+        #     new_product, "page_title":product.title, "type": "product", \
+        #     "product_id": product.pk})
 
 
 
