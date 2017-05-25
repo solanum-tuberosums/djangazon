@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from website.forms import PaymentTypeForm
 from website.models.payment_type_model import PaymentType
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseNotFound
 
 def add_payment_type(request):
     if request.method == 'GET':
@@ -31,6 +31,9 @@ def delete_payment_type(request, payment_type_id):
     if request.method == 'POST':
         if 'delete_payment_type' in request.POST:
             pt = PaymentType.objects.get(pk=payment_type_id)
-            pt.is_active = 0
-            pt.save()
-            return render(request, 'success/payment_type_links.html', {'posted_object': 'Payment Type Deleted', 'posted_object_identifier': pt.account_nickname})
+            if pt.cardholder == str(request.user.id):
+                pt.is_active = 0
+                pt.save()
+                return render(request, 'success/payment_type_links.html', {'posted_object': 'Payment Type Deleted', 'posted_object_identifier': pt.account_nickname})
+
+    return HttpResponseNotFound('<h1>Page not found</h1>')

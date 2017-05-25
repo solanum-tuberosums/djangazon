@@ -41,7 +41,6 @@ def delete_product_from_order(request, product_id, order_id):
 	if request.user == order.user:
 
 		ProductOrder.objects.filter(product_id=product_id, order_id=order_id).delete()
-		# return render(request, 'success.html', {"deleted_object":"Product"})
 		template_name = 'order_detail.html'
 
 
@@ -57,6 +56,4 @@ def delete_product_from_order(request, product_id, order_id):
 			product_list.append((product, product_count, subtotal))
 		return render(request, template_name, {'order': order, "orderproducts":product_list, "total":total})
 	else:
-		# return render(request, 'index.html', {})
 		return HttpResponseNotFound('<h1>Page not found</h1>')
-
