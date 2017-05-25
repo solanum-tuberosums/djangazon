@@ -18,24 +18,26 @@ def list_product_categories(request):
 	final_three_products = list()
 
 
+	if all_product_categories:
+		# For each category
+		for category in all_product_categories:
+			# Get top 3 products for this category
+			top_three_products = Product.objects.filter(product_category=category.id).order_by('-id')[:3]
+			# Make a placeholder list that will hold two indexed values
+			#	- product_id
+			#	- product_title
+			# placeholder_list = list()
+			# # For each product in each category:
+			# for product in temp_top_three_products:
+			# 	# Add each the top 3 products to a placeholder list
+			# 	placeholder_list.append((product.id, product.title))
+			# Get count for this category
+			this_category_product_count = category.category_products.count()
 
-	# For each category
-	for category in all_product_categories:
-		# Get top 3 products for this category
-		temp_top_three_products = Product.objects.filter(product_category=category.id).order_by('-id')[:3]
-		# Make a placeholder list that will hold two indexed values
-		#	- product_id
-		#	- product_title
-		placeholder_list = list()
-		# For each product in each category:
-		for product in temp_top_three_products:
-			# Add each the top 3 products to a placeholder list
-			placeholder_list.append((product.id, product.title))
-		# Get count for this category
-		this_category_product_count = category.category_products.count()
-
-		# After the second loop, create a tuple with a length of 3 (0 = CategoryName, 1 = placeholder_list, 2 = count of products)
-		final_three_products.append((category, placeholder_list, this_category_product_count))
+			# After the second loop, create a tuple with a length of 3 (0 = CategoryName, 1 = placeholder_list, 2 = count of products)
+			final_three_products.append((category, top_three_products, this_category_product_count))
 
 
-	return render(request, template_name, {'items': final_three_products, "page_title": "Product Categories"})
+		return render(request, template_name, {'items': final_three_products, 'page_title': 'Product Categories'})
+	else:
+		return render(request, template_name, {'items':[], 'page_title':"Product Categories", "error": 'No categories are available.'})
