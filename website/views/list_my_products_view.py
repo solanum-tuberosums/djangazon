@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from website.models.product_model import Product
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseForbidden
 
 def list_my_products(request, user_id):
     """
@@ -17,4 +17,4 @@ def list_my_products(request, user_id):
     	template_name = 'list.html'
     	return render(request, template_name, {'items': user_products, "page_title":"My Products"})
     else:
-        return HttpResponseNotFound('<h1>Page not found</h1>')
+        return HttpResponseForbidden('<h1>Page not found</h1><img src="/website/static/other.jpg">')

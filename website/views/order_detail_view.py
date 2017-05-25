@@ -4,7 +4,7 @@ from website.models.order_model import Order
 from website.models.product_order_model import ProductOrder
 from website.models.product_model import Product
 from django.contrib.auth.models import User
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseForbidden
 
 
 def order_detail(request, order_id):
@@ -34,7 +34,7 @@ def order_detail(request, order_id):
 
 		return render(request, template_name, {'order': order, "orderproducts":product_list, "total":total})
 	else:
-		return HttpResponseNotFound('<h1>Not your order, bruh!</h1>')
+		return HttpResponseForbidden('<h1>Not your order, bruh!</h1><img src="/website/static/other.jpg">')
 
 def delete_product_from_order(request, product_id, order_id):
 	order = Order.objects.get(pk=order_id)
@@ -56,4 +56,4 @@ def delete_product_from_order(request, product_id, order_id):
 			product_list.append((product, product_count, subtotal))
 		return render(request, template_name, {'order': order, "orderproducts":product_list, "total":total})
 	else:
-		return HttpResponseNotFound('<h1>Not your order, bruh!</h1>')
+		return HttpResponseForbidden('<h1>Not your order, bruh!</h1><img src="/website/static/other.jpg">')
