@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.contrib.auth.models import User
 from website.models import PaymentType
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseForbidden
 
 def my_account(request, user_id):
     """
@@ -17,4 +17,4 @@ def my_account(request, user_id):
 
         return render(request, template_name, {"payment_types": payment_types})
     else:
-        return HttpResponseNotFound('<h1>Not your account, homie.</h1><img src="/website/static/other.jpg">')
+        return HttpResponseForbidden('<h1>Not your account, homie.</h1><img src="/website/static/other.jpg">')
