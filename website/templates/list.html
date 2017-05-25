@@ -7,7 +7,7 @@
 	        {% for item in items %}
 	            <a class="list-group-item lead list-group-item-info" href="/products/{{ item.id }}">{{ item.title }} <span style="float: right">for ${{item.price}}0/unit</span></a>
 	        {% empty %}
-	            <h3> Sorry! No products</h3>
+	            {{ error }}
 	        {% endfor %}
 	        </ul>
 		</div>

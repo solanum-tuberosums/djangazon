@@ -24,12 +24,13 @@ def login_user(username, password):
 def create_product_category():
     return ProductCategory.objects.create(title="Test Category")
 
-def create_product(name="Test Product", user=None):
+def create_product(name="Test Product", user=None, category=None):
     """
     Creates a product to be used within the test cases
     """
+    if category == None:
+        category = create_product_category()
     time = timezone.now()
-    category = create_product_category()
     return Product.objects.create(  seller=user, \
                                     product_category=category, \
                                     title=name, \
@@ -74,7 +75,6 @@ class WebsiteViewTests(TestCase):
     #######################
 
     def test_list_product_categories_without_products(self):
-
         response = self.client.get(reverse('website:list_product_categories'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response,  "No categories are available.")
@@ -82,8 +82,40 @@ class WebsiteViewTests(TestCase):
 
     def test_list_product_categories_with_products(self):
         my_user = create_user()
-        create_product(user=my_user)
-        create_product("Red Ball", user=my_user)
+        category = create_product_category()
+        create_product(user=my_user, category=category)
+        create_product(name="Red Ball", user=my_user, category=category)
         response = self.client.get(reverse('website:list_product_categories'))
         # CategoryName, Top3, Count
-        self.assertQuerysetEqual(response.context['items'], ["(<ProductCategory: Test Category>, [(1, 'Test Product'), (2, 'Red Ball')], 1)"])
+        self.assertQuerysetEqual(response.context['items'], ["(<ProductCategory: Test Category>, <QuerySet [<Product: Product object>, <Product: Product object>]>, 2)"])
+
+    #################################
+    ###   PRODUCTS IN CATEGORY   ####
+    #################################
+
+    def test_category_details_without_products(self):
+        category = create_product_category()
+        response = self.client.get('/product-categories/{}/'.format(category.id))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response,  "No products are available in this category.")
+        self.assertQuerysetEqual(response.context["items"], [])
+
+    def test_category_shows_correct_products(self):
+        my_user = create_user()
+        category = create_product_category()
+        create_product(user=my_user, category=category)
+        create_product(name="Red Ball", user=my_user, category=category)
+        response = self.client.get('/product-categories/{}/'.format(category.id))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(response.context['items'], ['<Product: Product object>', '<Product: Product object>'])
+
+
+
+
+
+
+
+
+
+
+
