@@ -82,4 +82,4 @@ API Build Contributors:
   * [Will Sims](https://github.com/willsims14)
 
 ## License
-[MIT © Potatoes](./LICENSE)
+MIT © Potatoes
