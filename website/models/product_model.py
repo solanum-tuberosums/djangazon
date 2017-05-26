@@ -45,3 +45,6 @@ class Product (models.Model):
     def formatted_price_no_decimals(self):
         temp_price = locale.currency(self.price, grouping=True)
         return temp_price[:-3]
+
+    def seller_string(self):
+        return " ".join([self.seller.first_name, self.seller.last_name])
