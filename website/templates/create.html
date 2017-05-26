@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content%}
-    <h1 class="text-center">Sell Product</h1>
-    <form class="col-xs-6 col-xs-offset-3" action="{% url 'website:sell' %}" method="post">
+    <h1 class="text-center lead">Sell Product</h1>
+    <form class="col-xs-6 col-xs-offset-3" 
+    action="{% url 'website:sell' %}" method="post">
       {% csrf_token %}
       {{ product_form.as_p }}
       <div class="text-center">
-      	<input style="margin-top:1em" class="btn btn-success" type="submit" value="Sell It" />
+      	<input style="margin:1em" class="btn btn-success" 
+      	type="submit" value="Sell It" />
       </div>
     </form>
  {% endblock %}

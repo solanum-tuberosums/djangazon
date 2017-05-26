@@ -15,9 +15,16 @@ class ProductForm(forms.ModelForm):
     Author: Will Sims
     """
     
-    price = forms.FloatField(min_value=0.01, max_value=100000000)
-    quantity = forms.IntegerField(min_value=1, max_value=100000)
+    price = forms.FloatField(min_value=0.01, max_value=100000000, 
+        widget=forms.NumberInput(attrs={'class': "form-control"}))
+    quantity = forms.IntegerField(min_value=1, max_value=100000, 
+        widget=forms.NumberInput(attrs={'class': "form-control"}))
     class Meta:
         model = Product
         fields = ('title', 'description', 'price', 'quantity', 
             'product_category')
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': "form-control"}),
+            'product_category': forms.Select(attrs={'class': "form-control"}),
+            }

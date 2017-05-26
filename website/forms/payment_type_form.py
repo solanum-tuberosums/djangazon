@@ -14,10 +14,13 @@ class PaymentTypeForm(forms.ModelForm):
     Author: Jessica Younker, Beve Strownlee
     """
 
-    account_nickname = forms.CharField(label="Nickname for this account")
-    account_type = forms.CharField(label="Account type (eg Visa, Mastercard)")
+    account_nickname = forms.CharField(label="Nickname for this account",
+        widget=forms.TextInput(attrs={'class':'form-control'}))
+    account_type = forms.CharField(label="Account type (eg Visa, Mastercard)",
+        widget=forms.TextInput(attrs={'class':'form-control'}))
     account_number = forms.IntegerField(label="Account number", 
-        max_value=9999999999999999)
+        max_value=9999999999999999,
+        widget=forms.NumberInput(attrs={'class':'form-control'}))
 
     class Meta:
         model = PaymentType

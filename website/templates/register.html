@@ -7,16 +7,19 @@
         {% if registered %}
         <div class="text-center">
             <strong>Thank you for registering!</strong>
-            <a href="{% url 'website:index' %}">Return to the homepage.</a><br />
+            <a href="{% url 'website:index' %}">Return to the homepage.</a>
+            <br>
         </div>
         {% else %}
         <p class="text-center lead">Register here!</p>
-        <form class="col-xs-4 col-xs-offset-4" id="user_form" method="post" action="{% url 'website:register' %}"
+        <form class="col-xs-4 col-xs-offset-4" id="user_form" 
+        method="post" action="{% url 'website:register' %}"
                 enctype="multipart/form-data">
             {% csrf_token %}
             {{ user_form.as_p }}
             <div class="text-center">
-                <input class="btn btn-primary" type="submit" name="submit" 
+                <input style="margin:1em;" class="btn btn-primary" 
+                type="submit" name="submit" 
                 value="Register" />
             </div>
         </form>
