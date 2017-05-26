@@ -14,7 +14,8 @@ def add_payment_type(request):
     renders payment_type.html
 
         ---Context---
-        'payment_type_form'(form): the payment type form from payment_type_form.py
+        'payment_type_form'(form): the payment type form from 
+            payment_type_form.py
 
     ---POST---
     Renders success/payment_type_links.html
@@ -29,7 +30,8 @@ def add_payment_type(request):
     if request.method == 'GET':
         payment_type_form = PaymentTypeForm()
         template_name = 'payment_type.html'
-        return render(request, template_name, {'payment_type_form': payment_type_form})
+        return render(request, template_name, {'payment_type_form': 
+            payment_type_form})
 
     elif request.method == 'POST':
         form_data = request.POST
@@ -42,9 +44,10 @@ def add_payment_type(request):
             )
         pt.save()
         template_name = 'success/payment_type_links.html'
-        return render(request, template_name, {"posted_object":"Payment Type Added", "posted_object_identifier": pt.account_nickname})
+        return render(request, template_name, {"posted_object":
+            "Payment Type Added", "posted_object_identifier": 
+            pt.account_nickname})
 
-    
 def delete_payment_type(request, payment_type_id):
     """
     This function is invoked to add a payment type to a user account.
@@ -58,7 +61,8 @@ def delete_payment_type(request, payment_type_id):
     renders payment_type.html
 
         ---Context---
-        'payment_type_form'(form): the payment type form from payment_type_form.py
+        'payment_type_form'(form): the payment type form from 
+            payment_type_form.py
 
     ---POST---
     Renders success/payment_type_links.html
@@ -67,7 +71,7 @@ def delete_payment_type(request, payment_type_id):
         'posted_object'(string): String = 'Payment Type Added' 
         'posted_object_identifier'(integer): order id
 
-    Author: Jessica Younker, Jeremy Bakker
+    Author: Jessica Younker, Jeremy Bakker, Will Sims, Blaise Roberts
     """
 
     if request.method == 'POST':
@@ -76,5 +80,8 @@ def delete_payment_type(request, payment_type_id):
             if pt.cardholder == request.user:
                 pt.is_active = 0
                 pt.save()
-                return render(request, 'success/payment_type_links.html', {'posted_object': 'Payment Type Deleted', 'posted_object_identifier': pt.account_nickname})
-    return HttpResponseForbidden('<h1>Not your payment type, dawg.</h1><img src="/website/static/other.jpg">')
+                return render(request, 'success/payment_type_links.html', 
+                    {'posted_object': 'Payment Type Deleted', 
+                        'posted_object_identifier': pt.account_nickname})
+    return HttpResponseForbidden('''<h1>Not your payment type, dawg.</h1>
+        <img src="/website/static/other.jpg">''')
