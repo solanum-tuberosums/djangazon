@@ -28,7 +28,7 @@ def order_detail(request, order_id):
     Author: Blaise Roberts
     """
 
-    template_name = 'order_detail.html'
+	template_name = 'order_detail.html'
 	order = Order.objects.get(pk=order_id)
 
 	if request.user == order.user:
