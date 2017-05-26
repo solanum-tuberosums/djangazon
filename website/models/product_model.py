@@ -17,9 +17,12 @@ class Product (models.Model):
     - product_category: links to ProductCategory with a foreign key 
     - title(character): a product's title
     - description(text): a product's description
-    - price(integer): a product's unit price
+    - price(decimal): a product's unit price
     - quantity(integer): the available quantity of a product
     - date_added(date): date a product was added to the database
+
+    ----Methods----
+    formatted_price(): returns a currency-formatted string of the product's price
 
     Author: Jessica Younker
     """
@@ -34,4 +37,4 @@ class Product (models.Model):
     date_added = models.DateField()
 
     def formatted_price(self):
-        return locale.currency(self.price, grouping=True)
+        return str(locale.currency(self.price, grouping=True))
