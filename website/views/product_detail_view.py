@@ -59,5 +59,7 @@ def product_detail(request, product_id=None):
 		po.save()
 		template_name = 'success/product_added_to_cart_links.html'
 		
-		return render(request, template_name, {'posted_object': 'Product Added to Cart', 'posted_object_identifier': product.title})
+		return render(request, template_name, {
+			'posted_object': 'Product Added to Cart', 
+			'posted_object_identifier': product.title})
 
