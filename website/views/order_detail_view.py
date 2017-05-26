@@ -44,7 +44,7 @@ def order_detail(request, order_id):
 			product = Product.objects.filter(pk=x[0])
 			product_count = ProductOrder.objects.filter(product_id=x[0],order=order_id).count()
 			subtotal = product[0].price * product_count
-			total += subtotal
+			total += float(subtotal)
 			product_list.append((product, product_count, locale.currency(subtotal, grouping=True)))
 		return render(request, template_name, {'order': order, "orderproducts":
 	  		product_list, "total":locale.currency(total, grouping=True)})

@@ -28,6 +28,6 @@ class Product (models.Model):
         on_delete=models.CASCADE, related_name="category_products")
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=9, decimal_places=2)
     quantity = models.IntegerField()
     date_added = models.DateField()
