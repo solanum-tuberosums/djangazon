@@ -44,13 +44,13 @@ Then, open your favorite internet browser and go to your [Local Host - port: 800
 In order to use all of the Bangazon website's features, users must create an account by clicking the "Register" button in the top left corner of the splash page.
 
 #### Registered users can:
-* Can Add Products to Sell
+* Add Products to Sell
+* Add and Delete Multiple Payment Types
+* Add Products to or delete products from a Shopping Cart
 * Browse All Products
 * Browse All Product Categories
 * Browse 20 Most Recently Added Products
 * Browse Products by Category
-* Add and Delete Multiple Payment Types
-* Add Products to or delete products from a Shopping Cart
 * Logout
 
 #### Users that are _not_ registered can:
@@ -74,6 +74,7 @@ In order to use all of the Bangazon website's features, users must create an acc
 ## Credits
 Project Manager:
   - [Jurnell Cockhren](https://github.com/jcockhren)
+  - [Steve Brownlee](https://github.com/stevebrownlee)
 
 API Build Contributors:
   * [Jeremy Bakker](https://github.com/JeremyBakker)
