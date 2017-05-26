@@ -20,12 +20,11 @@ Install [Python 3.6](https://www.python.org/downloads/)
 Install Django and REST framework:
 ```
 pip install django
-pip install djangorestframework
 ```
 
 ## Installation
 ```
-git clone https://github.com/Trashy-Armadillos/djangazon.git
+git clone https://github.com/solanum-tuberosums/djangazon.git
 cd djangazon
 ```
 Setting up the database:
@@ -48,7 +47,7 @@ Djangazon is a marketplace where users can buy and sell goods. Registered users 
 * Browse Products by Category
 * Add Multiple Payment Types
 * Add Products to a (persistent) Shopping Cart
-Users that are not registered can:
+Users that are __not__ registered can:
 * Browse All Products
 * Browse Products by Category
 
@@ -67,7 +66,7 @@ Small note: If editing the Readme, please conform to the [standard-readme](https
 
 ## Credits
 Project Manager:
-  - Jurnell Cockhren
+  - [Jurnell Cockhren](https://github.com/jcockhren)
 
 API Build Contributors:
   * [Jeremy Bakker](https://github.com/JeremyBakker)
