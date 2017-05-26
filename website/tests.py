@@ -213,13 +213,3 @@ class WebsiteViewTests(TestCase):
         self.assertContains(response, product.description)
         self.assertContains(response, product.price)
         self.assertContains(response, product.quantity)
-
-
-
-
-
-
-
-
-
-
