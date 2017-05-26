@@ -69,8 +69,6 @@ In order to use all of the Bangazon website's features, users must create an acc
 ```git push origin <new-feature-branch-name-here-too>```
 5. Submit a pull request!
 
-Small note: If editing the Readme, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
-
 ## Credits
 Project Manager:
   - [Jurnell Cockhren](https://github.com/jcockhren)
