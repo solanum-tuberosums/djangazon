@@ -72,7 +72,7 @@ In order to use all of the Bangazon website's features, users must create an acc
 5. Submit a pull request!
 
 ## Credits
-Project Manager:
+Project Managers:
   - [Jurnell Cockhren](https://github.com/jcockhren)
   - [Steve Brownlee](https://github.com/stevebrownlee)
 
