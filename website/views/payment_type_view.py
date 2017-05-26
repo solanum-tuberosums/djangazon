@@ -31,7 +31,7 @@ def delete_payment_type(request, payment_type_id):
     if request.method == 'POST':
         if 'delete_payment_type' in request.POST:
             pt = PaymentType.objects.get(pk=payment_type_id)
-            if pt.cardholder == str(request.user.id):
+            if pt.cardholder == request.user:
                 pt.is_active = 0
                 pt.save()
                 return render(request, 'success/payment_type_links.html', {'posted_object': 'Payment Type Deleted', 'posted_object_identifier': pt.account_nickname})
