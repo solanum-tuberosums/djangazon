@@ -4,12 +4,37 @@ from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
 
 def complete_order(request):
+    """
+    This function is invoked to complete an order.
+
+    ---Arguments---
+    None
+
+    ---GET---
+    Renders complete_order.html
+
+        ---Context---
+        'payment_types': the payment types avaiable to assign to an order
+        'complete_order_form': the form from complete_order_form.py
+
+    ---POST---
+    Renders success/order_links.html
+
+        ---Context---
+        'posted_object': String = 'Order Complete' 
+        'posted_object_identifier': order id
+
+    Author: Jessica Younker
+    """
+
     if request.method == 'GET':
         complete_order_form = CompleteOrderForm()
-        complete_order_form.fields['payment_type'].queryset = PaymentType.objects.filter(cardholder=request.user, is_active=1)
+        complete_order_form.fields['payment_type'].queryset = PaymentType.\
+        objects.filter(cardholder=request.user, is_active=1)
         template_name = 'complete_order.html'
         payment_types = PaymentType.objects.filter(cardholder=request.user)
-        return render(request, template_name, {'payment_types': payment_types, "complete_order_form": complete_order_form})
+        return render(request, template_name, {'payment_types': payment_types, 
+            "complete_order_form": complete_order_form})
 
     elif request.method == 'POST':
         print("post")
@@ -27,9 +52,5 @@ def complete_order(request):
             )
         o.save()
         template_name = 'success/order_links.html'
-        
-        #should redirect back to thank you/success page
-        return render(request, template_name, {'posted_object': 'Order Complete', 'posted_object_identifier': o.id})
-
-
-        
+        return render(request, template_name, {'posted_object': 
+            'Order Complete', 'posted_object_identifier': o.id})

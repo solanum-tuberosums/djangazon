@@ -16,7 +16,8 @@ class PaymentTypeForm(forms.ModelForm):
 
     account_nickname = forms.CharField(label="Nickname for this account")
     account_type = forms.CharField(label="Account type (eg Visa, Mastercard)")
-    account_number = forms.IntegerField(label="Account number", max_value=9999999999999999)
+    account_number = forms.IntegerField(label="Account number", 
+        max_value=9999999999999999)
 
     class Meta:
         model = PaymentType
