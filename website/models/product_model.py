@@ -5,6 +5,7 @@ djangazon model configuration for product
 from django.db import models
 from django.contrib.auth.models import User
 from website.models.product_category_model import ProductCategory
+import locale
 
 
 class Product (models.Model):
@@ -31,3 +32,6 @@ class Product (models.Model):
     price = models.DecimalField(max_digits=9, decimal_places=2)
     quantity = models.IntegerField()
     date_added = models.DateField()
+
+    def formatted_price(self):
+        return locale.currency(self.price, grouping=True)
