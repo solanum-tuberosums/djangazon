@@ -4,7 +4,7 @@ from website.models.product_model import Product
 
 def list_products(request):
     """
-    This function is invoked to list products added by a seller.
+    This function is invoked to list products available for sale.
 
     ---Arguments---
     user_id(integer): the id of the seller listing the product for sale
@@ -13,19 +13,13 @@ def list_products(request):
     Renders list.html
 
         ---Context---
-        'payment_types': the payment types avaiable to assign to an order
-        'complete_order_form': the form from complete_order_form.py
+        'items'(QuerySet): all_products, 
+        'page_title'(string): A string, "Products", identifying the title of the page.
 
-    ---POST---
-    Renders success/order_links.html
-
-        ---Context---
-        'posted_object': String = 'Order Complete' 
-        'posted_object_identifier': order id
-
-    Author: Blaise Roberts
+    Author: Will Sims
     """
 
     all_products = Product.objects.all()
     template_name = 'list.html'
-    return render(request, template_name, {'items': all_products, "page_title":"Products"})
+    return render(request, template_name, {'items': all_products, 
+        "page_title":"Products"})

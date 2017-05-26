@@ -6,7 +6,6 @@ fixtures
 import factory
 import datetime
 from django.utils import timezone
-
 from django.contrib.auth.models import User
 from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
