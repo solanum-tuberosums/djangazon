@@ -1,28 +1,45 @@
 from django.shortcuts import render
+from django.db.models import F, Count, Value
 
 from website.models.product_model import ProductCategory
 from website.models import Product
 
-from django.db.models import F, Count, Value
 
 def list_product_categories(request):
 	"""
-	Name: list_product_categories()
-	Purpose: grabs the 3 most recent items added for each product category
-	Author: Will Sims
-	"""
+    This function grabs the 3 most recent items added for each product 
+    category.
+
+    ---Arguments---
+    None
+
+    ---GET---
+    Renders product_category_list.html.
+
+        ---Context---
+        'payment_types': the payment types avaiable to assign to an order
+        'complete_order_form': the form from complete_order_form.py
+
+    ---POST---
+    None
+
+        ---Context---
+        None
+
+    Author: Will Sims
+    """
 	all_product_categories = ProductCategory.objects.all()
 	template_name = 'product_category_list.html'
 
 	# This is the list that will eventually be returned
 	final_three_products = list()
 
-
 	if all_product_categories:
 		# For each category
 		for category in all_product_categories:
 			# Get top 3 products for this category
-			top_three_products = Product.objects.filter(product_category=category.id).order_by('-id')[:3]
+			top_three_products = Product.objects.filter(product_category=
+                category.id).order_by('-id')[:3]
 			# Make a placeholder list that will hold two indexed values
 			#	- product_id
 			#	- product_title
@@ -34,10 +51,14 @@ def list_product_categories(request):
 			# Get count for this category
 			this_category_product_count = category.category_products.count()
 
-			# After the second loop, create a tuple with a length of 3 (0 = CategoryName, 1 = placeholder_list, 2 = count of products)
-			final_three_products.append((category, top_three_products, this_category_product_count))
+			# After the second loop, create a tuple with a length of 3 (0 = 
+            # CategoryName, 1 = placeholder_list, 2 = count of products)
+			final_three_products.append((category, top_three_products, 
+                this_category_product_count))
 
 
-		return render(request, template_name, {'items': final_three_products, 'page_title': 'Product Categories'})
+		return render(request, template_name, {'items': final_three_products, 
+            'page_title': 'Product Categories'})
 	else:
-		return render(request, template_name, {'items':[], 'page_title':"Product Categories", "error": 'No categories are available.'})
+		return render(request, template_name, {'items':[], 'page_title':
+            "Product Categories", "error": 'No categories are available.'})
