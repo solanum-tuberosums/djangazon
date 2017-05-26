@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User
 from django import forms
+from django.contrib.auth.models import User
+
 
 class LoginForm(forms.ModelForm):
     """
@@ -7,10 +8,12 @@ class LoginForm(forms.ModelForm):
 
     ----Fields----
     - username
+    - help_texts (username): None
     - password (widget=forms.PasswordInput())
 
     Author: Will Sims
     """
+    
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:

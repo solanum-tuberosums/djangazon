@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
   {% block content %}
-	
 	<div class="jumbotron text-center">
     <h1>Welcome to Bangazon!</h1>
     {% if user.is_authenticated %}
@@ -15,14 +14,9 @@
     <div class="list-group">
     {% for product in product_dict_list %}
       <a class="list-group-item list-group-item-info lead" href="/products/{{ product.id }}">{{ product.title }} <span style="float: right">for ${{product.price}}0/unit</span></a>
-
     {% empty %}
       <h4>{{ error }}</h4>
-
-      
-
     {% endfor %}
     </div>
   </div>
-	
   {% endblock %}

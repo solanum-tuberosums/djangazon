@@ -4,16 +4,11 @@
 	{% block content %}
 		<h1 class="text-center">My Account</h1>
 		<p class="text-center lead">for {{ request.user.first_name }} {{ request.user.last_name }}</p>
-        
-
         <div class="col-xs-6 col-xs-offset-3">
         {% if payment_types %}
             <h4>Payment Types</h4>
-
         {% else %}
-
         {% endif %}
-
         <ol class="list-group">
             {% for payment_type in payment_types  %}
                 <li class="list-group-item lead">

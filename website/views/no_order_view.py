@@ -1,15 +1,23 @@
 from django.shortcuts import render
-
 from django.contrib.auth.models import User
 
+
 def no_order(request):
-	"""
-	This function renders the request using:
-		- TEMPLATE: no_order.html
+    """
+    This function is invoked when no order has been created for a user.
 
-	Author: Blaise Roberts
-	"""
-	template_name = 'no_order.html'
+    ---Arguments---
+    request: the full HTTP request object
 
-	
-	return render(request, template_name, {})
+    ---GET---
+    Renders no_order.html.
+
+        ---Context---
+        None
+
+    Author: Blaise Roberts
+    """
+    
+    template_name = 'no_order.html'
+
+    return render(request, template_name, {})

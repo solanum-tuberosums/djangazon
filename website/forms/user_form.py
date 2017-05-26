@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User
 from django import forms
+from django.contrib.auth.models import User
 
 
 class UserForm(forms.ModelForm):
@@ -15,6 +15,7 @@ class UserForm(forms.ModelForm):
 
     Author: Beve Strownlee
     """
+
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
@@ -23,4 +24,3 @@ class UserForm(forms.ModelForm):
             'username':None,
         }
         fields = ('username', 'email', 'password', 'first_name', 'last_name',)
-

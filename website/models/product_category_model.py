@@ -10,8 +10,7 @@ class ProductCategory (models.Model):
     This class models a product category in the database.
 
     ----Fields----
-    label(character): a product category's title
-
+    - title(character): a product category's title
 
     Author: Jeremy Bakker
     """

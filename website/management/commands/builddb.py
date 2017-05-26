@@ -1,5 +1,5 @@
 """
-bangazon api custom command to build database
+djangazon api custom command to build database
 """
 
 from django.core import management
@@ -15,19 +15,16 @@ class Command(BaseCommand):
     load our data to them via Faker. These commands are, in order:
     1. python manage.py makemigrations website
     2. python manage.py migrate
-    3. (Factory Calls): User, Profile, ProductCategory, Product, PaymentType, 
+    3. (Factory Calls): User, ProductCategory, Product, PaymentType, 
                         Order, OrderProduct
-        
-
 
     Author: Jeremy Bakker
     """
-
+    
     def handle(self, *args, **options):
         management.call_command('makemigrations', 'website')
         management.call_command('migrate')
         UserFactory.create_batch(size=100)
-        # ProfileFactory.create_batch(size=100)
         ProductCategoryFactory.create_batch(size=10)
         ProductFactory.create_batch(size=50)
         PaymentTypeFactory.create_batch(size=100)

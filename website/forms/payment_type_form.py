@@ -1,6 +1,7 @@
 from django import forms
 from website.models import PaymentType
 
+
 class PaymentTypeForm(forms.ModelForm):
     """
     This class represents an HTML form for a user to add a new payment type.
@@ -12,9 +13,11 @@ class PaymentTypeForm(forms.ModelForm):
 
     Author: Jessica Younker, Beve Strownlee
     """
+
     account_nickname = forms.CharField(label="Nickname for this account")
     account_type = forms.CharField(label="Account type (eg Visa, Mastercard)")
-    account_number = forms.IntegerField(label="Account number", max_value=9999999999999999)
+    account_number = forms.IntegerField(label="Account number", 
+        max_value=9999999999999999)
 
     class Meta:
         model = PaymentType

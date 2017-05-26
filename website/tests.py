@@ -3,9 +3,7 @@ from django.test import TestCase, Client
 
 from django.utils import timezone
 from django.urls import reverse
-
 import datetime
-
 from .models import Product, ProductCategory, Order, PaymentType, ProductOrder
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -81,7 +79,8 @@ class WebsiteViewTests(TestCase):
         create_product(user=create_user())
         response = self.client.get(reverse('website:index'))
         self.assertQuerysetEqual(
-            response.context['product_dict_list'],['<Product: Product object>'])
+            response.context['product_dict_list'],
+            ['<Product: Product object>'])
 
     #######################
     ###   CATEGORIES   ####
@@ -100,7 +99,10 @@ class WebsiteViewTests(TestCase):
         create_product(name="Red Ball", user=my_user, category=category)
         response = self.client.get(reverse('website:list_product_categories'))
         # CategoryName, Top3, Count
-        self.assertQuerysetEqual(response.context['items'], ["(<ProductCategory: Test Category>, <QuerySet [<Product: Product object>, <Product: Product object>]>, 2)"])
+        self.assertQuerysetEqual(response.context['items'], 
+            ["""(<ProductCategory: Test Category>, 
+            <QuerySet [<Product: Product object>, 
+            <Product: Product object>]>, 2)"""])
 
     #################################
     ###   PRODUCTS IN CATEGORY   ####
@@ -108,9 +110,11 @@ class WebsiteViewTests(TestCase):
 
     def test_category_details_without_products(self):
         category = create_product_category()
-        response = self.client.get('/product-categories/{}/'.format(category.id))
+        response = self.client.get('/product-categories/{}/'.
+            format(category.id))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response,  "No products are available in this category.")
+        self.assertContains(response,  
+            "No products are available in this category.")
         self.assertQuerysetEqual(response.context["items"], [])
 
     def test_category_shows_correct_products(self):
@@ -119,24 +123,29 @@ class WebsiteViewTests(TestCase):
         create_product(user=my_user, category=category)
         create_product(name="Red Ball", user=my_user, category=category)
         create_product(name='Blue Ball', user=my_user)
-        response = self.client.get('/product-categories/{}/'.format(category.id))
+        response = self.client.get('/product-categories/{}/'.
+            format(category.id))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['items'].order_by('pk'), ['<Product: Product object>', '<Product: Product object>'])
+        self.assertQuerysetEqual(response.context['items'].order_by('pk'), 
+            ['<Product: Product object>', '<Product: Product object>'])
 
 
     ###############################
     ###   ORDER SUMMARY VIEW   ####
     ###############################
 
-    def test_order_summary_view_has_correct_number_of_products_in_response_context(self):
+    def test_order_summary_view_has_correct_number_of_products_in_\
+        response_context(self):
         client = Client()
         my_user = create_user()
         client.force_login(my_user, backend=None)
         category = create_product_category()
         category_2 = create_product_category()
         product_1 = create_product(user=my_user, category=category)
-        product_2 = create_product(name="Red Ball", user=my_user, category=category)
-        product_3 = create_product(name='Blue Ball', user=my_user, category=category_2)
+        product_2 = create_product(name="Red Ball", user=my_user, 
+            category=category)
+        product_3 = create_product(name='Blue Ball', user=my_user, 
+            category=category_2)
         order = create_order(my_user)
         create_product_order(order.id, product_1.id)
         create_product_order(order.id, product_1.id)
@@ -154,7 +163,8 @@ class WebsiteViewTests(TestCase):
     def test_order_summary_without_login(self):
         my_user = create_user()
         order = create_order(my_user)
-        response = self.client.get(reverse('website:order_detail', args=[order.id]))
+        response = self.client.get(reverse('website:order_detail', 
+            args=[order.id]))
         self.assertEqual(response.status_code, 403)
 
 
@@ -170,12 +180,14 @@ class WebsiteViewTests(TestCase):
         payment_type_2 = create_payment_type(my_user)
         response = client.get(reverse('website:my_account', args=[my_user.id]))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['payment_types'].order_by('pk'), \
-            ['<PaymentType: Test Payment Type>', '<PaymentType: Test Payment Type>'])
+        self.assertQuerysetEqual(response.context['payment_types'].
+            order_by('pk'), ['<PaymentType: Test Payment Type>', 
+            '<PaymentType: Test Payment Type>'])
 
     def test_my_account_without_login(self):
         my_user = create_user()
-        response = self.client.get(reverse('website:my_account', args=[my_user.id]))
+        response = self.client.get(reverse('website:my_account', 
+            args=[my_user.id]))
         self.assertEqual(response.status_code, 403)
 
     def test_my_account_without_payment_types(self):
@@ -201,13 +213,3 @@ class WebsiteViewTests(TestCase):
         self.assertContains(response, product.description)
         self.assertContains(response, product.price)
         self.assertContains(response, product.quantity)
-
-
-
-
-
-
-
-
-
-

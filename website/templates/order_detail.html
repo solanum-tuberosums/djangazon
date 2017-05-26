@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
   {% block content %}
-	
-  
 	<div class="jumbotron">
     <h1>Order # {{ order.id }}</h1>
 	</div>
@@ -37,8 +35,6 @@
       <th class="text-right">${{ total }}0</th>
       <th></th>
     </tr>
-    
-  
   </table>
   <div class="btn-group btn-group-justified" role="group" aria-label="...">
     {% if total > 0 %}
@@ -46,7 +42,4 @@
     {% endif %}
     <a href="/deleteorder" class ="btn btn-danger">Cancel Order</a>
   </div>
-  
-  
-  
   {% endblock %}

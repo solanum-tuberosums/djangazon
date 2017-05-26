@@ -6,14 +6,28 @@ from website.views.login_user_view import login_user
 from website.forms import UserForm
 
 def register(request):
-    '''Handles the creation of a new user for authentication
+    """
+    Handles the creation of a new user for authentication
 
-    Method arguments:
-      request -- The full HTTP request object
-    '''
+    ---Arguments---
+    None
 
-    # A boolean value for telling the template whether the registration was successful.
-    # Set to False initially. Code changes value to True when registration succeeds.
+    ---GET---
+    Renders register.html
+
+        ---Context---
+        'user_form': the form from user_form.py
+
+    ---POST---
+    runs the login_user function
+
+    Author: Steve Browlee
+    """
+
+    # A boolean value for telling the template 
+    # whether the registration was successful.
+    # Set to False initially. Code changes value to True when registration 
+    # succeeds.
     registered = False
 
     # Create a new user by invoking the `create_user` helper method
@@ -30,7 +44,8 @@ def register(request):
             user.set_password(user.password)
             user.save()
 
-            # Update our variable to tell the template registration was successful.
+            # Update our variable to tell the template 
+            # registration was successful.
             registered = True
 
         return login_user(request)

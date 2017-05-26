@@ -7,9 +7,7 @@
 		<div class="text-center">
         <form id="login_form" method="post" action="{% url 'website:login' %}">
             {% csrf_token %}
-
             {{ login_form.as_p }}
-
             <input class="btn btn-primary" type="submit" value="Submit" />
         </form>
         </div>

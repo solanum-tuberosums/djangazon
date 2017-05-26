@@ -1,3 +1,7 @@
+"""
+These modules represent the views for our bangazon website.
+"""
+
 from website.views.index_view import index
 from website.views.list_products_view import list_products
 from website.views.login_user_view import login_user
@@ -8,7 +12,6 @@ from website.views.list_product_categories_view import list_product_categories
 from website.views.payment_type_view import add_payment_type, delete_payment_type
 from website.views.product_detail_view import product_detail
 from website.views.order_detail_view import order_detail, delete_product_from_order
-
 from website.views.no_order_view import no_order
 from website.views.my_account_view import my_account
 from website.views.list_my_products_view import list_my_products

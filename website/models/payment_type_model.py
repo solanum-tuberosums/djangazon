@@ -11,10 +11,12 @@ class PaymentType(models.Model):
     This class models a payment type in the API's database. 
 
     ----Fields---- 
-    account_label(character): name of payment 
-    account_type(character): type of payment
-    account_number(decimal): account number
-    cardholder(foreign key): links to Customer(CustomerID) with a foregin key
+    - cardholder(foreign key): links to Customer(CustomerID) with a foregin key
+    - account_nickname(character): nickname of payment type
+    - account_type(character): type of payment
+    - account_number(decimal): account number
+    - is_active(boolean): boolean field indicating whether a payment type is 
+        active
 
     Author: Jeremy Bakker  
     """
