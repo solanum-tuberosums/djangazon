@@ -27,17 +27,17 @@ pip install django
 git clone https://github.com/solanum-tuberosums/djangazon.git
 cd djangazon
 ```
-Create and seed the database:
+Create and Seed the Database:
 
 ```
 python manage.py builddb
 ```
-Run project in browser:
+Host a Server:
 
 ```
 python manage.py runserver
 ```
-
+Then, open your favorite internet browser and go to your [Local Host (port: 8000)](http://localhost:8000/)
 
 
 ## Usage
