@@ -41,20 +41,22 @@ Then, open your favorite internet browser and go to your [Local Host - port: 800
 
 
 ## Usage
-In order to use all of the Bangazon website's features, users must create an account by clicking the "Sign Up" button in the top left corner of the splash page.
+In order to use all of the Bangazon website's features, users must create an account by clicking the "Register" button in the top left corner of the splash page.
 
 #### Registered users can:
-* Sell Products
+* Can Add Products to Sell
 * Browse All Products
+* Browse All Product Categories
 * Browse 20 Most Recently Added Products
 * Browse Products by Category
-* Add Multiple Payment Types
-* Add Products to a (persistent) Shopping Cart
+* Add and Delete Multiple Payment Types
+* Add Products to or delete products from a Shopping Cart
 * Logout
 
 #### Users that are _not_ registered can:
 * Sign Up
 * Browse All Products
+* Browse All Product Categories
 * Browse Products by Category
 * Browse 20 Most Recently Added Products
 
