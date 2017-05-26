@@ -199,19 +199,20 @@ class WebsiteViewTests(TestCase):
         self.assertContains(response,  "No Payment Types!")
 
 
+    #################################
+    ###   PRODUCT DETAIL VIEW    ####
+    #################################
 
-
-
-
-
-
-
-
-
-
-
-
-
+    def test_product_detail_view_has_correct_product(self):
+        my_user = create_user()
+        product = create_product(user=my_user)
+        response = self.client.get(reverse('website:product_detail', args=[product.id])) 
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['product'], product)
+        self.assertContains(response, product.title)
+        self.assertContains(response, product.description)
+        self.assertContains(response, product.price)
+        self.assertContains(response, product.quantity)
 
 
 
