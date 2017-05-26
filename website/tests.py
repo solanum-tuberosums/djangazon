@@ -187,8 +187,6 @@ class WebsiteViewTests(TestCase):
         self.assertContains(response,  "No Payment Types!")
 
 
-
-
     #################################
     ###   PRODUCT DETAIL VIEW    ####
     #################################
@@ -198,21 +196,11 @@ class WebsiteViewTests(TestCase):
         product = create_product(user=my_user)
         response = self.client.get(reverse('website:product_detail', args=[product.id])) 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['product_id'], product.id)
-
-    # def test_product_detail_has_title_description_price_quant(self):
-    #     my_user = create_user()
-    #     product = create_product(user=my_user)
-    #     response = self.client.get(reverse('website:product_detail', args=[product.id])) 
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertQuerysetEqual(response.context['object']
-            
-
-        # return render(request, template_name, {'object_to_display': \
-        #     new_product, "page_title":product.title, "type": "product", \
-        #     "product_id": product.pk})
-
-
+        self.assertEqual(response.context['product'], product)
+        self.assertContains(response, product.title)
+        self.assertContains(response, product.description)
+        self.assertContains(response, product.price)
+        self.assertContains(response, product.quantity)
 
 
 
