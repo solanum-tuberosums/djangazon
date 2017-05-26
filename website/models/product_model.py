@@ -6,6 +6,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from website.models.product_category_model import ProductCategory
 import locale
+import math
 
 
 class Product (models.Model):
@@ -22,7 +23,9 @@ class Product (models.Model):
     - date_added(date): date a product was added to the database
 
     ----Methods----
-    formatted_price(): returns a currency-formatted string of the product's price
+    - formatted_price(): returns a currency-formatted string of the product's price
+    - formatted_price(): returns a currency-formatted string of the product's ROUNDED 
+                            price, without any decimal places
 
     Author: Jessica Younker
     """
@@ -38,3 +41,7 @@ class Product (models.Model):
 
     def formatted_price(self):
         return str(locale.currency(self.price, grouping=True))
+
+    def formatted_price_no_decimals(self):
+        temp_price = locale.currency(self.price, grouping=True)
+        return temp_price[:-3]
