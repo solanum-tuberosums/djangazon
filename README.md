@@ -1,7 +1,7 @@
 # Djangazon!! Bangazon on Django
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-A django webapp where users can buy and sell products!
+Djangazon is Bangazon's e-commerce website powered by Python and Django. In order to use all of the Bangazon website's features, users must create an account by clicking the "Sign Up" button in the top left corner of the splash page.
 
 ## Table of Contents
 
@@ -41,7 +41,6 @@ python manage.py runserver
 
 
 ## Usage
-Djangazon is Bangazon's e-commerce website powered by Python and Django. In order to use all of the Bangazon website's features, users must create an account by clicking the "Sign Up" button in the top left corner of the splash page.
 
 #### Registered users can:
 * Sell Products
