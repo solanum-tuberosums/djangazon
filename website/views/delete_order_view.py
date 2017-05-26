@@ -7,7 +7,7 @@ def delete_order(request):
         return render(request, template_name, {})
 
     elif request.method == "POST":
-        order = Order.objects.get(user_id=request.user.id, payment_type=None)
+        order = Order.objects.get(user=request.user, payment_type=None)
         order_number = order.id
         order.delete()
         template_name = "success/order_links.html"

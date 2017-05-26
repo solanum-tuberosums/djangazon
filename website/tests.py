@@ -148,6 +148,8 @@ class WebsiteViewTests(TestCase):
             ['(<QuerySet [<Product: Product object>]>, 2, 20.0)', \
             '(<QuerySet [<Product: Product object>]>, 1, 10.0)', \
             '(<QuerySet [<Product: Product object>]>, 1, 10.0)'])
+        client.logout()
+
 
 
 

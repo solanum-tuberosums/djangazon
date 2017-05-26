@@ -53,8 +53,8 @@ def product_detail(request, product_id=None):
 				)
 			order.save()
 		po = ProductOrder(
-			order_id = order.pk,
-			product_id = product_id
+			order = order,
+			product = product
 		)
 		po.save()
 		template_name = 'success/product_added_to_cart_links.html'

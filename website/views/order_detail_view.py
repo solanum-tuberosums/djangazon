@@ -36,8 +36,12 @@ def order_detail(request, order_id):
 		return HttpResponseForbidden('<h1>Not your order, bruh!</h1><img src="/website/static/other.jpg">')
 
 def delete_product_from_order(request, product_id, order_id):
-	order = Order.objects.get(pk=order_id)
+	order = Order.objects.get(pk=order_id, user=request.user)
+	print("\n\n\n\n\n")
+	print(request.user.id)
+	print(order.user.id)
 	if request.user == order.user:
+
 
 		ProductOrder.objects.filter(product_id=product_id, order_id=order_id).delete()
 		template_name = 'order_detail.html'
@@ -56,3 +60,5 @@ def delete_product_from_order(request, product_id, order_id):
 		return render(request, template_name, {'order': order, "orderproducts":product_list, "total":total})
 	else:
 		return HttpResponseForbidden('<h1>Not your order, bruh!</h1><img src="/website/static/other.jpg">')
+
+
