@@ -1,32 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content%}
-    <div class="jumbotron text-center">
-        <h1>{{ page_title }}</h1>
-    </div>
-    <div class="col-xs-6 col-xs-offset-3">
-    <ul class="list-group">
-	    {% for key_val_pair in object_to_display %}
-
-	    	{% if key_val_pair.0 == "Price" %}
-
-			    <li class="list-group-item list-group-item-info"><strong>{{ key_val_pair.0 }}</strong>: ${{ key_val_pair.1 }}0</li>
-
-			{% else %}
-			   
-				<li class="list-group-item list-group-item-info"><strong>{{ key_val_pair.0 }}</strong>: {{ key_val_pair.1 }}</li>
-
-	    	{% endif %}
-		
-	    {% endfor %}
-    </ul>
-    {% if user.is_authenticated %}
-        {% if type == "product" %}
-            <form action="{% url 'website:product_detail' product_id %}" method="post">
-                {% csrf_token %}
-                <input class="btn btn-success" type="submit"  value = "Add to Cart"/>
-            </form>
-        {% endif %}
-    {% endif %}
+    <div class="jumbotron">
+        <img style="float:right; height: 9em; border: 8px solid #fff;" src="http://lorempixel.com/400/200/" alt="">
+        <h1>{{ product.title }}</h1>
+        <p class="lead text-primary">from {{ product.product_category.title }}</p>
+        <hr>
+        <p class="lead text-right">{{ product.description }}</p>
+        <hr>
+        <p class="lead text-center">Price per Unit<span style="float:right">${{ product.price }}0</span></p>
+        <p class="lead text-center">Quantity  <span style="float:right">{{ product.quantity }}</span></p>
+        <hr>
+        <blockquote class="blockquote-reverse">
+          <footer>Added {{ product.date_added }} by {{ product.seller.first_name }} {{ product.seller.last_name}}</footer>
+        </blockquote>
+        <p>
+            {% if user.is_authenticated %}
+                <form class="text-right" action="{% url 'website:product_detail' product.id %}" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-success" type="submit"  value = "Add to Cart"/>
+                </form>
+            {% endif %}
+            </p>
     </div>
 {% endblock %}
