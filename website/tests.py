@@ -100,9 +100,7 @@ class WebsiteViewTests(TestCase):
         response = self.client.get(reverse('website:list_product_categories'))
         # CategoryName, Top3, Count
         self.assertQuerysetEqual(response.context['items'], 
-            ["""(<ProductCategory: Test Category>, 
-            <QuerySet [<Product: Product object>, 
-            <Product: Product object>]>, 2)"""])
+            ["""(<ProductCategory: Test Category>, <QuerySet [<Product: Product object>, <Product: Product object>]>, 2)"""])
 
     #################################
     ###   PRODUCTS IN CATEGORY   ####
@@ -134,8 +132,7 @@ class WebsiteViewTests(TestCase):
     ###   ORDER SUMMARY VIEW   ####
     ###############################
 
-    def test_order_summary_view_has_correct_number_of_products_in_\
-        response_context(self):
+    def test_order_summary_view_has_correct_number_of_products_in_response_context(self):
         client = Client()
         my_user = create_user()
         client.force_login(my_user, backend=None)
