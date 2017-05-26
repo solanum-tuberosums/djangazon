@@ -41,7 +41,9 @@
   
   </table>
   <div class="btn-group btn-group-justified" role="group" aria-label="...">
-    <a href="/completeorder" class="btn btn-info btn-lrg">Complete Order</a>
+    {% if total > 0 %}
+      <a href="/completeorder" class="btn btn-info btn-lrg">Complete Order</a>
+    {% endif %}
     <a href="/deleteorder" class ="btn btn-danger">Cancel Order</a>
   </div>
   

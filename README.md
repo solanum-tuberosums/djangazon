@@ -1,34 +1,86 @@
-# Welcome to Bangazon
+# Djangazon!! Bangazon on Django
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-This web application is the source code for the Bangazon e-commerce web site. It is powered by Python and Django.
+Djangazon is Bangazon's e-commerce website powered by Python and Django.
 
-Students, you are inheriting a basic implementation that provides the following features:
+## Table of Contents
 
-1. User registration 
-1. User login 
-1. User logout 
-1. Adding a product 
-1. Listing products
+- [Installation](#installation)
+- [Usage](#usage)   
+- [Contribute](#contribute)
+- [Credits](#credits)
+- [License](#license)
 
-Please consult the backlog of issues and work with your product owner to implement the top priority tickets for your sprints.
 
-## To begin work
+### Prerequisites
+Install [pip](https://packaging.python.org/installing/)
 
-1. Fork this repository into your team's Github organization.
-1. Alert your manager when this is complete and all backlog issues will be imported into your fork.
-1. Each teammate should clone the repository.
-1. In the `djangazon` directory that gets created, run the migrations with `python manage.py migrate`
+Install [Python 3.6](https://www.python.org/downloads/)
 
-## Helpful Resources
+Install Django:
+```
+pip install django
+```
 
-### Django Models and Migrations
+## Installation
+```
+git clone https://github.com/solanum-tuberosums/djangazon.git
+cd djangazon
+```
+Create and Seed the Database:
 
-Using the requirements above create a [model](https://docs.djangoproject.com/en/1.10/topics/db/models/) for each resource, and use [migrations](https://docs.djangoproject.com/en/1.10/topics/migrations/) to ensure your database structure is up to date.
+```
+python manage.py builddb
+```
+Host a Server:
 
-### Templates
+```
+python manage.py runserver
+```
+Then, open your favorite internet browser and go to your [Local Host - port: 8000](http://localhost:8000/)
 
-[Django template language](https://docs.djangoproject.com/en/1.10/ref/templates/language/)
 
-### Form Helpers
+## Usage
+In order to use all of the Bangazon website's features, users must create an account by clicking the "Register" button in the top left corner of the splash page.
 
-Django, like Angular, has many built-in [helper tags and filters](https://docs.djangoproject.com/en/1.10/ref/templates/builtins/) when building the site templates. We strongly recommend reading this documentation while building your templates.
+#### Registered users can:
+* Add Products to Sell
+* Add and Delete Multiple Payment Types
+* Add Products to or delete products from a Shopping Cart
+* Browse All Products
+* Browse All Product Categories
+* Browse 20 Most Recently Added Products
+* Browse Products by Category
+* Logout
+
+#### Users that are _not_ registered can:
+* Sign Up
+* Browse All Products
+* Browse All Product Categories
+* Browse Products by Category
+* Browse 20 Most Recently Added Products
+
+
+## Contribute
+1. Fork it!
+2. Create your feature branch:
+```git checkout -b <new-feature-branch-name-here>```
+3. Commit your changes:
+```git commit -m 'Add some feature'```
+4. Push to the branch:
+```git push origin <new-feature-branch-name-here-too>```
+5. Submit a pull request!
+
+## Credits
+Project Managers:
+  - [Jurnell Cockhren](https://github.com/jcockhren)
+  - [Steve Brownlee](https://github.com/stevebrownlee)
+
+Contributors:
+  * [Jeremy Bakker](https://github.com/JeremyBakker)
+  * [Blaise Roberts](https://github.com/BlaiseRoberts)
+  * [Jessica Younker](https://github.com/jessica-younker)
+  * [Will Sims](https://github.com/willsims14)
+
+## License
+MIT © Potatoes
