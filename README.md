@@ -37,7 +37,7 @@ Host a Server:
 ```
 python manage.py runserver
 ```
-Then, open your favorite internet browser and go to your [Local Host (port: 8000)](http://localhost:8000/)
+Then, open your favorite internet browser and go to your [Local Host ](http://localhost:8000/) (port: 8000)
 
 
 ## Usage
