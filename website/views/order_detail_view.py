@@ -45,9 +45,10 @@ def order_detail(request, order_id):
 			product_count = ProductOrder.objects.filter(product_id=x[0],order=order_id).count()
 			subtotal = product[0].price * product_count
 			total += float(subtotal)
+			total_string = locale.currency(total, grouping=True)
 			product_list.append((product, product_count, locale.currency(subtotal, grouping=True)))
 		return render(request, template_name, {'order': order, "orderproducts":
-	  		product_list, "total":locale.currency(total, grouping=True)})
+	  		product_list, "total":total, "total_string":total_string})
 	else:
 		return HttpResponseForbidden('''<h1>Not your order, bruh!</h1>
 			<img src="/website/static/other.jpg">''')
