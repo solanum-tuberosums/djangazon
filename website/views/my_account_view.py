@@ -8,6 +8,7 @@ def my_account(request, user_id):
     This function is invoked to display a user's account details.
 
     ---Arguments---
+    request: the full HTTP request object
     user_id(integer): the id of the user
 
     ---GET---

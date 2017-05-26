@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
 from django.contrib.auth.models import User
-
 from website.models.product_model import Product
 from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
@@ -60,4 +59,3 @@ def product_detail(request, product_id):
 		return render(request, template_name, {
 			'posted_object': 'Product Added to Cart', 
 			'posted_object_identifier': product.title})
-

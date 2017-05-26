@@ -14,6 +14,7 @@ def order_detail(request, order_id):
     This function is invoked to display the details of a user's order.
 
     ---Arguments---
+    request: the full HTTP request object
     order_id(integer): the id of the order
 
     ---GET---
@@ -55,6 +56,7 @@ def delete_product_from_order(request, product_id, order_id):
     This function is invoked to delete a product from a user's order.
 
     ---Arguments---
+    request: the full HTTP request object
     product_id(integer): the id of the product
     order_id(integer): the id of the order
 

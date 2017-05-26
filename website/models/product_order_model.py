@@ -13,8 +13,8 @@ class ProductOrder (models.Model):
     in the database.
 
     ----Fields----
-    product(foreign key): Links to Product(ProductID) with a foreign key
-    order(foreign key): Links to Order(OrderID) with a foreign key
+    - product(foreign key): Links to Product(ProductID) with a foreign key
+    - order(foreign key): Links to Order(OrderID) with a foreign key
    
 
     Author: Jessica Younker

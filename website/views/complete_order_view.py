@@ -8,7 +8,7 @@ def complete_order(request):
     This function is invoked to complete an order.
 
     ---Arguments---
-    None
+    request: the full HTTP request object
 
     ---GET---
     Renders complete_order.html

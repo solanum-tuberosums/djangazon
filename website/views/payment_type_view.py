@@ -57,13 +57,6 @@ def delete_payment_type(request, payment_type_id):
     payment_type_id(integer): the id connected to the payment type selected for
         delection
 
-    ---GET---
-    renders payment_type.html
-
-        ---Context---
-        'payment_type_form'(form): the payment type form from 
-            payment_type_form.py
-
     ---POST---
     Renders success/payment_type_links.html
 

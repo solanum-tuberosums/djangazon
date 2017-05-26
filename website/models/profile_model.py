@@ -13,11 +13,11 @@ class Profile (models.Model):
     This class models the profile table in the database.
 
     ----Fields----
-    user(foreign key) = links to User(UserID) with a foregin key
-    street_address(character) = a user's street address
-    city = a user's city
-    state = a user's state
-    postal_code = a user's postal code
+    - user(foreign key) = links to User(UserID) with a foregin key
+    - street_address(character) = a user's street address
+    - city = a user's city
+    - state = a user's state
+    - postal_code = a user's postal code
 
     ----Methods----
     get_user_order    

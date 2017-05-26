@@ -12,9 +12,9 @@ class Order (models.Model):
     This class models an order in the database.
 
     ----Fields----
-    payment_type(foreign key): a foreign key attached to the payment type
-    order_date(date): an order's date
-    user(foreign key): a foreign key attached to the user 
+    - payment_type(foreign key): a foreign key attached to the payment type
+    - order_date(date): an order's date
+    - user(foreign key): a foreign key attached to the user 
 
     Author: Jeremy Bakker
     """

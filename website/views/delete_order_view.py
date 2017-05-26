@@ -7,7 +7,7 @@ def delete_order(request):
     This function is invoked to delete an incomplete order from the DB.
 
     ---Arguments---
-    None
+    request: the full HTTP request object
 
     ---POST---
     Renders success/order_links.html page after incomplete order has been 
@@ -27,6 +27,7 @@ def delete_order(request):
 
     Author: Jeremy Bakker
     """
+    
     if request.method == "GET":
         template_name = "delete_order.html"
         return render(request, template_name, {})

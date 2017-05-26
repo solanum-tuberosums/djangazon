@@ -8,7 +8,7 @@ def index(request):
     This function is invoked to show the index page.
 
     ---Arguments---
-    None
+    request: the full HTTP request object
 
     ---GET---
     Renders complete_index.html

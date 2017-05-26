@@ -7,7 +7,7 @@ def list_products(request):
     This function is invoked to list products available for sale.
 
     ---Arguments---
-    user_id(integer): the id of the seller listing the product for sale
+    request: the full HTTP request object
 
     ---GET---
     Renders list.html

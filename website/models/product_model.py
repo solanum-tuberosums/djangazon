@@ -12,13 +12,13 @@ class Product (models.Model):
     This class models a product in the database.
 
     ----Fields----
-    seller(foreign key): links to User(UserID) with a foreign key
-    product_category: links to ProductCategory with a foreign key 
-    title(character): a product's title
-    description(text): a product's description
-    price(integer): a product's unit price
-    quantity(integer): the available quantity of a product
-    date_added(date): date a product was added to the database
+    - seller(foreign key): links to User(UserID) with a foreign key
+    - product_category: links to ProductCategory with a foreign key 
+    - title(character): a product's title
+    - description(text): a product's description
+    - price(integer): a product's unit price
+    - quantity(integer): the available quantity of a product
+    - date_added(date): date a product was added to the database
 
     Author: Jessica Younker
     """

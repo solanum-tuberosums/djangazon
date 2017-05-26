@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from website.models.product_model import ProductCategory, Product
 
 def product_category_detail(request, category_id):

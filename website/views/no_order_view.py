@@ -7,7 +7,7 @@ def no_order(request):
     This function is invoked when no order has been created for a user.
 
     ---Arguments---
-    None
+    request: the full HTTP request object
 
     ---GET---
     Renders no_order.html.
@@ -15,11 +15,9 @@ def no_order(request):
         ---Context---
         None
 
-    ---POST---
-    None
-
     Author: Blaise Roberts
     """
+    
     template_name = 'no_order.html'
 
     return render(request, template_name, {})

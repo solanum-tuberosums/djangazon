@@ -11,7 +11,7 @@ def list_product_categories(request):
     category.
 
     ---Arguments---
-    None
+    request: the full HTTP request object
 
     ---GET---
     Renders product_category_list.html.

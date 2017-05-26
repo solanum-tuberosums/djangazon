@@ -3,9 +3,7 @@ from django.test import TestCase, Client
 
 from django.utils import timezone
 from django.urls import reverse
-
 import datetime
-
 from .models import Product, ProductCategory, Order, PaymentType, ProductOrder
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login

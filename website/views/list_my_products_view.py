@@ -8,6 +8,7 @@ def list_my_products(request, user_id):
     This function is invoked to list products added by a seller.
 
     ---Arguments---
+    request: the full HTTP request object
     user_id(integer): the id of the seller listing the product for sale
 
     ---GET---
@@ -21,8 +22,11 @@ def list_my_products(request, user_id):
     Renders success/order_links.html
 
         ---Context---
-        'posted_object': String = 'Order Complete' 
-        'posted_object_identifier': order id
+            --if request.user.id == user_id
+                'posted_object': String = 'Order Complete' 
+                'posted_object_identifier': order id
+            --else--
+                403 
 
     Author: Blaise Roberts
     """

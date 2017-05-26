@@ -25,6 +25,7 @@ def sell_product(request):
 
     Author: Jessica Younker
     """
+
     if request.method == 'GET':
         product_form = ProductForm()
         template_name = 'create.html'
@@ -32,7 +33,6 @@ def sell_product(request):
 
     elif request.method == 'POST':
         form_data = request.POST
-
         p = Product(
             seller = request.user,
             title = form_data['title'],
