@@ -5,9 +5,8 @@
     <div class="col-xs-8 col-xs-offset-2">
         <ul class="list-group">
         {% for category in items %}
-        
-
-            <a class="list-group-item list-group-item-success lead" href="/product-categories/{{ category.0.id }}">{{ category.0 }} <span class="badge">{{ category.2 }}</span></a>
+            <a class="list-group-item list-group-item-success lead" href="/product-categories/{{ category.0.id }}">{{ category.0 }} 
+            <span class="badge">{{ category.2 }}</span></a>
             
             <ol class="list-group" style="margin-left:10em">
                 {% for product in category.1 %}
@@ -16,9 +15,6 @@
                     <li class="list-group-item list-group-item-danger lead">There are no products in this category.</li>
                 {% endfor %}
             </ol>
-
-
-
         {% empty %}
             {{ error }}
         {% endfor %}
