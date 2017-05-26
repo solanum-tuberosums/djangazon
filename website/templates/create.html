@@ -2,8 +2,6 @@
 
 {% block content%}
     <h1 class="text-center">Sell Product</h1>
-
-
     <form class="col-xs-6 col-xs-offset-3" action="{% url 'website:sell' %}" method="post">
       {% csrf_token %}
       {{ product_form.as_p }}
