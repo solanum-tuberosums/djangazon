@@ -17,26 +17,9 @@ def product_detail(request, product_id):
 
 	Author: Will Sims & Blaise Roberts
 	"""
-	
 	if request.method == 'GET':
-
 		template_name = 'detail.html'
 		product = Product.objects.get(pk=product_id)
-
-		# Get seller object
-		# seller = User.objects.get(pk=product.seller_id)
-		# seller_name = " ".join([seller.first_name.title(), seller.last_name.\
-		# 	title()])
-
-		# This part can probably be refactored, I just wanted to get something 
-		# that works merged in (manually extracting the product data and 
-		# creating a list of tuples is probably resource expensive)
-		# new_product = [("Seller", seller_name), ("Description", \
-		# 	product.description), ("Price", product.price), ("Quantity", \
-		# 	product.quantity), ("Date Listed", product.date_added)]
-
-
-		
 		return render(request, template_name, {'product': product})
 
 	elif request.method == 'POST':
