@@ -6,8 +6,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from website.models.product_category_model import ProductCategory
 import locale
-import math
-
 
 class Product (models.Model):
     """
@@ -26,6 +24,8 @@ class Product (models.Model):
     - formatted_price(): returns a currency-formatted string of the product's price
     - formatted_price(): returns a currency-formatted string of the product's ROUNDED 
                             price, without any decimal places
+    - seller_string(): returns the first name and last name of the person selling 
+    the product as a string
 
     Author: Jessica Younker
     """
