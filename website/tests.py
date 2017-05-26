@@ -50,7 +50,7 @@ def create_payment_type(user):
     return PaymentType.objects.create(
         account_nickname = "Test Payment Type",
         account_type = "Visa",
-        account_number = "1223 1223 1233 1231",
+        account_number = "1223122312331231",
         is_active = 1,
         cardholder=user)
 
@@ -124,9 +124,9 @@ class WebsiteViewTests(TestCase):
         self.assertQuerysetEqual(response.context['items'].order_by('pk'), ['<Product: Product object>', '<Product: Product object>'])
 
 
-    #################################
-    ###   ORDER SUMMARY VIEW     ####
-    #################################
+    ###############################
+    ###   ORDER SUMMARY VIEW   ####
+    ###############################
 
     def test_order_summary_view_has_correct_number_of_products_in_response_context(self):
         client = Client()
@@ -149,6 +149,43 @@ class WebsiteViewTests(TestCase):
             '(<QuerySet [<Product: Product object>]>, 1, 10.0)', \
             '(<QuerySet [<Product: Product object>]>, 1, 10.0)'])
         client.logout()
+
+
+    def test_order_summary_without_login(self):
+        my_user = create_user()
+        order = create_order(my_user)
+        response = self.client.get(reverse('website:order_detail', args=[order.id]))
+        self.assertEqual(response.status_code, 403)
+
+
+    ############################
+    ###   PAYMENTTYPE TEST  ####
+    ############################
+
+    def test_my_account_payment_types(self):
+        client = Client()
+        my_user = create_user()
+        client.force_login(my_user, backend=None)
+        payment_type_1 = create_payment_type(my_user)
+        payment_type_2 = create_payment_type(my_user)
+        response = client.get(reverse('website:my_account', args=[my_user.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(response.context['payment_types'].order_by('pk'), \
+            ['<PaymentType: Test Payment Type>', '<PaymentType: Test Payment Type>'])
+
+    def test_my_account_without_login(self):
+        my_user = create_user()
+        response = self.client.get(reverse('website:my_account', args=[my_user.id]))
+        self.assertEqual(response.status_code, 403)
+
+    def test_my_account_without_payment_types(self):
+        client = Client()
+        my_user = create_user()
+        client.force_login(my_user, backend=None)
+        response = client.get(reverse('website:my_account', args=[my_user.id]))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response,  "No Payment Types!")
+
 
 
 
