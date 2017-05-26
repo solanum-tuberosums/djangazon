@@ -5,7 +5,7 @@ from website.models.product_model import ProductCategory, Product
 def product_category_detail(request, category_id):
 	"""
 	This function renders the request using:
-		- TEMPLATE: detail.html
+		- TEMPLATE: list.html
 		- OBJECT: The Product that was clicked on is the data that this view returns
 
 	Author: Will Sims

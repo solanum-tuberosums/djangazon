@@ -5,6 +5,10 @@ from website.models.product_order_model import ProductOrder
 from website.models.product_model import Product
 from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
 
 
 def order_detail(request, order_id):
@@ -36,23 +40,16 @@ def order_detail(request, order_id):
 		return HttpResponseForbidden('<h1>Not your order, bruh!</h1><img src="/website/static/other.jpg">')
 
 def delete_product_from_order(request, product_id, order_id):
-	order = Order.objects.get(pk=order_id)
+	order = Order.objects.get(pk=order_id, user=request.user)
+	print("\n\n\n\n\n")
+	print(request.user.id)
+	print(order.user.id)
 	if request.user == order.user:
 
+
 		ProductOrder.objects.filter(product_id=product_id, order_id=order_id).delete()
-		template_name = 'order_detail.html'
-
-
-		# Get seller object
-		line_items = ProductOrder.objects.filter(order=order_id).values_list('product_id').distinct()
-		product_list = list()
-		total = int()
-		for x in line_items:
-			product = Product.objects.filter(pk=x[0])
-			product_count = ProductOrder.objects.filter(product_id=x[0], order=order_id).count()
-			subtotal = product[0].price * product_count
-			total += subtotal
-			product_list.append((product, product_count, subtotal))
-		return render(request, template_name, {'order': order, "orderproducts":product_list, "total":total})
+		return HttpResponseRedirect(reverse('website:order_detail', args=[order.id]))
 	else:
 		return HttpResponseForbidden('<h1>Not your order, bruh!</h1><img src="/website/static/other.jpg">')
+
+
