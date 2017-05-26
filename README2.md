@@ -41,7 +41,9 @@ python manage.py runserver
 
 
 ## Usage
-#### Djangazon is a marketplace where users can buy and sell goods. Registered users can:
+Djangazon is Bangazon's e-commerce website powered by Python and Django. Djangazon gives its users the ability to buy and sell products.
+
+#### Registered users can:
 * Sell Products
 * Browse All Products
 * Browse 20 Most Recently Added Products
