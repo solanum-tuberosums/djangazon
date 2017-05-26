@@ -76,7 +76,7 @@ Project Manager:
   - [Jurnell Cockhren](https://github.com/jcockhren)
   - [Steve Brownlee](https://github.com/stevebrownlee)
 
-API Build Contributors:
+Contributors:
   * [Jeremy Bakker](https://github.com/JeremyBakker)
   * [Blaise Roberts](https://github.com/BlaiseRoberts)
   * [Jessica Younker](https://github.com/jessica-younker)
