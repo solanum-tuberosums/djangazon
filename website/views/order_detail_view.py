@@ -50,6 +50,7 @@ def order_detail(request, order_id):
 			<img src="/website/static/other.jpg">''')
 
 def delete_product_from_order(request, product_id, order_id):
+
 	"""
     This function is invoked to delete a product from a user's order.
 
@@ -64,9 +65,6 @@ def delete_product_from_order(request, product_id, order_id):
     """
 
 	order = Order.objects.get(pk=order_id, user=request.user)
-	print("\n\n\n\n\n")
-	print(request.user.id)
-	print(order.user.id)
 	if request.user == order.user:
 		ProductOrder.objects.filter(product_id=product_id, 
 			order_id=order_id).delete()

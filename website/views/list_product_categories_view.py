@@ -17,8 +17,14 @@ def list_product_categories(request):
     Renders product_category_list.html.
 
         ---Context---
-        'payment_types': the payment types avaiable to assign to an order
-        'complete_order_form': the form from complete_order_form.py
+        If there are categories available to view:
+        'items': final_three_product, a list of the top 3 products
+        in the category
+        'page_title': 'Product Categories'
+        If there are no categories in the DB:
+        'items': returns an empty list 
+        'page_title': "Product Categories", 
+        'error': 'No categories are available.'
 
     ---POST---
     None
