@@ -44,12 +44,17 @@ python manage.py runserver
 #### Djangazon is a marketplace where users can buy and sell goods. Registered users can:
 * Sell Products
 * Browse All Products
+* Browse 20 Most Recently Added Products
 * Browse Products by Category
 * Add Multiple Payment Types
 * Add Products to a (persistent) Shopping Cart
-#### Users that are __not__ registered can:
+* Logout
+
+#### Users that are _not_ registered can:
+* Sign Up
 * Browse All Products
 * Browse Products by Category
+* Browse 20 Most Recently Added Products
 
 
 ## Contribute
