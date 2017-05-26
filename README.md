@@ -27,7 +27,7 @@ pip install django
 git clone https://github.com/solanum-tuberosums/djangazon.git
 cd djangazon
 ```
-Setting up the database:
+Create and seed the database:
 
 ```
 python manage.py builddb
