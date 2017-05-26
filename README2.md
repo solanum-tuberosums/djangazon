@@ -17,7 +17,7 @@ Install [pip](https://packaging.python.org/installing/)
 
 Install [Python 3.6](https://www.python.org/downloads/)
 
-Install Django and REST framework:
+Install Django:
 ```
 pip install django
 ```
@@ -41,13 +41,13 @@ python manage.py runserver
 
 
 ## Usage
-Djangazon is a marketplace where users can buy and sell goods. Registered users can:
+#### Djangazon is a marketplace where users can buy and sell goods. Registered users can:
 * Sell Products
 * Browse All Products
 * Browse Products by Category
 * Add Multiple Payment Types
 * Add Products to a (persistent) Shopping Cart
-Users that are __not__ registered can:
+#### Users that are __not__ registered can:
 * Browse All Products
 * Browse Products by Category
 
