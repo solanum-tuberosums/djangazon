@@ -19,7 +19,7 @@ def list_products(request):
     Author: Will Sims
     """
 
-    all_products = Product.objects.all()
+    all_products = Product.objects.all().order_by('-pk')
     template_name = 'list.html'
     return render(request, template_name, {'items': all_products, 
         "page_title":"Products"})
