@@ -40,12 +40,9 @@ def order_detail(request, order_id):
 		return HttpResponseForbidden('<h1>Not your order, bruh!</h1><img src="/website/static/other.jpg">')
 
 def delete_product_from_order(request, product_id, order_id):
+	# Get user's order object
 	order = Order.objects.get(pk=order_id, user=request.user)
-	print("\n\n\n\n\n")
-	print(request.user.id)
-	print(order.user.id)
 	if request.user == order.user:
-
 
 		ProductOrder.objects.filter(product_id=product_id, order_id=order_id).delete()
 		return HttpResponseRedirect(reverse('website:order_detail', args=[order.id]))
