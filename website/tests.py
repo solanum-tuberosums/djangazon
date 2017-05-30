@@ -35,8 +35,11 @@ def create_product(name="Test Product", user=None, category=None):
                                     title=name, 
                                     description="Test Description", 
                                     price=10, 
-                                    quantity=5, 
-                                    date_added=time)
+                                    current_inventory=5, 
+                                    date_added=time,
+                                    local_delivery=True,
+                                    total_number_sold=0,
+                                    is_active=1)
 
 def create_order(user):
     return Order.objects.create(user=user, order_date=timezone.now())
@@ -209,4 +212,4 @@ class WebsiteViewTests(TestCase):
         self.assertContains(response, product.title)
         self.assertContains(response, product.description)
         self.assertContains(response, product.price)
-        self.assertContains(response, product.quantity)
+        self.assertContains(response, product.current_inventory)

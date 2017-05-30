@@ -40,9 +40,12 @@ def sell_product(request):
             title = form_data['title'],
             description = form_data['description'],
             price = form_data['price'],
-            quantity = form_data['quantity'],
+            current_inventory = form_data['current_inventory'],
             product_category_id = form_data['product_category'],
             date_added = timezone.now(),
+            local_delivery = form_data['local_delivery'],
+            total_number_sold = 0,
+            is_active = 1
         )
         p.save()
         # template_name = 'success/product_added_to_sell_links.html'

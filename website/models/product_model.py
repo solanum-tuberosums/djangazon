@@ -17,8 +17,14 @@ class Product (models.Model):
     - title(character): a product's title
     - description(text): a product's description
     - price(decimal): a product's unit price
-    - quantity(integer): the available quantity of a product
     - date_added(date): date a product was added to the database
+    - local_delivery(boolean): indicates whether a product is available for 
+        local delivery
+    - location(character): location for local delivery
+    - total_number_sold(integer): total number of products sold
+    - current_inventory(integer): total number of products available for sale
+    - image(image): file path to image for display
+    - is_active(boolean): indicates whether a product is active
 
     ----Methods----
     - formatted_price(): returns a currency-formatted string of the product's price
@@ -27,7 +33,7 @@ class Product (models.Model):
     - seller_string(): returns the first name and last name of the person selling 
     the product as a string
 
-    Author: Jessica Younker
+    Author: Jessica Younker and Jeremy Bakker
     """
 
     seller = models.ForeignKey(User, on_delete=models.CASCADE,)
@@ -36,8 +42,13 @@ class Product (models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=9, decimal_places=2)
-    quantity = models.IntegerField()
     date_added = models.DateField()
+    local_delivery = models.BooleanField()
+    location = models.CharField(max_length=255, blank=True, null=True)
+    total_number_sold = models.IntegerField()
+    current_inventory = models.IntegerField()
+    image = models.ImageField(upload_to = 'images/', default = 'images/None/no-img.jpg')
+    is_active = models.BooleanField()
 
     def formatted_price(self):
         return str(locale.currency(self.price, grouping=True))
