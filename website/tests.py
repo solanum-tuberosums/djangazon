@@ -36,7 +36,10 @@ def create_product(name="Test Product", user=None, category=None):
                                     description="Test Description", 
                                     price=10, 
                                     current_inventory=5, 
-                                    date_added=time)
+                                    date_added=time,
+                                    local_delivery=True,
+                                    total_number_sold=0,
+                                    is_active=1)
 
 def create_order(user):
     return Order.objects.create(user=user, order_date=timezone.now())

@@ -15,7 +15,7 @@ class ProductForm(forms.ModelForm):
 
     Author: Will Sims
     """
-    print("DIR", dir(forms.NullBooleanField))
+    
     price = forms.FloatField(min_value=0.01, max_value=100000000, 
         widget=forms.NumberInput(attrs={'class': "form-control"}))
     current_inventory = forms.IntegerField(label="Quantity", min_value=1, 

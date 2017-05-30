@@ -45,7 +45,7 @@ def list_product_categories(request):
 		for category in all_product_categories:
 			# Get top 3 products for this category
 			top_three_products = Product.objects.filter(product_category=
-                category.id, current_inventory__gt=0).order_by('-id')[:3]
+                category.id, current_inventory__gt=0, is_active=1).order_by('-id')[:3]
 			# Make a placeholder list that will hold two indexed values
 			#	- product_id
 			#	- product_title
@@ -56,7 +56,7 @@ def list_product_categories(request):
 			# 	placeholder_list.append((product.id, product.title))
 			# Get count for this category
 			this_category_product_count = category.category_products.filter(
-                current_inventory__gt=0).count()
+                current_inventory__gt=0, is_active=1).count()
 
 			# After the second loop, create a tuple with a length of 3 (0 = 
             # CategoryName, 1 = placeholder_list, 2 = count of products)
