@@ -9,6 +9,14 @@
     </ul>  
     <ul class="nav navbar-nav navbar-right">
       <li>
+        <form class="navbar-form" type="get" action= "{% url 'website:search_products' %}">
+          <div class="form-group">
+            <input  class="form-control" id="search_box" type="text" name="search_box"  placeholder="Search Products. . ." >
+          </div>
+          <button class="btn btn-default" id="search_submit" type="submit" >Submit</button>
+        </form>
+      </li>
+      <li>
         <a href="{% url 'website:list_product_categories' %}">Categories</a>
       </li>
       <li>

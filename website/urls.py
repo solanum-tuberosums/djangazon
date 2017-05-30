@@ -36,6 +36,9 @@ urlpatterns = [
             name="delete_product_from_order"), 
     url(r'^order/$', views.no_order, name='no_order'),
     url(r'^deleteorder/$', views.delete_order, name='delete_order'),
-    url(r'^order-history/(?P<user_id>[0-9]+)/$', views.order_history, name="order_history")
-    
+
+    url(r'^order-history/(?P<user_id>[0-9]+)/$', views.order_history, 
+            name="order_history"),
+    url(r'^searchproducts/$', views.search_products, name='search_products'),
+
 ]

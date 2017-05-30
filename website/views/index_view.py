@@ -23,7 +23,8 @@ def index(request):
     """
 
     template_name = 'index.html'
-    my_product_list = Product.objects.all().order_by('-id')[:20]
+    my_product_list = Product.objects.filter(current_inventory__gt=0, 
+        is_active=1).order_by('-id')[:20]
 
     if my_product_list:
         return render(request, template_name, 
