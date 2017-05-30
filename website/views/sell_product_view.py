@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.utils import timezone
 from website.forms import ProductForm
 from website.models.product_model import Product
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 def sell_product(request):
@@ -38,12 +40,16 @@ def sell_product(request):
             title = form_data['title'],
             description = form_data['description'],
             price = form_data['price'],
-            quantity = form_data['quantity'],
+            current_inventory = form_data['current_inventory'],
             product_category_id = form_data['product_category'],
             date_added = timezone.now(),
+            local_delivery = form_data['local_delivery'],
+            is_active = 1
         )
         p.save()
-        template_name = 'success/product_added_to_sell_links.html'
-        return render(request, template_name, {
-            'posted_object': 'Your Product added to Sell', 
-            'posted_object_identifier': p.title})
+        # template_name = 'success/product_added_to_sell_links.html'
+        # return render(request, template_name, {
+        #     'posted_object': 'Your Product added to Sell', 
+        #     'posted_object_identifier': p.title})
+        return HttpResponseRedirect(reverse('website:product_detail', 
+            args=[p.id]))

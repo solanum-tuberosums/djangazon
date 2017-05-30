@@ -35,6 +35,6 @@ urlpatterns = [
             views.order_detail_view.delete_product_from_order, 
             name="delete_product_from_order"), 
     url(r'^order/$', views.no_order, name='no_order'),
-    url(r'^deleteorder/$', views.delete_order, name='delete_order')
-    
+    url(r'^deleteorder/$', views.delete_order, name='delete_order'),
+    url(r'^searchproducts/$', views.search_products, name='search_products')
 ]

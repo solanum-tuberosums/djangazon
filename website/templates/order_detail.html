@@ -16,8 +16,8 @@
     <tr>
       <td><a href="/products/{{ object.0.id }}">{{ object.0.title }}</a></td>
       <td class="text-center">{{ object.1 }}</td>
-      <td class="text-right">${{ object.0.price }}0</td>
-      <td class="text-right">${{ object.2 }}0</td>
+      <td class="text-right">${{ object.0.price }}</td>
+      <td class="text-right">{{ object.2 }}</td>
       <form method="POST" action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
         {% csrf_token %}
         <td class="text-right">
@@ -30,7 +30,7 @@
       <th></th>
       <th></th>
       <th class="text-right">Total :</th>
-      <th class="text-right">${{ total }}0</th>
+      <th class="text-right">{{ total_string }}</th>
       <th></th>
     </tr>
   </table>

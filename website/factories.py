@@ -70,11 +70,17 @@ class ProductFactory(factory.django.DjangoModelFactory):
     title('word'): fake title of a product
     description('text'): fake description of a product
     price('random_int'): fake price for a product
-    quantity('random_int'): fake quantity of a product
     date_added('date'): fake date a product was added
-    product_category(Iterator[ProductCategory]): fake foreign key linked to the product type table
+    product_category(Iterator[ProductCategory]): fake foreign key linked to the
+        product type table
     seller(Iterator[User]): fake foreign key linked to the customer table
-    
+    local_delivery('boolean'): fake value indicating whether a product is 
+        available for local delivery
+    location('city'): fake city for local delivery
+    current_inventory('random_int'): fake number of products available
+    is_active('boolean'): fake boolean indicating whether a product is 
+        available
+
     Author: Jeremy Bakker
     """
     
@@ -83,10 +89,13 @@ class ProductFactory(factory.django.DjangoModelFactory):
     title = factory.Faker('word')
     description = factory.Faker('bs')
     price = factory.Faker('random_int')
-    quantity = factory.Faker('random_int')
     date_added = factory.Faker('date')
     product_category = factory.Iterator(ProductCategory.objects.all())
     seller = factory.Iterator(User.objects.all())
+    local_delivery = factory.Faker('boolean')
+    location = factory.Faker('city')
+    current_inventory = factory.Faker('random_int')
+    is_active = factory.Faker('boolean')
 
 class PaymentTypeFactory(factory.django.DjangoModelFactory):
     """

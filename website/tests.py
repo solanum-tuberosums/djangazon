@@ -35,8 +35,10 @@ def create_product(name="Test Product", user=None, category=None):
                                     title=name, 
                                     description="Test Description", 
                                     price=10, 
-                                    quantity=5, 
-                                    date_added=time)
+                                    current_inventory=5, 
+                                    date_added=time,
+                                    local_delivery=True,
+                                    is_active=1)
 
 def create_order(user):
     return Order.objects.create(user=user, order_date=timezone.now())
@@ -151,9 +153,9 @@ class WebsiteViewTests(TestCase):
         response = client.get(reverse('website:order_detail', args=[order.id]))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['orderproducts'], \
-            ['(<QuerySet [<Product: Product object>]>, 2, 20.0)', \
-            '(<QuerySet [<Product: Product object>]>, 1, 10.0)', \
-            '(<QuerySet [<Product: Product object>]>, 1, 10.0)'])
+            ["(<QuerySet [<Product: Product object>]>, 2, '$20.00')", \
+            "(<QuerySet [<Product: Product object>]>, 1, '$10.00')", \
+            "(<QuerySet [<Product: Product object>]>, 1, '$10.00')"])
         client.logout()
 
 
@@ -209,4 +211,4 @@ class WebsiteViewTests(TestCase):
         self.assertContains(response, product.title)
         self.assertContains(response, product.description)
         self.assertContains(response, product.price)
-        self.assertContains(response, product.quantity)
+        self.assertContains(response, product.current_inventory)
