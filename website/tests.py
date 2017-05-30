@@ -38,7 +38,6 @@ def create_product(name="Test Product", user=None, category=None):
                                     current_inventory=5, 
                                     date_added=time,
                                     local_delivery=True,
-                                    total_number_sold=0,
                                     is_active=1)
 
 def create_order(user):
@@ -154,9 +153,9 @@ class WebsiteViewTests(TestCase):
         response = client.get(reverse('website:order_detail', args=[order.id]))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['orderproducts'], \
-            ["(<QuerySet [<Product: Product object>]>, 2, '$20.00')", \
-            "(<QuerySet [<Product: Product object>]>, 1, '$10.00')", \
-            "(<QuerySet [<Product: Product object>]>, 1, '$10.00')"])
+            ["(<Product: Product object>, 2, '$20.00')", \
+            "(<Product: Product object>, 1, '$10.00')", \
+            "(<Product: Product object>, 1, '$10.00')"])
         client.logout()
 
 

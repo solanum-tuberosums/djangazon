@@ -77,7 +77,6 @@ class ProductFactory(factory.django.DjangoModelFactory):
     local_delivery('boolean'): fake value indicating whether a product is 
         available for local delivery
     location('city'): fake city for local delivery
-    total_number_sold('random_int'): fake number of products sold
     current_inventory('random_int'): fake number of products available
     is_active('boolean'): fake boolean indicating whether a product is 
         available
@@ -95,7 +94,6 @@ class ProductFactory(factory.django.DjangoModelFactory):
     seller = factory.Iterator(User.objects.all())
     local_delivery = factory.Faker('boolean')
     location = factory.Faker('city')
-    total_number_sold = factory.Faker('random_int')
     current_inventory = factory.Faker('random_int')
     is_active = factory.Faker('boolean')
 

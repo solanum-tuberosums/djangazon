@@ -4,6 +4,7 @@ djangazon model configuration for order
 
 from django.db import models
 from django.contrib.auth.models import User
+from website.models.product_model import Product
 from website.models.payment_type_model import PaymentType
 
 
@@ -23,3 +24,4 @@ class Order (models.Model):
         on_delete=models.CASCADE)
     order_date = models.DateField()
     user = models.ForeignKey(User)
+    products = models.ManyToManyField(Product, through='ProductOrder')

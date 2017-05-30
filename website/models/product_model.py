@@ -21,7 +21,6 @@ class Product (models.Model):
     - local_delivery(boolean): indicates whether a product is available for 
         local delivery
     - location(character): location for local delivery
-    - total_number_sold(integer): total number of products sold
     - current_inventory(integer): total number of products available for sale
     - image(image): file path to image for display
     - is_active(boolean): indicates whether a product is active
@@ -45,7 +44,6 @@ class Product (models.Model):
     date_added = models.DateField()
     local_delivery = models.BooleanField()
     location = models.CharField(max_length=255, blank=True, null=True)
-    total_number_sold = models.IntegerField()
     current_inventory = models.IntegerField()
     image = models.ImageField(upload_to = 'images/', default = 'images/None/no-img.jpg')
     is_active = models.BooleanField()
