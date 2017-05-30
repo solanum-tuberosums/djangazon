@@ -7,7 +7,7 @@
 	        {% for item in items %}
 	            <a class="list-group-item lead list-group-item-info" href="/products/{{ item.id }}">{{ item.title }} <span style="font-size: .6em; margin-left: 4em;">Quantity : {{ item.quantity }}</span><span style="float: right">for {{item.formatted_price}} / unit</span></a>
 	        {% empty %}
-	            {{ error }}
+	            <h1 class="jumbotron lead text-center">{{ error }}</h1>
 	        {% endfor %}
 	        </ul>
 		</div>
