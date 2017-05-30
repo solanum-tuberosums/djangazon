@@ -23,8 +23,9 @@ def search_products(request):
     if request.method == 'GET':
         form_data = request.GET
         search_box = form_data['search_box']
-        all_products = Product.objects.filter(Q(title__icontains=search_box) |\
-         Q(description__icontains=search_box))
+        all_products = Product.objects.filter(Q(title__icontains=search_box) &\
+             Q(current_inventory__gt=0) | Q(description__icontains=search_box)\
+             & Q(current_inventory__gt=0))
         template_name = 'list.html'
         return render(request, template_name, {'items': all_products, 
             "page_title":"Products", "error": """Search Query Returned 

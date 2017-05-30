@@ -40,7 +40,7 @@ def sell_product(request):
             title = form_data['title'],
             description = form_data['description'],
             price = form_data['price'],
-            quantity = form_data['quantity'],
+            current_inventory = form_data['current_inventory'],
             product_category_id = form_data['product_category'],
             date_added = timezone.now(),
         )

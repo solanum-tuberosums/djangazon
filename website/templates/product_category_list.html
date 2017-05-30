@@ -10,7 +10,7 @@
             <ol class="list-group" style="margin-left:10em">
                 {% for product in category.1 %}
                     <span class="list-group-item list-group-item-info row">
-                        <a class="col-sm-5" href="/products/{{ product.id }}">{{ product.title }} &thinsp; <i>({{ product.quantity }})</i></a>
+                        <a class="col-sm-5" href="/products/{{ product.id }}">{{ product.title }} &thinsp; <i>({{ product.current_inventory }})</i></a>
                         <!-- <span class="col-sm-3"></span> -->
                         <span class="col-sm-5"><small>{{ product.seller_string }}</small></span>
                         <span class="col-sm-2">{{ product.formatted_price }} </span>
