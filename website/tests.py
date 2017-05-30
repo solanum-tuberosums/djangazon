@@ -151,9 +151,9 @@ class WebsiteViewTests(TestCase):
         response = client.get(reverse('website:order_detail', args=[order.id]))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['orderproducts'], \
-            ['(<QuerySet [<Product: Product object>]>, 2, 20.0)', \
-            '(<QuerySet [<Product: Product object>]>, 1, 10.0)', \
-            '(<QuerySet [<Product: Product object>]>, 1, 10.0)'])
+            ["(<QuerySet [<Product: Product object>]>, 2, '$20.00')", \
+            "(<QuerySet [<Product: Product object>]>, 1, '$10.00')", \
+            "(<QuerySet [<Product: Product object>]>, 1, '$10.00')"])
         client.logout()
 
 

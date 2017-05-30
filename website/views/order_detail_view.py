@@ -7,26 +7,28 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+import locale
 
+locale.setlocale( locale.LC_ALL, '' )
 
 def order_detail(request, order_id):
 	"""
-    This function is invoked to display the details of a user's order.
+	This function is invoked to display the details of a user's order.
 
-    ---Arguments---
-    request: the full HTTP request object
-    order_id(integer): the id of the order
+	---Arguments---
+	request: the full HTTP request object
+	order_id(integer): the id of the order
 
-    ---GET---
-    Renders order_detail.html
+	---GET---
+	Renders order_detail.html
 
-        ---Context---
-        'order'(instance): the order instance
-        'orderproducts'(list): a list of the products on the order 
-        'total'(integer): the total cost of an order
+	---Context---
+	'order'(instance): the order instance
+	'orderproducts'(list): a list of the products on the order 
+	'total'(integer): the total cost of an order
 
-    Author: Blaise Roberts
-    """
+	Author: Blaise Roberts
+	"""
 
 	template_name = 'order_detail.html'
 	order = Order.objects.get(pk=order_id)
@@ -43,7 +45,7 @@ def order_detail(request, order_id):
 			total += subtotal
 			product_list.append((product, product_count, subtotal))
 		return render(request, template_name, {'order': order, "orderproducts":
-			product_list, "total":total})
+	  		product_list, "total":total, "total_string":total_string})
 	else:
 		return HttpResponseForbidden('''<h1>Not your order, bruh!</h1>
 			<img src="/website/static/other.jpg">''')
@@ -51,23 +53,23 @@ def order_detail(request, order_id):
 def delete_product_from_order(request, product_id, order_id):
 
 	"""
-    This function is invoked to delete a product from a user's order.
+	This function is invoked to delete a product from a user's order.
 
-    ---Arguments---
-    request: the full HTTP request object
-    product_id(integer): the id of the product
-    order_id(integer): the id of the order
+	---Arguments---
+	request: the full HTTP request object
+	product_id(integer): the id of the product
+	order_id(integer): the id of the order
 
-    ---Return---
-    Returns HttpResponseRedirect to order_detail
+	---Return---
+	Returns HttpResponseRedirect to order_detail
 
-    Author: Jeremy Bakker and Jessica Younker
-    """
+	Author: Jeremy Bakker and Jessica Younker
+	"""
 
 	order = Order.objects.get(pk=order_id, user=request.user)
 	if request.user == order.user:
 		ProductOrder.objects.filter(product_id=product_id, 
-			order_id=order_id).delete()
+		order_id=order_id).delete()
 		return HttpResponseRedirect(reverse('website:order_detail', 
 			args=[order.id]))
 	else:

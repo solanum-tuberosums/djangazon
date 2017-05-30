@@ -16,3 +16,6 @@ class CompleteOrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ('payment_type', )
+        widgets = {
+            'payment_type': forms.Select(attrs={'class': 'form-control'}),
+            }
