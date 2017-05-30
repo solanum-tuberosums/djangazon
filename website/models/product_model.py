@@ -38,6 +38,12 @@ class Product (models.Model):
     price = models.DecimalField(max_digits=9, decimal_places=2)
     quantity = models.IntegerField()
     date_added = models.DateField()
+    local_delivery = models.BooleanField()
+    location = models.CharField(max_length=255, blank=True, null=True)
+    total_number_sold = models.IntegerField()
+    current_inventory = models.IntegerField()
+    image = models.ImageField(upload_to = 'images/', default = 'images/None/no-img.jpg')
+    is_active = models.BooleanField()
 
     def formatted_price(self):
         return str(locale.currency(self.price, grouping=True))

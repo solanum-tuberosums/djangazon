@@ -87,6 +87,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
     date_added = factory.Faker('date')
     product_category = factory.Iterator(ProductCategory.objects.all())
     seller = factory.Iterator(User.objects.all())
+    local_delivery = factory.Faker('boolean')
 
 class PaymentTypeFactory(factory.django.DjangoModelFactory):
     """
