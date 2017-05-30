@@ -40,10 +40,10 @@ class Product (models.Model):
     date_added = models.DateField()
 
     def formatted_price(self):
-        return str(locale.currency(round(self.price), grouping=True))
+        return str(locale.currency(self.price, grouping=True))
 
     def formatted_price_no_decimals(self):
-        temp_price = locale.currency(self.price, grouping=True)
+        temp_price = locale.currency(round(self.price), grouping=True)
         return temp_price[:-3]
 
     def seller_string(self):
