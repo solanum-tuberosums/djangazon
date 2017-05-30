@@ -22,7 +22,7 @@ class ProductForm(forms.ModelForm):
         max_value=100000, widget=forms.NumberInput(attrs={'class': 
             "form-control"}))
     local_delivery=forms.ChoiceField(widget=forms.NullBooleanSelect(attrs=
-        {'class': "form-control"}), choices=((True, "Yes"), (False, "No")))
+        {'class': "form-control"}), choices=((1, "Yes"), (0, "No")))
     class Meta:
         model = Product
         fields = ('title', 'description', 'price', 'current_inventory', 
