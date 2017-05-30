@@ -13,7 +13,9 @@
   <div class="col-xs-8 col-xs-offset-2">
     <div class="list-group">
     {% for product in product_dict_list %}
-      <a class="list-group-item list-group-item-info lead" href="/products/{{ product.id }}">{{ product.title }} <span style="font-size: .6em; margin-left: 4em;">Quantity : {{ product.quantity }}</span><span style="float: right">for ${{product.price}}0/unit</span></a>
+
+      <a class="list-group-item list-group-item-info lead" href="/products/{{ product.id }}">{{ product.title }} <span style="font-size: .6em; margin-left: 4em;">Quantity : {{ product.quantity }}</span><span style="float: right">for {{product.formatted_price}} / unit</span></a>
+
     {% empty %}
       <h4>{{ error }}</h4>
     {% endfor %}
