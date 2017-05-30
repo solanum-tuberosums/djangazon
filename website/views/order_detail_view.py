@@ -45,6 +45,7 @@ def order_detail(request, order_id):
 			total += float(subtotal)
 			total_string = locale.currency(total, grouping=True)
 			product_list.append((product, product_count, locale.currency(subtotal, grouping=True)))
+
 		return render(request, template_name, {'order': order, "orderproducts":
 	  		product_list, "total":total, "total_string":total_string})
 	else:
