@@ -18,3 +18,4 @@ from website.views.list_my_products_view import list_my_products
 from website.views.product_category_detail_view import product_category_detail
 from website.views.complete_order_view import complete_order
 from website.views.delete_order_view import delete_order
+from website.views.order_history_view import order_history
