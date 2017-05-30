@@ -3,14 +3,19 @@
 	 {% block content %}
 		<h2 class="text-center">Please select a payment type for this order:
 		</h2>
-		<form class="text-center" id="complete_order_form" action="{% url 'website:complete_order' %}" method="POST">
+		<form class="text-center col-sm-4 col-sm-offset-4" 
+		id="complete_order_form" action="{% url 'website:complete_order' %}" 
+		method="POST">
 		    {% csrf_token %}
 		    {{ complete_order_form.as_p }}
-		    <input class="btn btn-success" type="submit" value="Submit"/>
+		    <input style="margin:1em;" class="btn btn-success"
+		     type="submit" value="Submit"/>
 		</form>  
-		<div class="text-center" style="margin-top: 2em">
+		<div class="text-center col-sm-4 col-sm-offset-4"
+		 style="margin-top: 2em">
 			<h3 class="text-center">- or -</h3>
-			<a class="btn btn-info" href="{% url 'website:payment_type' %}" style="margin-top: 2em">Add New Payment Type</a>
+			<a class="btn btn-info" href="{% url 'website:payment_type' %}"
+			 style="margin-top: 2em">Add New Payment Type</a>
 		</div>
 	{% endblock %}
 

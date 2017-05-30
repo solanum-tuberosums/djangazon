@@ -4,11 +4,12 @@
 		<div class="jumbotron text-center">
         	<h1>Login to Bangazon</h1>
 		</div>
-		<div class="text-center">
+		<div class="text-center col-sm-4 col-sm-offset-4">
         <form id="login_form" method="post" action="{% url 'website:login' %}">
             {% csrf_token %}
             {{ login_form.as_p }}
-            <input class="btn btn-primary" type="submit" value="Submit" />
+            <input style="margin:1em;" class="btn btn-primary"
+             type="submit" value="Submit" />
         </form>
         </div>
 {% endblock %}
