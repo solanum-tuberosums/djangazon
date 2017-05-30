@@ -35,18 +35,17 @@ def order_detail(request, order_id):
 
 	if request.user == order.user:
 		# Get seller object
-		line_items = ProductOrder.objects.filter(order=order_id).values_list(
-		'product_id').distinct()
+		line_items = order.products.distinct()
 		product_list = list()
 		total = float()
-
-		for x in line_items:
-			product = Product.objects.filter(pk=x[0])
-			product_count = ProductOrder.objects.filter(product_id=x[0],order=order_id).count()
-			subtotal = product[0].price * product_count
+		for product in line_items:
+			product_count = ProductOrder.objects.filter(product=product, 
+				order=order).count()
+			subtotal = product.price * product_count
 			total += float(subtotal)
 			total_string = locale.currency(total, grouping=True)
 			product_list.append((product, product_count, locale.currency(subtotal, grouping=True)))
+
 		return render(request, template_name, {'order': order, "orderproducts":
 	  		product_list, "total":total, "total_string":total_string})
 	else:
