@@ -15,14 +15,17 @@ def search_products(request):
 
         ---Context---
         'items'(QuerySet): searched_products, 
-        'page_title'(string): A string, "Products", identifying the title of the page.
+        'page_title'(string): A string, "Products", identifying the title of 
+            the page.
 
     Author: Jeremy Bakker
     """
     if request.method == 'GET':
         form_data = request.GET
         search_box = form_data['search_box']
-        all_products = Product.objects.filter(Q(title__icontains=search_box) | Q(description__icontains=search_box))
+        all_products = Product.objects.filter(Q(title__icontains=search_box) |\
+         Q(description__icontains=search_box))
         template_name = 'list.html'
         return render(request, template_name, {'items': all_products, 
-            "page_title":"Products", "error": "Search Query Returned No Results"})
+            "page_title":"Products", "error": """Search Query Returned 
+            No Results"""})
