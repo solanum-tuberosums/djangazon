@@ -16,7 +16,7 @@
 	</div>
 
   {% if empty_order %}
-    <h4>No products are on your order!</h4>
+    <h4 class="text-warning text-center">No products are on your order!</h4>
   {% else %}
 
 
@@ -66,6 +66,6 @@
       {% endif %}
     {% endif %}
       {% endif %}
-    <a href="/deleteorder" class ="btn btn-danger">Cancel Order</a>
+    <a href="/deleteorder" class="btn btn-danger">Cancel Order</a>
   </div>
   {% endblock %}
