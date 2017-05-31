@@ -5,11 +5,11 @@
     <h1>Order # {{ order.id }}</h1>
       {% if valid_order %}
       {% else %}
-        <h2><font color="red">Uh Oh!</font></h2>
-        <h4 class="" ><font color="red">The following products have been removed by the seller:</font></h4>
-        <ul class="">
+        <h2 class="text-danger">Uh Oh!</h2>
+        <h4 class="text-danger">The following products have been removed by the seller:</h4>
+        <ul>
           {% for product in invalid_products %}
-            <li class=""><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
+            <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
           {% endfor %}
         </ul>
       {% endif %}
