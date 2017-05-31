@@ -11,7 +11,9 @@
       <li>
         <form class="navbar-form" type="get" action= "{% url 'website:search_products' %}">
           <div class="form-group">
-            <input  class="form-control" id="search_box" type="text" name="search_box"  placeholder="Search Products. . ." >
+          <label class="form-check-label" for="search_location_checkbox" style="font-size: .83em; font-weight: normal; color: gray">Search Product Locations: <input id="search_location_checkbox" title="Search Product Locations" type="checkbox" label="Search Product Locations: " /></label>
+            <input  class="form-control" id="product_search_box" type="text" name="search_box"  placeholder="Search Products..." >
+            <input  class="form-control" style="display:none" id="location_search_box" type="text" name="search_box" placeholder="Search Location..." >
           </div>
           <button class="btn btn-default" id="search_submit" type="submit" >Submit</button>
         </form>
