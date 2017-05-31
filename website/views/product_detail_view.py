@@ -1,4 +1,4 @@
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, SuspiciousOperation
 from django.shortcuts import render
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -6,6 +6,7 @@ from website.models.product_model import Product
 from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
 from website.models.product_order_model import ProductOrder
+
 
 
 def product_detail(request, product_id):
@@ -74,8 +75,24 @@ def product_detail(request, product_id):
                 'posted_object': 'Product Added to Cart',
                 'posted_object_identifier': product.title})
         elif button_clicked.lower() == 'delete':
-            print("DELETEING")
             template_name = 'success/success.html'
-            return render(request, template_name, {"posted_object":product_id})
+            num_times_product_has_been_ordered = ProductOrder.objects.filter(product=product_id).count()
 
 
+            if num_times_product_has_been_ordered == 0:
+                # soft delete
+                Product.objects.get(pk=product_id).delete()
+                return render(request, template_name, {"posted_object":"Deleted Product", "posted_object_identifier":product_id})
+
+            else:
+                # hard delete
+                try:
+                    prod = Product.objects.get(pk=product_id)
+                    prod.is_active = 0
+                    prod.save()
+                    return render(request, template_name, {"posted_object":"Removed Product ", "posted_object_identifier":product_id})
+                except:
+                    return ObjectDoesNotExist('''<h1>Product not found in database</h1>''')
+
+    else:
+        return SuspiciousOperation('''<h1>Could not resolve request.</h1>)
