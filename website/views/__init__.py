@@ -20,3 +20,4 @@ from website.views.complete_order_view import complete_order
 from website.views.delete_order_view import delete_order
 from website.views.order_history_view import order_history
 from website.views.search_product_view import search_products
+from website.views.remove_product_view import remove_product
