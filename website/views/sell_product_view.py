@@ -4,7 +4,7 @@ from website.forms import ProductForm
 from website.models.product_model import Product
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-import base64
+# import base64
 
 def sell_product(request):
     """
