@@ -94,5 +94,6 @@ def product_detail(request, product_id):
                 except:
                     return ObjectDoesNotExist('''<h1>Product not found in database</h1>''')
 
+
     else:
         return SuspiciousOperation('''<h1>Could not resolve request.</h1>)
