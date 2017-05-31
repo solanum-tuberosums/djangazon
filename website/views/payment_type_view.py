@@ -33,20 +33,7 @@ def add_payment_type(request):
         return render(request, template_name, {'payment_type_form': 
             payment_type_form})
 
-    elif request.method == 'POST':
-        form_data = request.POST
-        pt = PaymentType(
-            account_nickname = form_data['account_nickname'],
-            account_type = form_data['account_type'],
-            account_number = form_data['account_number'],
-            cardholder = request.user,
-            is_active = True,
-            )
-        pt.save()
-        template_name = 'success/payment_type_links.html'
-        return render(request, template_name, {"posted_object":
-            "Payment Type Added", "posted_object_identifier": 
-            pt.account_nickname})
+    
 
 def delete_payment_type(request, payment_type_id):
     """
@@ -78,3 +65,6 @@ def delete_payment_type(request, payment_type_id):
                         'posted_object_identifier': pt.account_nickname})
     return HttpResponseForbidden('''<h1>Not your payment type, dawg.</h1>
         <img src="/website/static/other.jpg">''')
+
+def edit_payment_type(request, payment_type_id):
+    print("You want to edit payment type w/ this id:", payment_type_id)

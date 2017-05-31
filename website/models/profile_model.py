@@ -18,6 +18,7 @@ class Profile (models.Model):
     - city = a user's city
     - state = a user's state
     - postal_code = a user's postal code
+    - phone = a user's phone number
 
     ----Methods----
     get_user_order    
@@ -30,6 +31,7 @@ class Profile (models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=20)
     postal_code = models.CharField(max_length=20)
+    phone = models.CharField(max_length=18)
 
     def get_user_order(self):
         """

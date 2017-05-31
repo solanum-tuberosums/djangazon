@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+    {% block content %}
+        
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{edit_my_account_form}}        
+            <input type="submit" method="POST" class="btn btn-sm btn-success" value="Submit" name="edit_account_info"></input><br>
+        </form>
+    {% endblock %}
