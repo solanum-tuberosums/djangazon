@@ -70,7 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bangazonweb.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -123,3 +122,5 @@ STATIC_DIRS = (
 
 
 STATIC_URL = '/website/static/'
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
