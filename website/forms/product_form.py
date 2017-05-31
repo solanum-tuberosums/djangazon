@@ -28,7 +28,7 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ('title', 'description', 'price', 'current_inventory', 
-            'product_category', 'local_delivery', 'location')
+            'product_category', 'local_delivery', 'location', 'image')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': "form-control"}),

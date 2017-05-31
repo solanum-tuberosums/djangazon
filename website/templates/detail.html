@@ -2,7 +2,7 @@
 
 {% block content%}
     <div class="jumbotron">
-        <img style="float:right; height: 9em; border: 8px solid #fff;" src="http://lorempixel.com/400/200/" alt="">
+        <img style="float:right; height: 9em; border: 8px solid #fff;" src="{{ product.image.url }}" alt="">
         <h1>{{ product.title }}</h1>
         <a href="/product-categories/{{product.product_category.id}}/" class="lead text-primary">from {{ product.product_category.title }}
         </a>
