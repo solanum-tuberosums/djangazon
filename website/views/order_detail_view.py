@@ -35,7 +35,7 @@ def order_detail(request, order_id):
 
 	if request.user == order.user:
 		# Get seller object
-		line_items = order.products.distinct()
+		line_items = order.products.distinct().filter(is_active=1)
 		product_list = list()
 		total = float()
 		for product in line_items:
