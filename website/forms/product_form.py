@@ -34,6 +34,6 @@ class ProductForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': "form-control"}),
             'product_category': forms.Select(attrs={'class': "form-control"}),
             'location': forms.TextInput(attrs={'class': 'form-control', 
-                'disabled': 'True', 'placeholder': '''Select "Local delivery" 
-                to input city. . .'''})
+                'disabled': 'True', 'placeholder': 'Select "Local delivery"'+ 
+                ' to input city...'})
             }
