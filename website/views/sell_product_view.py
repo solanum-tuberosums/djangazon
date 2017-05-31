@@ -31,12 +31,19 @@ def sell_product(request):
     if request.method == 'GET':
         product_form = ProductForm()
         template_name = 'create.html'
-        return render(request, template_name, {'product_form': product_form})
+        return render(request, template_name, {'product_form': product_form,})
 
     elif request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
+        form_data = request.POST
+        try: 
+            form_data['local_delivery'] == 'on'
+            local_delivery_boolean = True
+            location_data = form_data['location']
+        except KeyError: 
+            local_delivery_boolean = False
+            location_data = None
         if form.is_valid():
-            form_data = request.POST
             # b64_image = base64.b64encode(request.FILES['image'].read())
             p = Product(
                 seller = request.user,
@@ -46,9 +53,10 @@ def sell_product(request):
                 current_inventory = form_data['current_inventory'],
                 product_category_id = form_data['product_category'],
                 date_added = timezone.now(),
-                local_delivery = 1,
+                local_delivery = local_delivery_boolean,
                 image = form.cleaned_data['image'],
-                is_active = 1
+                is_active = 1,
+                location = location_data
             )
             p.save()
             # template_name = 'success/product_added_to_sell_links.html'
@@ -60,3 +68,4 @@ def sell_product(request):
         else:
             return HttpResponseRedirect(reverse('website:sell' 
                 ))
+
