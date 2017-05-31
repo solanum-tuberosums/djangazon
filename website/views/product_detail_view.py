@@ -96,4 +96,4 @@ def product_detail(request, product_id):
 
 
     else:
-        return SuspiciousOperation('''<h1>Could not resolve request.</h1>)
+        return SuspiciousOperation('<h1>Could not resolve request.</h1>')
