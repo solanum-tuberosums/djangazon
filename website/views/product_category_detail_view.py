@@ -13,7 +13,7 @@ def product_category_detail(request, category_id):
 
         ---Success Context---
         'items'(QuerySet): The products from the selected category
-		'page_title'(string): The title of the selected category 
+		'page_title'(string): The title of the selected category
 
     	---Fail Context---
         'items'(list): 'an empty list
@@ -26,12 +26,12 @@ def product_category_detail(request, category_id):
 	template_name = 'list.html'
 	my_product_category = ProductCategory.objects.get(pk=category_id)
 	products_in_category = Product.objects.filter(product_category=category_id,
-     current_inventory__gt=0)
+     current_inventory__gt=0, is_active=1)
 	if products_in_category:
-		return render(request, template_name, {'items': products_in_category, 
+		return render(request, template_name, {'items': products_in_category,
 			"page_title": my_product_category.title})
 
 	else:
-		return render(request, template_name, 
-			{'items': [], 'page_title': my_product_category.title, 
+		return render(request, template_name,
+			{'items': [], 'page_title': my_product_category.title,
 			'error': 'No products are available in this category.'})
