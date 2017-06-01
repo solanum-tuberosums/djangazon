@@ -88,7 +88,9 @@ def delete_payment_type(request, payment_type_id):
 class UpdatePaymentType(UpdateView):
     """
     UpdatePaymentType is a subclass of UpdateView, though it may not be 
-    utilizing the full extent of its Django-osity.
+    utilizing the full extent of its Django-osity. Need to test still, but I 
+    bet deleting this class and converting method to a regular function would
+    work.
 
     ----Fields---- 
     - model: links to PaymentType
@@ -132,11 +134,11 @@ class UpdatePaymentType(UpdateView):
             pt_to_edit = PaymentType.objects.get(pk=payment_type_id)
             payment_type_form = PaymentTypeForm(instance=pt_to_edit)
             template_name = 'payment_type_update_form.html'
-            return render(request, template_name, {"payment_type_form": payment_type_form, "payment_type": pt_to_edit})
+            return render(request, template_name, {"payment_type_form": 
+                payment_type_form, "payment_type": pt_to_edit})
         
         elif request.method == 'POST':
             form = PaymentTypeForm(request.POST)
-            print("form", form)
             if form.is_valid():
                 form_data = request.POST
 
