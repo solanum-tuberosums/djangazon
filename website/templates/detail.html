@@ -3,7 +3,11 @@
 {% block content%}
     <div class="jumbotron">
         <img style="float:right; height: 9em; border: 8px solid #fff;" src="{{ product.image.url }}" alt="">
-        <h1>{{ product.title }}</h1>
+        <h1>{{ product.title }}
+        {% if product.is_active == 0 %}
+            <span style="font-size:.3em;" class="text-danger text-center">* This product has been removed by seller.</span>
+        {% endif %}
+        </h1>
         <a href="/product-categories/{{product.product_category.id}}/" class="lead text-primary">from {{ product.product_category.title }}
         </a>
         <hr>
@@ -16,7 +20,7 @@
           <footer>Added {{ product.date_added }} by {{ product.seller.first_name }} {{ product.seller.last_name}}</footer>
         </blockquote>
         <p>
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and product.is_active == 1%}
                 <form class="text-right" name="detail_form" action="{% url 'website:product_detail' product.id %}" method="post">
                     {% csrf_token %}
                     <input class="btn btn-success" name="detail_button" type="submit"  value="Add to Cart"/>
