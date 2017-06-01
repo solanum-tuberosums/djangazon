@@ -32,9 +32,13 @@ def list_my_products(request, user_id):
     """
 
     if str(request.user.id) == user_id:
-    	user_products = Product.objects.filter(seller=request.user)
-    	template_name = 'list.html'
-    	return render(request, template_name, {'items': user_products, 
+        template_name = 'list.html'
+        user_products = Product.objects.filter(seller=request.user, is_active=1)
+        if user_products.count() == 0:
+            return render(request, template_name, {'items': [], 
+                "page_title":"My Products", "error":"No Products for sale."})
+
+        return render(request, template_name, {'items': user_products, 
             "page_title":"My Products"})
     else:
         return HttpResponseForbidden('''<h1>Page not found</h1>
