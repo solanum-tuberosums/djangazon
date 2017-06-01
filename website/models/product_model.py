@@ -23,6 +23,9 @@ class Product (models.Model):
     - location(character): location for local delivery
     - current_inventory(integer): total number of products available for sale
     - image(image): file path to image for display
+    - recommendations(ManytoMany): linked to the User through the UserProductRecommendation table
+    - likes(ManytoMany): stores User Instances
+    - dislikes(ManytoMany): stores User Instances
     - is_active(boolean): indicates whether a product is active
 
     ----Methods----
@@ -46,6 +49,9 @@ class Product (models.Model):
     location = models.CharField(max_length=255, blank=True, null=True)
     current_inventory = models.IntegerField()
     image = models.ImageField(default='flawless-diamond.png')
+    recommendations = models.ManyToManyField(User, through='UserProductRecommendation', related_name='recommendations')
+    likes = models.ManyToManyField(User, related_name='likes')
+    dislikes = models.ManyToManyField(User, related_name='dislikes')
     is_active = models.BooleanField()
 
     def formatted_price(self):

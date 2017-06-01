@@ -33,6 +33,7 @@ class Profile (models.Model):
     postal_code = models.CharField(max_length=20, blank=True, null=True)
     phone = models.CharField(max_length=18, blank=True, null=True)
 
+
     def get_user_order(self):
         """
         This method should return the current user's active order (no payment 

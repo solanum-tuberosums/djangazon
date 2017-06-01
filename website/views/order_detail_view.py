@@ -54,6 +54,9 @@ def order_detail(request, order_id):
 
                 product_count = ProductOrder.objects.filter(product=product,
                     order=order).count()
+                if product.current_inventory < product_count:
+                    valid_order = False
+                    products_no_longer_available.append(product)
                 subtotal = product.price * product_count
                 total += float(subtotal)
                 total_string = locale.currency(total, grouping=True)
