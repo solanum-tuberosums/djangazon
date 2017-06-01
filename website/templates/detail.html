@@ -24,6 +24,7 @@
                         <input class="btn btn-danger" name="detail_button" type="submit" value="Remove for Sale">
                     {% endif %}
                 </form>
+                <form action="{% url 'website:recommend_product' product.id%}"><input class="btn btn-success pull-right" type="submit" style="margin-top: 5px" value="Recommend to a Friend"></input></form>
             {% endif %}
             </p>
     </div>

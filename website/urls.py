@@ -42,7 +42,10 @@ urlpatterns = [
     url(r'^order-history/(?P<user_id>[0-9]+)/$', views.order_history,
             name="order_history"),
     url(r'^searchproducts/$', views.search_products, name='search_products'),
-    url(r'^searchlocations/$', views.search_locations, name='search_locations'),
+    url(r'^searchlocations/$', views.search_locations, 
+        name='search_locations'),
+    url(r'^recommend/(?P<product_id>[0-9]+)/$', views.recommend_product, 
+        name='recommend_product')
 ]
 
 if settings.DEBUG:
