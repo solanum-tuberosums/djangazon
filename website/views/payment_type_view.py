@@ -87,7 +87,7 @@ def delete_payment_type(request, payment_type_id):
 
 def edit_payment_type(request, payment_type_id):
 	"""
-	Method allowing a user to edit existing payment types from their 
+	Function allowing a user to edit existing payment types from their 
 	My Account page. 
 
 	---Arguments---
