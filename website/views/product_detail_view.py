@@ -52,7 +52,7 @@ def product_detail(request, product_id):
 
         button_clicked = request.POST.get("detail_button", "")
 
-        if button_clicked.lower() == "Add to Cart":
+        if button_clicked == "Add to Cart":
             product = Product.objects.get(pk=product_id)
             try:
                 order = Order.objects.get(user=request.user, payment_type=None)
@@ -74,7 +74,7 @@ def product_detail(request, product_id):
             return render(request, template_name, {
                 'posted_object': 'Product Added to Cart',
                 'posted_object_identifier': product.title})
-        elif button_clicked.lower() == 'Remove for Sale':
+        elif button_clicked == 'Remove for Sale':
             template_name = 'success/success.html'
             num_times_product_has_been_ordered = ProductOrder.objects.filter(product=product_id).count()
 
