@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.views.generic.edit import UpdateView
+from django.urls import reverse
 from website.forms import PaymentTypeForm
 from website.models.payment_type_model import PaymentType
-from django.urls import reverse
-
 
 
 
@@ -87,11 +86,48 @@ def delete_payment_type(request, payment_type_id):
 
 
 class UpdatePaymentType(UpdateView):
+    """
+    UpdatePaymentType is a subclass of UpdateView, though it may not be 
+    utilizing the full extent of its Django-osity.
+
+    ----Fields---- 
+    - model: links to PaymentType
+    - fields: account_nickname, account_type, account_number
+    - template_name_suffix: references 'payment_type_update_form.html'
+
+    Author: Jessica Younker  
+    """
     model = PaymentType
     fields = ['account_nickname', 'account_type', 'account_number',]
     template_name_suffix = '_update_form'
 
     def edit_payment_type(request, payment_type_id):
+        """
+        Method allowing a user to edit existing payment types from their 
+        My Account page. 
+
+        ---Arguments---
+        request: the full HTTP request object
+        payment_type_id: id of selected payment type
+
+        ---GET---
+        renders payment_type_update_form.html and prepopulates the fields with
+        info for that specific payment type
+
+            ---Context---
+            'payment_type_form'(form): the payment type form from 
+                payment_type_form.py
+            'payment_type(instance)': payment type instance to edit
+
+        ---POST---
+        Updates selected payment type instance and redirects user back to My
+        Account page
+
+            ---Context---
+            None
+
+        Author: Jessica Younker
+        """
         if request.method == 'GET':
             pt_to_edit = PaymentType.objects.get(pk=payment_type_id)
             payment_type_form = PaymentTypeForm(instance=pt_to_edit)
