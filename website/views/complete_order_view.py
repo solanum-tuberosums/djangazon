@@ -2,6 +2,7 @@ from django.shortcuts import render
 from website.forms import CompleteOrderForm
 from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
+from website.models.product_order_model import ProductOrder
 
 def complete_order(request):
     """
@@ -39,11 +40,17 @@ def complete_order(request):
     elif request.method == 'POST':
         print("post")
         form_data = request.POST
-        order = Order.objects.filter(user=request.user, payment_type_id=None)
-        open_order_id = order.latest("id").id
-        open_order_date = order.latest("id").order_date
+        order = Order.objects.get(user=request.user, payment_type_id=None)
+        open_order_id = order.id
+        open_order_date = order.order_date
         payment_type_id = form_data['payment_type']
         payment_type = PaymentType.objects.get(pk=payment_type_id)
+        line_items = order.products.distinct()
+        for product in line_items:
+            product_count = (ProductOrder.objects.filter(product=product,
+                    order=order).count())
+            product.current_inventory = product.current_inventory - product_count 
+            product.save()
         o= Order(
             id = open_order_id,
             payment_type = payment_type,
