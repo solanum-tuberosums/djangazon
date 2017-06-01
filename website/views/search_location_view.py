@@ -3,7 +3,7 @@ from django.db.models import Q
 from website.models.product_model import Product
 
 
-def search_products(request):
+def search_locations(request):
     """
     This function is invoked to search products available for sale.
 
@@ -22,10 +22,9 @@ def search_products(request):
     """
     if request.method == 'GET':
         form_data = request.GET
-        product_search_box = form_data['product_search_box']
-        all_products = Product.objects.filter(Q(title__icontains=product_search_box) &\
-             Q(current_inventory__gt=0) & Q(is_active=1)| Q(description__icontains=product_search_box)\
-             & Q(current_inventory__gt=0) & Q(is_active=1))
+        location_search_box = form_data['location_search_box']
+        all_products = Product.objects.filter(Q(location__icontains=location_search_box) &\
+             Q(current_inventory__gt=0) & Q(is_active=1))
         template_name = 'list.html'
         return render(request, template_name, {'items': all_products, 
             "page_title":"Products", "error": """Search Query Returned 
