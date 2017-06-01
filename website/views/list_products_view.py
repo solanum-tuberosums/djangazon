@@ -22,5 +22,5 @@ def list_products(request):
     all_products = Product.objects.filter(current_inventory__gt=0, is_active=
         1).order_by('-pk')
     template_name = 'list.html'
-    return render(request, template_name, {'items': all_products, 
+    return render(request, template_name, {'items': all_products,
         "page_title":"Products"})

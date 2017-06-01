@@ -17,9 +17,12 @@
         </blockquote>
         <p>
             {% if user.is_authenticated %}
-                <form class="text-right" action="{% url 'website:product_detail' product.id %}" method="post">
+                <form class="text-right" name="detail_form" action="{% url 'website:product_detail' product.id %}" method="post">
                     {% csrf_token %}
-                    <input class="btn btn-success" type="submit"  value = "Add to Cart"/>
+                    <input class="btn btn-success" name="detail_button" type="submit"  value="Add to Cart"/>
+                    {% if current_users_product %}
+                        <input class="btn btn-danger" name="detail_button" type="submit" value="Remove for Sale">
+                    {% endif %}
                 </form>
             {% endif %}
             </p>

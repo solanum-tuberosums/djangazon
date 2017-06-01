@@ -15,12 +15,12 @@ class Order (models.Model):
     ----Fields----
     - payment_type(foreign key): a foreign key attached to the payment type
     - order_date(date): an order's date
-    - user(foreign key): a foreign key attached to the user 
+    - user(foreign key): a foreign key attached to the user
 
     Author: Jeremy Bakker
     """
 
-    payment_type = models.ForeignKey(PaymentType, null=True, 
+    payment_type = models.ForeignKey(PaymentType, null=True,
         on_delete=models.CASCADE)
     order_date = models.DateField()
     user = models.ForeignKey(User)

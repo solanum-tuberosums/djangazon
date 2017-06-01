@@ -3,8 +3,25 @@
   {% block content %}
 	<div class="jumbotron">
     <h1>Order # {{ order.id }}</h1>
+      {% if valid_order %}
+      {% else %}
+        <h2 class="text-danger">Uh Oh!</h2>
+        <h4 class="text-danger">The following products have been removed by the seller:</h4>
+        <ul>
+          {% for product in invalid_products %}
+            <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
 	</div>
-  <table class="table table-striped">
+
+  {% if empty_order %}
+    <h4 class="text-warning text-center">No products are on your order!</h4>
+  {% else %}
+
+
+
+  <table class="table table-striped table-hover">
     <tr>
       <th>Product</th>
       <th class="text-center">Quantity</th>
@@ -13,18 +30,25 @@
       <th></th>
     </tr>
     {% for object in orderproducts %}
+      {% if object.0 in invalid_products %}
+    <tr class="danger">
+      {% else %}
     <tr>
-      <td><a href="/products/{{ object.0.id }}">{{ object.0.title }}</a></td>
-      <td class="text-center">{{ object.1 }}</td>
-      <td class="text-right">${{ object.0.price }}</td>
-      <td class="text-right">{{ object.2 }}</td>
-      <form method="POST" action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
+      {% endif %}
+
+
+        <td><a href="/products/{{ object.0.id }}">{{ object.0.title }}</a></td>
+        <td class="text-center">{{ object.1 }}</td>
+        <td class="text-right">{{ object.0.formatted_price }}</td>
+        <td class="text-right">{{ object.2 }}</td>
+        <form method="POST" action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
         {% csrf_token %}
         <td class="text-right">
           <input type="submit" value="Delete Product" class="btn btn-xs btn-danger"/>
         </td>
       </form>
     </tr>
+
     {% endfor%}
     <tr>
       <th></th>
@@ -36,8 +60,12 @@
   </table>
   <div class="btn-group btn-group-justified" role="group" aria-label="...">
     {% if total > 0 %}
-      <a href="/completeorder" class="btn btn-info btn-lrg">Complete Order</a>
+      {% if valid_order %}
+        <a href="/completeorder" class="btn btn-info btn-lrg">Complete Order</a>
+
+      {% endif %}
     {% endif %}
-    <a href="/deleteorder" class ="btn btn-danger">Cancel Order</a>
+      {% endif %}
+    <a href="/deleteorder" class="btn btn-danger">Cancel Order</a>
   </div>
   {% endblock %}
