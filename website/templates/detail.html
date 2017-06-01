@@ -3,7 +3,7 @@
 {% block content%}
     <div class="jumbotron">
         <img style="float:right; height: 9em; border: 8px solid #fff;" src="{{ product.image.url }}" alt="">
-        <h1>{{ product.title }}
+        <h1 class="text-capitalize">{{ product.title }}
         {% if product.is_active == 0 %}
             <span style="font-size:.3em;" class="text-danger text-center">* This product has been removed by seller.</span>
         {% endif %}
@@ -17,7 +17,7 @@
         <p class="lead text-center">Quantity  <span style="float:right">{{ product.current_inventory }}</span></p>
         <hr>
         <blockquote class="blockquote-reverse">
-          <footer>Added {{ product.date_added }} by {{ product.seller.first_name }} {{ product.seller.last_name}}</footer>
+          <footer>Added {{ product.date_added }} by <span class="text-capitalize">{{ product.seller.first_name }} {{ product.seller.last_name}}</span></footer>
         </blockquote>
         <p>
             {% if user.is_authenticated and product.is_active == 1%}

@@ -5,30 +5,16 @@
     <h1>This is Order History for</h1>
     <h4>{{ profile }}</h4>
 
+    <ul>
     {% for order in orders %}
-    <table class="table table-striped table-hover">
-        <h3>Order {{ order.id }}</h3>
-        <tr>
-            <th class="text-center">Title</th>
-            <th class="text-center">Quantity</th>
-            <th class="text-center">Price/Unit</th>
-            <th class="text-center">Subtotal</th>
-        </tr>
-
-
+    
+        <li><a href="/order/{{ order.id }}">Order {{ order.id }}</a> <small><i>({{ order.order_date }})</i></small></li>
+        <ul>
         {% for product in order.products.all %}
-        <tr>
-            <td class="text-center">{{product.title}}</td>
-            <td class="text-center">placeholder</td>
-            <td class="text-center">{{ product.price }}</td>
-            <td class="text-center">{{ product.price }} </td>
-            {% csrf_token %}
-
-        </tr>
+            <li class="text-capitalize"><a href="/products/{{ product.id }}"><small>{{ product.title }}</small></a></li>
         {% endfor %}
-
-
-    </table>
-
+        </ul>
+            
     {% endfor %}
+    </ul>
 {% endblock %}
