@@ -34,6 +34,7 @@ def order_detail(request, order_id):
     order = Order.objects.get(pk=order_id)
     # Boolean for HTML to show/hide complete order button
     valid_order = True
+    # Boolean for HTML to show/hide 'empty cart' message
     empty_order = False
     # List for storing each product that has been removed by seller
     products_no_longer_available = list()
@@ -54,19 +55,19 @@ def order_detail(request, order_id):
                 product_count = ProductOrder.objects.filter(product=product,
                     order=order).count()
                 subtotal = product.price * product_count
-                print("\n\n\nSubTotal:{}\n\n\n".format(subtotal))
                 total += float(subtotal)
-                print("\n\n\nTotal:{}\n\n\n".format(total))
                 total_string = locale.currency(total, grouping=True)
                 product_list.append((product, product_count, locale.currency(subtotal, grouping=True)))
             return render(request, template_name, {'order': order, "orderproducts":
-                product_list, "total":total, "total_string":total_string, "valid_order":valid_order, "invalid_products":products_no_longer_available})
+                product_list, "total":total, "total_string":total_string, "valid_order":valid_order, 
+                    "invalid_products":products_no_longer_available})
         else:
             total = 0.0
             total_string = "$0"
             empty_order = True
-            return render(request, template_name, {'order': order, "total":total, "total_string":total_string, "valid_order":valid_order,
-                    "invalid_products":products_no_longer_available, "empty_order":empty_order})
+            return render(request, template_name, {'order': order, "total":total, 
+                "total_string":total_string, "valid_order":valid_order,
+                "invalid_products":products_no_longer_available, "empty_order":empty_order})
     else:
         return HttpResponseForbidden('''<h1>Not your order, bruh!</h1>
             <img src="/website/static/other.jpg">''')
