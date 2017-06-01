@@ -2,7 +2,7 @@ from django import forms
 from website.models import Profile
 
 
-class MyAccountForm(forms.ModelForm):
+class MyAccountForm(forms.Form):
     """
     This class represents an HTML form for a user to edit their account 
     information.
@@ -35,7 +35,7 @@ class MyAccountForm(forms.ModelForm):
         max_value=999999999999999999,
         widget=forms.NumberInput(attrs={'class':'form-control'}))
 
-    class Meta:
-        model = Profile
-        fields = ('first_name', 'last_name', 'street_address', 'city', 'state',
-        'postal_code', 'phone',)
+    # class Meta:
+    #     model = Profile
+    #     fields = ('first_name', 'last_name', 'street_address', 'city', 'state',
+    #     'postal_code', 'phone',)
