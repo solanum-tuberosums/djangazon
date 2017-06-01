@@ -4,3 +4,4 @@ from website.models.product_model import Product
 from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
 from website.models.profile_model import Profile
+from website.models.user_product_recommendation_model import UserProductRecommendation

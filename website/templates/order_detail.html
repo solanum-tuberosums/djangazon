@@ -6,7 +6,10 @@
       {% if valid_order %}
       {% else %}
         <h2 class="text-danger">Uh Oh!</h2>
-        <h4 class="text-danger">The following products have been removed by the seller:</h4>
+        <p class="text-danger lead">The following products do not have enough 
+        inventory to fufill your order
+        <br>
+         or have been removed from marketplace:</p>
         <ul>
           {% for product in invalid_products %}
             <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
