@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from website.models.order_model import Order
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+# from website.models.user_product_recommendation_model import UserProductRecommendation
 
 class Profile (models.Model):
     """
@@ -55,6 +56,14 @@ class Profile (models.Model):
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
 
+    def get_user_recommendations(self):
+
+        profile = Profile.objects.get(user=self.user)
+        print("profile", profile)
+        upr_count = profile.userproductrecommendation_set.filter(viewed=False).count()
+        return upr_count
+        # except:
+        #     return 0
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
