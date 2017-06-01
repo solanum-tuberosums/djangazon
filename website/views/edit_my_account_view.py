@@ -28,15 +28,15 @@ def edit_my_account(request, user_id):
                 form_data = request.POST
                 
                 updated_user_info = request.user
-                updated_user_info.first_name = form.cleaned_data['first_name'],
-                updated_user_info.last_name = form.cleaned_data['last_name'],
+                updated_user_info.first_name = form.cleaned_data['first_name']
+                updated_user_info.last_name = form.cleaned_data['last_name']
                 updated_user_info.save()
 
                 updated_account_info = Profile.objects.get(user=request.user)
                 updated_account_info.street_address = form.cleaned_data['street_address']
-                updated_account_info.city = form.cleaned_data['city'],
-                updated_account_info.state = form.cleaned_data['state'],
-                updated_account_info.postal_code = form.cleaned_data['postal_code'],
+                updated_account_info.city = form.cleaned_data['city']
+                updated_account_info.state = form.cleaned_data['state']
+                updated_account_info.postal_code = form.cleaned_data['postal_code']
                 updated_account_info.phone = form.cleaned_data['phone']
                 updated_account_info.save()
 
