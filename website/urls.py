@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^paymenttype/delete/(?P<payment_type_id>[0-9]+)/$',
             views.delete_payment_type, name="delete_payment_type"),
     url(r'^paymenttype/edit/(?P<payment_type_id>[0-9]+)/$',
-            views.UpdatePaymentType.edit_payment_type, name="edit_payment_type"),
+            views.edit_payment_type, name="edit_payment_type"),
     url(r'^products$', views.list_products, name='list_products'),
     url(r'^my-account/(?P<user_id>[0-9]+)/$', views.my_account,
             name='my_account'),

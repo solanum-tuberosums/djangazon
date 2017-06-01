@@ -85,74 +85,56 @@ def delete_payment_type(request, payment_type_id):
         <img src="/website/static/other.jpg">''')
 
 
-class UpdatePaymentType(UpdateView):
-    """
-    UpdatePaymentType is a subclass of UpdateView, though it may not be 
-    utilizing the full extent of its Django-osity. Need to test still, but I 
-    bet deleting this class and converting method to a regular function would
-    work.
+def edit_payment_type(request, payment_type_id):
+	"""
+	Method allowing a user to edit existing payment types from their 
+	My Account page. 
 
-    ----Fields---- 
-    - model: links to PaymentType
-    - fields: account_nickname, account_type, account_number
-    - template_name_suffix: references 'payment_type_update_form.html'
+	---Arguments---
+	request: the full HTTP request object
+	payment_type_id: id of selected payment type
 
-    Author: Jessica Younker  
-    """
-    model = PaymentType
-    fields = ['account_nickname', 'account_type', 'account_number',]
-    template_name_suffix = '_update_form'
+	---GET---
+	renders payment_type_update_form.html and prepopulates the fields with
+	info for that specific payment type
 
-    def edit_payment_type(request, payment_type_id):
-        """
-        Method allowing a user to edit existing payment types from their 
-        My Account page. 
+	---Context---
+	'payment_type_form'(form): the payment type form from 
+	    payment_type_form.py
+	'payment_type(instance)': payment type instance to edit
 
-        ---Arguments---
-        request: the full HTTP request object
-        payment_type_id: id of selected payment type
+	---POST---
+	Updates selected payment type instance and redirects user back to My
+	Account page
 
-        ---GET---
-        renders payment_type_update_form.html and prepopulates the fields with
-        info for that specific payment type
+	---Context---
+	None
 
-            ---Context---
-            'payment_type_form'(form): the payment type form from 
-                payment_type_form.py
-            'payment_type(instance)': payment type instance to edit
+	Author: Jessica Younker
+	"""
+	if request.method == 'GET':
+		pt_to_edit = PaymentType.objects.get(pk=payment_type_id)
+		payment_type_form = PaymentTypeForm(instance=pt_to_edit)
+		template_name = 'payment_type_update_form.html'
+		return render(request, template_name, {"payment_type_form": 
+		    payment_type_form, "payment_type": pt_to_edit})
 
-        ---POST---
-        Updates selected payment type instance and redirects user back to My
-        Account page
+	elif request.method == 'POST':
+		form = PaymentTypeForm(request.POST)
+	if form.is_valid():
+		form_data = request.POST
 
-            ---Context---
-            None
+		updated_pt = PaymentType.objects.get(pk=payment_type_id)
+		updated_pt.account_nickname = form.cleaned_data['account_nickname']
+		updated_pt.account_type = form.cleaned_data['account_type']
+		updated_pt.account_number = form.cleaned_data['account_number']
+		updated_pt.save()
 
-        Author: Jessica Younker
-        """
-        if request.method == 'GET':
-            pt_to_edit = PaymentType.objects.get(pk=payment_type_id)
-            payment_type_form = PaymentTypeForm(instance=pt_to_edit)
-            template_name = 'payment_type_update_form.html'
-            return render(request, template_name, {"payment_type_form": 
-                payment_type_form, "payment_type": pt_to_edit})
-        
-        elif request.method == 'POST':
-            form = PaymentTypeForm(request.POST)
-            if form.is_valid():
-                form_data = request.POST
+		return HttpResponseRedirect(reverse('website:my_account',
+			args=[request.user.id]))
 
-                updated_pt = PaymentType.objects.get(pk=payment_type_id)
-                updated_pt.account_nickname = form.cleaned_data['account_nickname']
-                updated_pt.account_type = form.cleaned_data['account_type']
-                updated_pt.account_number = form.cleaned_data['account_number']
-                updated_pt.save()
-
-            return HttpResponseRedirect(reverse('website:my_account',
-                args=[request.user.id]))
-
-        else:
-            return HttpResponseForbidden('''<h1>Not your payments, dawg.</h1>
-            <img src="/website/static/other.jpg">''')
+	else:
+		return HttpResponseForbidden('''<h1>Not your payments, dawg.</h1>
+		<img src="/website/static/other.jpg">''')
 
 
