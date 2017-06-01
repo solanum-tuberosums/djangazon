@@ -34,8 +34,3 @@ class MyAccountForm(forms.Form):
     phone = forms.IntegerField(label="Phone Number", 
         max_value=999999999999999999,
         widget=forms.NumberInput(attrs={'class':'form-control'}))
-
-    # class Meta:
-    #     model = Profile
-    #     fields = ('first_name', 'last_name', 'street_address', 'city', 'state',
-    #     'postal_code', 'phone',)

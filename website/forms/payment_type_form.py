@@ -13,6 +13,8 @@ class PaymentTypeForm(forms.ModelForm):
 
     Author: Jessica Younker, Beve Strownlee
     """
+    def __init__(self, *args, **kwargs):
+        super(PaymentTypeForm, self).__init__(*args, **kwargs)
 
     account_nickname = forms.CharField(label="Nickname for this account",
         widget=forms.TextInput(attrs={'class':'form-control'}))
