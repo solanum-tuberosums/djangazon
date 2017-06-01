@@ -5,13 +5,13 @@
     <h1>This is Order History for</h1>
     <h4>{{ profile }}</h4>
 
-    <ul>
+    <ul class="list-group">
     {% for order in orders %}
     
-        <li><a href="/order/{{ order.id }}">Order {{ order.id }}</a> <small><i>({{ order.order_date }})</i></small></li>
-        <ul>
-        {% for product in order.products.all %}
-            <li class="text-capitalize"><a href="/products/{{ product.id }}"><small>{{ product.title }}</small></a></li>
+        <a class="list-group-item list-group-item-info" href="/order/{{ order.id }}">Order {{ order.id }}<small><i> ({{ order.order_date }})</i></small></a> 
+        <ul class="list-group">
+        {% for product in order.products.distinct %}
+            <a class="text-capitalize list-group-item list-group-item-warning" href="/products/{{ product.id }}"><small>{{ product.title }}</small></a>
         {% endfor %}
         </ul>
             

@@ -10,11 +10,6 @@ def order_history(request):
         # user_orders = Order.objects.filter(user=request.user)
         user_completed_orders = Order.objects.filter(user=request.user).exclude(payment_type__isnull=True)
 
-        print("\n")
-        for order in user_completed_orders:
-            print('\nOrder:')
-
-
 
         return render(request, 'order_history.html', {"profile":profile, 'orders':user_completed_orders})
     else:
