@@ -5,6 +5,8 @@ These are the URL regular experssion paths and names for our app, 'website'
 from django.conf.urls import url
 from . import views
 
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = "website"
 urlpatterns = [
@@ -42,3 +44,6 @@ urlpatterns = [
     url(r'^searchproducts/$', views.search_products, name='search_products'),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

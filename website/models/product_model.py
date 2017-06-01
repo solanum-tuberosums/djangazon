@@ -45,7 +45,7 @@ class Product (models.Model):
     local_delivery = models.BooleanField()
     location = models.CharField(max_length=255, blank=True, null=True)
     current_inventory = models.IntegerField()
-    image = models.ImageField(upload_to = 'images/', default = 'images/None/no-img.jpg')
+    image = models.ImageField(default='flawless-diamond.png')
     is_active = models.BooleanField()
 
     def formatted_price(self):
