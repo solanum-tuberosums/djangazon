@@ -25,3 +25,8 @@ class Order (models.Model):
     order_date = models.DateField()
     user = models.ForeignKey(User)
     products = models.ManyToManyField(Product, through='ProductOrder')
+
+    def __str__(self):
+        return "ORDER: " + str(self.pk) + " | User: " + self.user.first_name
+
+
