@@ -11,7 +11,7 @@
         <a class="list-group-item list-group-item-info" href="/order/{{ order.id }}">Order {{ order.id }}<small><i> ({{ order.order_date }})</i></small></a> 
         <ul class="list-group">
         {% for product in order.products.distinct %}
-            <a class="text-capitalize list-group-item list-group-item-warning" href="/products/{{ product.id }}"><small>{{ product.title }}</small></a>
+            <a style="margin-left:5em" class="text-capitalize list-group-item list-group-item-warning" href="/products/{{ product.id }}"><small>{{ product.title }}</small></a>
         {% endfor %}
         </ul>
             
