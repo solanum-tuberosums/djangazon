@@ -6,7 +6,7 @@
 	        <ul class="list-group">
 	        {% if sold_units_list %}
 				{% for item in sold_units_list %}
-					<a class="list-group-item lead list-group-item-info" href="/products/{{ item.0.id }}">{{ item.0.title }} <span style="font-size: .6em; margin-left: 1em;">for {{item.0.formatted_price}} / unit</span>
+					<a class="list-group-item lead list-group-item-info text-capitalize" href="/products/{{ item.0.id }}"><span class="text-capitalize">{{ item.0.title }} </span><span style="font-size: .6em; margin-left: 1em;">for {{item.0.formatted_price}} / unit</span></a>
 					<span style="float:right;margin-left:1em;color:green">Sold Units : {{ item.1 }}</span>
 					<span style="float:right;">Current Inventory : {{ item.0.current_inventory }}</span>
 					</a>
@@ -16,7 +16,7 @@
 		        {% endfor %}
 	        {% else %}
 		        {% for item in items %}
-		            <a class="list-group-item lead list-group-item-info" href="/products/{{ item.id }}">{{ item.title }} <span style="font-size: .6em; margin-left: 4em;">Quantity : {{ item.current_inventory }}</span><span style="float: right">for {{item.formatted_price}} / unit</span></a>
+		            <a class="list-group-item lead list-group-item-info" href="/products/{{ item.id }}"><span class="text-capitalize">{{ item.title }}</span> <span style="font-size: .6em; margin-left: 4em;">Quantity : {{ item.current_inventory }}</span><span style="float: right">for {{item.formatted_price}} / unit</span></a>
 		        {% empty %}
 		            <h1 class="jumbotron lead text-center">{{ error }}</h1>
 		        {% endfor %}
