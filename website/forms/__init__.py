@@ -8,3 +8,4 @@ from website.forms.user_form import UserForm
 from website.forms.complete_order_form import CompleteOrderForm
 from website.forms.login_form import LoginForm
 from website.forms.payment_type_form import PaymentTypeForm
+from website.forms.my_account_form import MyAccountForm
