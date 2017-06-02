@@ -36,6 +36,8 @@ def order_detail(request, order_id):
     valid_order = True
     # Boolean for HTML to show/hide 'empty cart' message
     empty_order = False
+    # Boolean for HTML to show/hide all buttons 
+    order_completed = False
     # List for storing each product that has been removed by seller
     products_no_longer_available = list()
 
@@ -44,6 +46,9 @@ def order_detail(request, order_id):
         line_items = order.products.distinct()
         product_list = list()
         total = float()
+
+        if order.payment_type is not None:
+            order_completed = True
 
         if line_items:
             for product in line_items:
@@ -63,7 +68,7 @@ def order_detail(request, order_id):
                 product_list.append((product, product_count, locale.currency(subtotal, grouping=True)))
             return render(request, template_name, {'order': order, "orderproducts":
                 product_list, "total":total, "total_string":total_string, "valid_order":valid_order, 
-                    "invalid_products":products_no_longer_available})
+                    "invalid_products":products_no_longer_available, "order_completed":order_completed})
         else:
             total = 0.0
             total_string = "$0"

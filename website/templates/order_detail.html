@@ -2,9 +2,18 @@
 
   {% block content %}
 	<div class="jumbotron">
-    <h1>Order # {{ order.id }}</h1>
+    <h1>
+    {% if order_completed %}
+    Completed
+    {% endif %}
+    Order # {{ order.id }}
+    </h1>
+    <h2><small>({{ order.order_date }})</small></h2>
       {% if valid_order %}
+
       {% else %}
+        {% if order_completed %}
+        {% else %}
         <h2 class="text-danger">Uh Oh!</h2>
         <p class="text-danger lead">The following products do not have enough 
         inventory to fufill your order
@@ -15,6 +24,7 @@
             <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
           {% endfor %}
         </ul>
+      {% endif %}
       {% endif %}
 	</div>
 
@@ -33,10 +43,14 @@
       <th></th>
     </tr>
     {% for object in orderproducts %}
-      {% if object.0 in invalid_products %}
-    <tr class="danger">
+      {% if order_completed %}
+          <tr>
       {% else %}
-    <tr>
+        {% if object.0 in invalid_products %}
+          <tr class="danger">
+        {% else %}
+          <tr>
+        {% endif %}
       {% endif %}
 
 
@@ -46,9 +60,12 @@
         <td class="text-right">{{ object.2 }}</td>
         <form method="POST" action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
         {% csrf_token %}
+        {% if order_completed %}
+        {% else %}
         <td class="text-right">
           <input type="submit" value="Delete Product" class="btn btn-xs btn-danger"/>
         </td>
+        {% endif %}
       </form>
     </tr>
 
@@ -61,14 +78,17 @@
       <th></th>
     </tr>
   </table>
+  {% if order_completed %}
+  {% else %}
   <div class="btn-group btn-group-justified" role="group" aria-label="...">
     {% if total > 0 %}
       {% if valid_order %}
         <a href="/completeorder" class="btn btn-info btn-lrg">Complete Order</a>
+      {% endif %}
 
-      {% endif %}
     {% endif %}
-      {% endif %}
     <a href="/deleteorder" class="btn btn-danger">Cancel Order</a>
   </div>
+      {% endif %}
+  {% endif %}
   {% endblock %}
