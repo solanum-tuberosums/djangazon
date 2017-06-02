@@ -39,20 +39,28 @@ def product_detail(request, product_id):
     """
     current_users_product = False
     product = Product.objects.get(pk=product_id)
+    liked_bool = False
+    disliked_bool = False
 
     if request.method == 'GET':
         template_name = 'detail.html'
 
-        x = product.likes.all()
-        # y = product.likes.get(product_id=product_id)
-        print("\n\n{}\n\n".format(x))
+        product = Product.objects.get(pk=product_id)
 
+        likes = product.likes.all()
+        dislikes = product.dislikes.all()
+
+        # If user has liked this product
+        if likes:
+            liked_bool = True
+        # If user has disliekd this product
+        if dislikes:
+            disliked_bool = True
+        # If this is the current user's product
         if product.seller == request.user:
             current_users_product = True
 
-
-
-        return render(request, template_name, {'product': product, "current_users_product": current_users_product})
+        return render(request, template_name, {'product': product, "current_users_product": current_users_product, "liked":liked_bool, "disliked":disliked_bool})
 
     elif request.method == 'POST':
 
@@ -60,9 +68,6 @@ def product_detail(request, product_id):
         behavior_button_clicked = request.POST.get("detail_button", "")
         # Stores if user clicks "Like" or "Dislike"
         like_dislike_button = request.POST.get("like_dislike_button", "")
-
-
-
 
         if behavior_button_clicked == "Add to Cart":
             try:
@@ -125,4 +130,5 @@ def product_detail(request, product_id):
                 return render(request, "success/success.html", {})
 
     else:
-        return SuspiciousOperation('<h1>Could not resolve request.</h1>')
+        return HttpResponseRedirect(reverse('website:product_detail', 
+            args=[product_id]))

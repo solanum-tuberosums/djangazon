@@ -4,6 +4,12 @@
     <div class="jumbotron">
         <img style="float:right; height: 9em; border: 8px solid #fff;" src="{{ product.image.url }}" alt="">
         <h1>{{ product.title }}
+        {% if liked %}
+            <small><i>(Liked)</i></small>
+        {% endif %}
+        {% if disliked %}
+            <small><i>(Disliked)</i></small>
+        {% endif %}
         {% if product.is_active == 0 %}
             <span style="font-size:.3em;" class="text-danger text-center">* This product has been removed by seller.</span>
         {% endif %}
