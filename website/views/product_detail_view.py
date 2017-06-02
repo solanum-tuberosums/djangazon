@@ -34,7 +34,6 @@ def product_detail(request, product_id):
 
     Author: Will Sims & Blaise Roberts
     """
-
     current_users_product = False
 
     if request.method == 'GET':
