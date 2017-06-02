@@ -9,6 +9,22 @@ from website.models.user_product_recommendation_model import UserProductRecommen
 
 
 def recommendations(request, user_id):
+    """
+    This function is invoked to see products recommended by another user.
+
+    ---Arguments---
+    request: the full HTTP request object
+    user_id: the id of the user
+
+    ---GET---
+    renders list.html
+
+        ---Context---
+        'items'(list): the recommended product instance(s)
+
+    Author: Jeremy Bakker
+    """
+    
     receiver_user_instance = User.objects.get(id = user_id)
     receiver_profile_instance = Profile.objects.get(user = receiver_user_instance)
     upr_products = UserProductRecommendation.objects.filter(receiver=receiver_profile_instance, viewed=False)

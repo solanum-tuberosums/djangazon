@@ -6,9 +6,32 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from website.models.product_model import Product
 from website.models.profile_model import Profile
-from website.models.user_product_recommendation_model import UserProductRecommendation
+from website.models.user_product_recommendation_model import 
+    UserProductRecommendation
 
 def recommend_product(request, product_id):
+    """
+    This function is invoked to recommend a product to another user.
+
+    ---Arguments---
+    request: the full HTTP request object
+    product_id: the id of the recommended product
+
+    ---GET---
+    renders recommend.html
+
+        ---Context---
+        'product'(product instance): the recommended product
+
+    ---POST---
+    Renders detail.html
+
+        ---Context---
+        NONE
+
+    Author: Jeremy Bakker
+    """
+
     product = Product.objects.get(pk=product_id)
     if request.method=="GET":
         template = 'recommend.html'
@@ -22,8 +45,10 @@ def recommend_product(request, product_id):
             receiver_user_instance = User.objects.get(username = user)
         except User.DoesNotExist:
             template = 'list.html'
-            return render(request, template, {"error": "Username '{}' does not exist".format(user)})
-        receiver_profile_instance = Profile.objects.get(user = receiver_user_instance)
+            return render(request, template, {"error": 
+                "Username '{}' does not exist".format(user)})
+        receiver_profile_instance = Profile.objects.get(user = 
+            receiver_user_instance)
         upr = UserProductRecommendation(
                 viewed = False,
                 product = product,
@@ -33,5 +58,5 @@ def recommend_product(request, product_id):
         upr.save()
 
         template = 'detail.html'
-        
-        return HttpResponseRedirect(reverse('website:product_detail', args=[product.id]))
+        return HttpResponseRedirect(reverse('website:product_detail', 
+            args=[product.id]))
