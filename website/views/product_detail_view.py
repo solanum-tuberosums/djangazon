@@ -38,10 +38,14 @@ def product_detail(request, product_id):
     Author: Will Sims & Blaise Roberts
     """
     current_users_product = False
+    product = Product.objects.get(pk=product_id)
 
     if request.method == 'GET':
         template_name = 'detail.html'
-        product = Product.objects.get(pk=product_id)
+
+        # x = product.likes.all().count()
+        # y = product.likes.get(product_id=product_id)
+        # print("\n\n{}\n\n".format(x))
 
         if product.seller == request.user:
             current_users_product = True
@@ -58,8 +62,9 @@ def product_detail(request, product_id):
         like_dislike_button = request.POST.get("like_dislike_button", "")
 
 
+
+
         if behavior_button_clicked == "Add to Cart":
-            product = Product.objects.get(pk=product_id)
             try:
                 order = Order.objects.get(user=request.user, payment_type=None)
             except Order.DoesNotExist:
@@ -100,13 +105,12 @@ def product_detail(request, product_id):
                 except:
                     return ObjectDoesNotExist('''<h1>Product not found in database</h1>''')
         else:
-            product = Product.objects.get(pk=product_id)
             if like_dislike_button == "Like":
-                product.likes.add(request.user, product_id)
+                product.likes.add(request.user)
                 return HttpResponseRedirect(reverse('website:product_detail', 
                     args=[product_id]))
             elif like_dislike_button == "Dislike":
-                product.dislikes.add(request.user, product_id)
+                product.dislikes.add(request.user)
                 return HttpResponseRedirect(reverse('website:product_detail', 
                     args=[product_id]))
             else:
