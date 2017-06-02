@@ -100,13 +100,13 @@ def product_detail(request, product_id):
                 except:
                     return ObjectDoesNotExist('''<h1>Product not found in database</h1>''')
         else:
-
+            product = Product.objects.get(pk=product_id)
             if like_dislike_button == "Like":
-                # print("\n\n\nLIKED\n\n\n")
+                product.likes.add(request.user, product_id)
                 return HttpResponseRedirect(reverse('website:product_detail', 
                     args=[product_id]))
             elif like_dislike_button == "Dislike":
-                # print("\n\n\nDISLIKED\n\n\n")
+                product.dislikes.add(request.user, product_id)
                 return HttpResponseRedirect(reverse('website:product_detail', 
                     args=[product_id]))
             else:
