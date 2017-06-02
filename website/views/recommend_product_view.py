@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from website.models.product_model import Product
 from website.models.profile_model import Profile
-from website.models.user_product_recommendation_model import 
+from website.models.user_product_recommendation_model import \
     UserProductRecommendation
 
 def recommend_product(request, product_id):
