@@ -25,8 +25,13 @@
                     {% csrf_token %}
                     <input class="btn btn-success" name="detail_button" type="submit"  value="Add to Cart"/>
                     {% if current_users_product %}
-                        <input class="btn btn-danger" name="detail_button" type="submit" value="Remove for Sale">
+                        <input class="btn btn-warning" name="detail_button" type="submit" value="Remove for Sale">
                     {% endif %}
+                    <div>
+                        <br>
+                        <input class="btn btn-info" name="like_dislike_button" type="submit" value="Like">
+                        <input class="btn btn-danger" name="like_dislike_button" type="submit" value="Dislike">
+                    </div>
                 </form>
             {% endif %}
             </p>

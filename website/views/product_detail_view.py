@@ -7,6 +7,9 @@ from website.models.order_model import Order
 from website.models.payment_type_model import PaymentType
 from website.models.product_order_model import ProductOrder
 
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 
 def product_detail(request, product_id):
@@ -49,9 +52,13 @@ def product_detail(request, product_id):
 
     elif request.method == 'POST':
 
-        button_clicked = request.POST.get("detail_button", "")
+        # Stores if user clicks "Add to Cart" or "Remove for Sale"
+        behavior_button_clicked = request.POST.get("detail_button", "")
+        # Stores if user clicks "Like" or "Dislike"
+        like_dislike_button = request.POST.get("like_dislike_button", "")
 
-        if button_clicked == "Add to Cart":
+
+        if behavior_button_clicked == "Add to Cart":
             product = Product.objects.get(pk=product_id)
             try:
                 order = Order.objects.get(user=request.user, payment_type=None)
@@ -73,7 +80,7 @@ def product_detail(request, product_id):
             return render(request, template_name, {
                 'posted_object': 'Product Added to Cart',
                 'posted_object_identifier': product.title})
-        elif button_clicked == 'Remove for Sale':
+        elif behavior_button_clicked == 'Remove for Sale':
             template_name = 'success/success.html'
             num_times_product_has_been_ordered = ProductOrder.objects.filter(product=product_id).count()
 
@@ -92,7 +99,18 @@ def product_detail(request, product_id):
                     return render(request, template_name, {"posted_object":"Removed Product ", "posted_object_identifier":product_id})
                 except:
                     return ObjectDoesNotExist('''<h1>Product not found in database</h1>''')
+        else:
 
+            if like_dislike_button == "Like":
+                # print("\n\n\nLIKED\n\n\n")
+                return HttpResponseRedirect(reverse('website:product_detail', 
+                    args=[product_id]))
+            elif like_dislike_button == "Dislike":
+                # print("\n\n\nDISLIKED\n\n\n")
+                return HttpResponseRedirect(reverse('website:product_detail', 
+                    args=[product_id]))
+            else:
+                return render(request, "success/success.html", {})
 
     else:
         return SuspiciousOperation('<h1>Could not resolve request.</h1>')
