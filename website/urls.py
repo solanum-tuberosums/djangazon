@@ -50,7 +50,9 @@ urlpatterns = [
     url(r'^searchlocations/$', views.search_locations, 
         name='search_locations'),
     url(r'^recommend/(?P<product_id>[0-9]+)/$', views.recommend_product, 
-        name='recommend_product')
+        name='recommend_product'),
+    url(r'^recommendations/(?P<user_id>[0-9]+)/$', views.recommendations, 
+        name='recommendations')
 ]
 
 if settings.DEBUG:

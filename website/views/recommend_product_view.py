@@ -17,7 +17,10 @@ def recommend_product(request, product_id):
         form_data = request.POST
         user = form_data['user_search_box']
         sender = request.user
-        receiver_user_instance = User.objects.get(first_name = user)
+        try:
+            receiver_user_instance = User.objects.get(username = user)
+        except DoesNotExist:
+            pass
         receiver_profile_instance = Profile.objects.get(user = receiver_user_instance)
         upr = UserProductRecommendation(
                 viewed = False,
