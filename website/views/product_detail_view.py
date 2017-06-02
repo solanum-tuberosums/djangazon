@@ -43,9 +43,9 @@ def product_detail(request, product_id):
     if request.method == 'GET':
         template_name = 'detail.html'
 
-        # x = product.likes.all().count()
+        x = product.likes.all()
         # y = product.likes.get(product_id=product_id)
-        # print("\n\n{}\n\n".format(x))
+        print("\n\n{}\n\n".format(x))
 
         if product.seller == request.user:
             current_users_product = True
@@ -106,10 +106,18 @@ def product_detail(request, product_id):
                     return ObjectDoesNotExist('''<h1>Product not found in database</h1>''')
         else:
             if like_dislike_button == "Like":
+
+                if product.dislikes:
+                    product.dislikes.clear()
+
                 product.likes.add(request.user)
                 return HttpResponseRedirect(reverse('website:product_detail', 
                     args=[product_id]))
             elif like_dislike_button == "Dislike":
+
+                if product.likes:
+                    product.likes.clear()
+
                 product.dislikes.add(request.user)
                 return HttpResponseRedirect(reverse('website:product_detail', 
                     args=[product_id]))
