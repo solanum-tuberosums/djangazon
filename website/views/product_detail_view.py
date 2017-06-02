@@ -45,22 +45,8 @@ def product_detail(request, product_id):
     if request.method == 'GET':
         template_name = 'detail.html'
 
-        product = Product.objects.get(pk=product_id)
-
-        likes = product.likes.all()
-        dislikes = product.dislikes.all()
-
-        # If user has liked this product
-        if likes:
-            liked_bool = True
-        # If user has disliekd this product
-        if dislikes:
-            disliked_bool = True
-        # If this is the current user's product
-        if product.seller == request.user:
-            current_users_product = True
-
-        return render(request, template_name, {'product': product, "current_users_product": current_users_product, "liked":liked_bool, "disliked":disliked_bool})
+        return render(request, template_name, {'product': product, "current_users_product": current_users_product, 
+                "liked":product.liked_by_current_user, "disliked":product.disliked_by_current_user})
 
     elif request.method == 'POST':
 
