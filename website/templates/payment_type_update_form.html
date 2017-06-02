@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+    {% block content %}
+        <form action="{% url 'website:edit_payment_type' payment_type.id %}" method="post">
+            {% csrf_token %}
+            {{ payment_type_form.as_p }}
+            <input type="submit" method="POST" class="btn btn-sm btn-success" name="edit_payment_type" value="Submit"></input>
+            <a href="{% url 'website:my_account' user.id %}">Cancel</a>
+        </form>
+    {% endblock %}
