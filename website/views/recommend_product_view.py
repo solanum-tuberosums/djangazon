@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from website.models.product_model import Product
 from website.models.profile_model import Profile
@@ -19,8 +20,9 @@ def recommend_product(request, product_id):
         sender = request.user
         try:
             receiver_user_instance = User.objects.get(username = user)
-        except DoesNotExist:
-            pass
+        except User.DoesNotExist:
+            template = 'list.html'
+            return render(request, template, {"error": "Username '{}' does not exist".format(user)})
         receiver_profile_instance = Profile.objects.get(user = receiver_user_instance)
         upr = UserProductRecommendation(
                 viewed = False,
