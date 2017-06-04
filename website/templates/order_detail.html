@@ -41,7 +41,7 @@
       <th class="text-center">Quantity</th>
       <th class="text-right">Price/Unit</th>
       <th class="text-right">Subtotal</th>
-      <th>Rating</th>
+      <th class="text-center">Rating</th>
       <th></th>
     </tr>
     {% for object in orderproducts %}
@@ -63,12 +63,12 @@
         {% if order_completed %}
           {% get_product_rating order object.0  as product_rating_flag %}
           {% if product_rating_flag %}
-          <td>
+          <td class="text-center">
             {{ product_rating_flag }}
           </td>
-          <form method="POST" action="{% url 'website:change_product_rating' order.id object.0.id %}">
+          <td class="text-center">
+          <form class="form-inline" method="POST" action="{% url 'website:change_product_rating' order.id object.0.id %}">
           {% csrf_token %}
-          <td class="text-right">
             <select name="rating" class="form-control">
               <option>5</option>
               <option>4</option>
@@ -77,13 +77,14 @@
               <option>1</option>
             </select>
             <input type="submit" value="Change Rating" class="btn btn-xs btn-info"/>
-          </td>
           </form>
+          </td>
           {% else %}
-          <form method="POST" action="{% url 'website:give_product_rating' order.id object.0.id %}">
+          <td class="text-center">N/a</td>
+          <td class="text-center">
+          <form class="form-inline" method="POST" action="{% url 'website:give_product_rating' order.id object.0.id %}">
           {% csrf_token %}
-          <td class="text-right">
-            <select name="rating" class="form-control">
+            <select name="rating" class="form-control form-inline">
               <option>5</option>
               <option>4</option>
               <option>3</option>
@@ -91,8 +92,8 @@
               <option>1</option>
             </select>
             <input type="submit" value="Rate Product" class="btn btn-xs btn-info"/>
-          </td>
           </form>
+          </td>
           {% endif %}
         {% else %}
           <form method="POST" action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
