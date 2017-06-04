@@ -40,7 +40,7 @@
       <th class="text-center">Quantity</th>
       <th class="text-right">Price/Unit</th>
       <th class="text-right">Subtotal</th>
-      <th></th>
+      <th>Rating</th>
     </tr>
     {% for object in orderproducts %}
       {% if order_completed %}
@@ -58,15 +58,27 @@
         <td class="text-center">{{ object.1 }}</td>
         <td class="text-right">{{ object.0.formatted_price }}</td>
         <td class="text-right">{{ object.2 }}</td>
-        <form method="POST" action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
-        {% csrf_token %}
         {% if order_completed %}
+          {% if object.0.get_rating > 0 %}
+          <td>
+            {{ object.0.get_rating }}
+          </td>
+          {% else %}
+          <form method="POST" action="{% url 'website:give_product_rating' order.id object.0.id %}">
+          {% csrf_token %}
+          <td class="text-right">
+            <input type="submit" value="Rate Product" class="btn btn-xs btn-info"/>
+          </td>
+          </form>
+          {% endif %}
         {% else %}
-        <td class="text-right">
-          <input type="submit" value="Delete Product" class="btn btn-xs btn-danger"/>
-        </td>
+          <form method="POST" action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
+          {% csrf_token %}
+          <td class="text-right">
+            <input type="submit" value="Delete Product" class="btn btn-xs btn-danger"/>
+          </td>
+          </form>
         {% endif %}
-      </form>
     </tr>
 
     {% endfor%}

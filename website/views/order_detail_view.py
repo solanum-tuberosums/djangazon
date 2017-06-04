@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from website.models.order_model import Order
 from website.models.product_order_model import ProductOrder
+from website.models.product_rating_model import ProductRating
 from website.models.product_model import Product
 from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
@@ -105,3 +106,16 @@ def delete_product_from_order(request, product_id, order_id):
     else:
         return HttpResponseForbidden('''<h1>Not your order, bruh!</h1>
             <img src="/website/static/other.jpg">''')
+
+def give_product_rating(request, order_id, product_id):
+    order = Order.objects.get(pk=order_id)
+    product = Product.objects.get(pk=product_id)
+    ProductRating.objects.create(product=product, order=order, rating=5)
+    return HttpResponseRedirect(reverse('website:order_detail', 
+            args=[order.id]))
+
+
+
+
+
+

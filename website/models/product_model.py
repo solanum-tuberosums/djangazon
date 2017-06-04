@@ -3,6 +3,7 @@ djangazon model configuration for product
 """
 
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth.models import User
 from website.models.product_category_model import ProductCategory
 import locale
@@ -53,6 +54,12 @@ class Product (models.Model):
     likes = models.ManyToManyField(User, related_name='likes')
     dislikes = models.ManyToManyField(User, related_name='dislikes')
     is_active = models.BooleanField()
+
+    def get_rating(self):
+        count = self.product_ratings.count()
+        total = self.product_ratings.aggregate(Sum('rating'))
+        average = total['rating__sum']/count
+        return average
 
     def formatted_price(self):
         return str(locale.currency(self.price, grouping=True))
