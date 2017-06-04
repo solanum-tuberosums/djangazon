@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
-
+  {% load order_tags %}
+    
   {% block content %}
-
-    <h1>This is Order History for</h1>
-    <h4 class="text-capitalize">{{ profile }}</h4>
-
-    <ul class="list-group">
+    <div class="jumbotron">
+    <h1>Order History</h1>
+    <h4 style="margin-left:10em" class="text-capitalize lead">-for {{ profile }}</h4>
+    </div>
+    <ul class="list-group col-xs-8 col-xs-offset-2">
     {% for order in orders %}
     
         <a class="list-group-item list-group-item-info" href="/order/{{ order.id }}">Order {{ order.id }}<small><i> ({{ order.order_date }})</i></small></a> 
         <ul class="list-group">
         {% for product in order.products.distinct %}
-            <a style="margin-left:5em" class="text-capitalize list-group-item list-group-item-warning" href="/products/{{ product.id }}"><small>{{ product.title }}</small></a>
+            {% get_product_rating order product  as product_rating_flag %}
+            <a style="margin-left:5em" class="text-capitalize list-group-item list-group-item-warning" href="/products/{{ product.id }}">{{ product.title }}<small style="margin-left:1em"><i>Quantity:{% get_product_count order product %}</i></small><span style="float:right;">Rating: {{ product_rating_flag }}</span></a>
         {% endfor %}
         </ul>
             

@@ -62,7 +62,7 @@
         <td class="text-right">{{ object.2 }}</td>
         {% if order_completed %}
           {% get_product_rating order object.0  as product_rating_flag %}
-          {% if product_rating_flag %}
+          {% if product_rating_flag != "Not Rated Yet" %}
           <td class="text-center">
             {{ product_rating_flag }}
           </td>

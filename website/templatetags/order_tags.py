@@ -9,7 +9,7 @@ def get_product_rating(order, product):
 		pr = product.product_ratings.get(order=order)
 		return pr.rating
 	except:
-		return None
+		return "Not Rated Yet"
 
 @register.simple_tag
 def get_product_count(order, product):
