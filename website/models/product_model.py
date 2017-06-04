@@ -57,9 +57,13 @@ class Product (models.Model):
 
     def get_rating(self):
         count = self.product_ratings.count()
-        total = self.product_ratings.aggregate(Sum('rating'))
-        average = total['rating__sum']/count
-        return average
+        try:
+            total = self.product_ratings.aggregate(Sum('rating'))
+            average = total['rating__sum']/count
+            return round(average, 2)
+        except TypeError:
+            average = 'Not Yet Rated'
+            return average
 
     def formatted_price(self):
         return str(locale.currency(self.price, grouping=True))

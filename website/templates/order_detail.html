@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
   {% block content %}
+  {% load order_tags %}
 	<div class="jumbotron">
     <h1>
     {% if order_completed %}
@@ -55,18 +56,26 @@
 
 
         <td><a href="/products/{{ object.0.id }}">{{ object.0.title }}</a></td>
-        <td class="text-center">{{ object.1 }}</td>
+        <td class="text-center">{% get_product_count order object.0 %}</td>
         <td class="text-right">{{ object.0.formatted_price }}</td>
         <td class="text-right">{{ object.2 }}</td>
         {% if order_completed %}
-          {% if object.0.get_rating > 0 %}
+          {% get_product_rating order object.0  as product_rating_flag %}
+          {% if product_rating_flag %}
           <td>
-            {{ object.0.get_rating }}
+            {{ product_rating_flag }}
           </td>
           {% else %}
           <form method="POST" action="{% url 'website:give_product_rating' order.id object.0.id %}">
           {% csrf_token %}
           <td class="text-right">
+            <select name="rating" class="form-control">
+              <option>5</option>
+              <option>4</option>
+              <option>3</option>
+              <option>2</option>
+              <option>1</option>
+            </select>
             <input type="submit" value="Rate Product" class="btn btn-xs btn-info"/>
           </td>
           </form>
