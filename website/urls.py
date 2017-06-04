@@ -44,6 +44,9 @@ urlpatterns = [
     url(r'^order/rateproduct/(?P<order_id>[0-9]+)/(?P<product_id>[0-9]+)$',
             views.order_detail_view.give_product_rating,
             name="give_product_rating"),
+    url(r'^order/changerating/(?P<order_id>[0-9]+)/(?P<product_id>[0-9]+)$',
+            views.order_detail_view.change_product_rating,
+            name="change_product_rating"),
     url(r'^order/$', views.no_order, name='no_order'),
     url(r'^deleteorder/$', views.delete_order, name='delete_order'),
 

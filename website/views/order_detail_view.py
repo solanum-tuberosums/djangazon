@@ -118,6 +118,13 @@ def give_product_rating(request, order_id, product_id):
     return HttpResponseRedirect(reverse('website:order_detail', 
             args=[order.id]))
 
+def change_product_rating(request, order_id, product_id):
+    form_data = request.POST
+    order = Order.objects.get(pk=order_id)
+    product = Product.objects.get(pk=product_id)
+    ProductRating.objects.filter(product=product, order=order).update(rating=form_data['rating'])
+    return HttpResponseRedirect(reverse('website:order_detail', 
+            args=[order.id]))
 
 
 
