@@ -9,11 +9,11 @@
     <ul class="list-group col-xs-8 col-xs-offset-2">
     {% for order in orders %}
     
-        <a class="list-group-item list-group-item-info" href="/order/{{ order.id }}">Order {{ order.id }}<small><i> ({{ order.order_date }})</i></small></a> 
+        <a class="list-group-item list-group-item-info" href="/order/{{ order.id }}">Order {{ order.id }}<small><i> ({{ order.order_date }})</i></small><small style="float:right;"><i>Click on the Order to Rate the Products Below</i></small></a> 
         <ul class="list-group">
         {% for product in order.products.distinct %}
             {% get_product_rating order product  as product_rating_flag %}
-            <a style="margin-left:5em" class="text-capitalize list-group-item list-group-item-warning" href="/products/{{ product.id }}">{{ product.title }}<small style="margin-left:1em"><i>Quantity:{% get_product_count order product %}</i></small><span style="float:right;">Rating: {{ product_rating_flag }}</span></a>
+            <li style="margin-left:5em" class="list-group-item list-group-item-warning"><a class="text-capitalize" href="/products/{{ product.id }}">{{ product.title }}</a><small style="margin-left:1em"><i>Quantity:{% get_product_count order product %}</i></small><span style="float:right;">Rating: {{ product_rating_flag }}</span></li>
         {% endfor %}
         </ul>
             
