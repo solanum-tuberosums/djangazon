@@ -49,11 +49,12 @@
       {% endif %}
       <th></th>
     </tr>
-    {% for object in orderproducts %}
+
+    {% for product in order.products.distinct %}
       {% if order_completed %}
           <tr>
       {% else %}
-        {% if object.0 in invalid_products %}
+        {% if product.id in invalid_products %}
           <tr class="danger">
         {% else %}
           <tr>
@@ -61,18 +62,18 @@
       {% endif %}
 
 
-        <td><a href="/products/{{ object.0.id }}">{{ object.0.title }}</a></td>
-        <td class="text-center">{% get_product_count order object.0 %}</td>
-        <td class="text-right">{{ object.0.formatted_price }}</td>
-        <td class="text-right">{{ object.2 }}</td>
+        <td><a href="/products/{{ product.id }}">{{ product.title }}</a></td>
+        <td class="text-center">{% get_product_count order product %}</td>
+        <td class="text-right">{{ product.formatted_price }}</td>
+        <td class="text-right">{% get_product_subtotal order product as_string %}</td>
         {% if order_completed %}
-          {% get_product_rating order object.0  as product_rating_flag %}
+          {% get_product_rating order product as product_rating_flag %}
           {% if product_rating_flag != "Not Rated Yet" %}
           <td class="text-center">
             {{ product_rating_flag }}
           </td>
           <td class="text-center">
-          <form class="form-inline" method="POST" action="{% url 'website:change_product_rating' order.id object.0.id %}">
+          <form class="form-inline" method="POST" action="{% url 'website:change_product_rating' order.id product.id %}">
           {% csrf_token %}
             <select name="rating" class="form-control">
               <option>5</option>
@@ -88,7 +89,7 @@
           {% else %}
           <td class="text-center">N/A</td>
           <td class="text-center">
-          <form class="form-inline" method="POST" action="{% url 'website:give_product_rating' order.id object.0.id %}">
+          <form class="form-inline" method="POST" action="{% url 'website:give_product_rating' order.id product.id %}">
           {% csrf_token %}
             <select name="rating" class="form-control form-inline">
               <option>5</option>
@@ -104,7 +105,7 @@
           {% endif %}
         {% else %}
           <form method="POST" 
-          action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
+          action="{% url 'website:delete_product_from_order' product.id order.id %}">
           {% csrf_token %}
           <td class="text-right">
             <input type="submit" value="Delete Product" 
@@ -119,7 +120,7 @@
       <th></th>
       <th></th>
       <th class="text-right">Total :</th>
-      <th class="text-right">{{ total_string }}</th>
+      <th class="text-right">{% get_order_total order as_string %}</th>
       <th></th>
       <th></th>
     </tr>
