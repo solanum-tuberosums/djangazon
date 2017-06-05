@@ -19,7 +19,7 @@ class ProductForm(forms.ModelForm):
     Author: Will Sims and Jeremy Bakker
     """
     
-    price = forms.FloatField(min_value=0.01, max_value=100000000, 
+    price = forms.DecimalField(min_value=0.01, max_value=100000000, 
         widget=forms.NumberInput(attrs={'class': "form-control"}))
     current_inventory = forms.IntegerField(label="Quantity", min_value=1, 
         max_value=100000, widget=forms.NumberInput(attrs={'class': 
