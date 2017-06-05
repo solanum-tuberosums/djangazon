@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
   {% block content %}
+  {% load order_tags %}
 	<div class="jumbotron">
     <h1>
     {% if order_completed %}
@@ -21,7 +22,8 @@
          or have been removed from marketplace:</p>
         <ul>
           {% for product in invalid_products %}
-            <li><a href="/products/{{ product.id }}">{{ product.title }}</a></li>
+            <li><a href="/products/{{ product.id }}">{{ product.title }}</a>
+            </li>
           {% endfor %}
         </ul>
       {% endif %}
@@ -40,6 +42,11 @@
       <th class="text-center">Quantity</th>
       <th class="text-right">Price/Unit</th>
       <th class="text-right">Subtotal</th>
+      {% if order_completed %}
+      <th class="text-center">Rating</th>
+      {% else %}
+      <th><th>
+      {% endif %}
       <th></th>
     </tr>
     {% for object in orderproducts %}
@@ -55,18 +62,56 @@
 
 
         <td><a href="/products/{{ object.0.id }}">{{ object.0.title }}</a></td>
-        <td class="text-center">{{ object.1 }}</td>
+        <td class="text-center">{% get_product_count order object.0 %}</td>
         <td class="text-right">{{ object.0.formatted_price }}</td>
         <td class="text-right">{{ object.2 }}</td>
-        <form method="POST" action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
-        {% csrf_token %}
         {% if order_completed %}
+          {% get_product_rating order object.0  as product_rating_flag %}
+          {% if product_rating_flag != "Not Rated Yet" %}
+          <td class="text-center">
+            {{ product_rating_flag }}
+          </td>
+          <td class="text-center">
+          <form class="form-inline" method="POST" action="{% url 'website:change_product_rating' order.id object.0.id %}">
+          {% csrf_token %}
+            <select name="rating" class="form-control">
+              <option>5</option>
+              <option>4</option>
+              <option>3</option>
+              <option>2</option>
+              <option>1</option>
+            </select>
+            <input type="submit" value="Change Rating"
+             class="btn btn-xs btn-info"/>
+          </form>
+          </td>
+          {% else %}
+          <td class="text-center">N/A</td>
+          <td class="text-center">
+          <form class="form-inline" method="POST" action="{% url 'website:give_product_rating' order.id object.0.id %}">
+          {% csrf_token %}
+            <select name="rating" class="form-control form-inline">
+              <option>5</option>
+              <option>4</option>
+              <option>3</option>
+              <option>2</option>
+              <option>1</option>
+            </select>
+            <input type="submit" value="Rate Product" 
+            class="btn btn-xs btn-info"/>
+          </form>
+          </td>
+          {% endif %}
         {% else %}
-        <td class="text-right">
-          <input type="submit" value="Delete Product" class="btn btn-xs btn-danger"/>
-        </td>
+          <form method="POST" 
+          action="{% url 'website:delete_product_from_order' object.0.id order.id %}">
+          {% csrf_token %}
+          <td class="text-right">
+            <input type="submit" value="Delete Product" 
+            class="btn btn-xs btn-danger"/>
+          </td>
+          </form>
         {% endif %}
-      </form>
     </tr>
 
     {% endfor%}
@@ -76,6 +121,7 @@
       <th class="text-right">Total :</th>
       <th class="text-right">{{ total_string }}</th>
       <th></th>
+      <th></th>
     </tr>
   </table>
   {% if order_completed %}
@@ -83,7 +129,8 @@
   <div class="btn-group btn-group-justified" role="group" aria-label="...">
     {% if total > 0 %}
       {% if valid_order %}
-        <a href="/completeorder" class="btn btn-info btn-lrg">Complete Order</a>
+        <a href="/completeorder" 
+        class="btn btn-info btn-lrg">Complete Order</a>
       {% endif %}
 
     {% endif %}

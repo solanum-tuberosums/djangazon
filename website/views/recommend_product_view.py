@@ -46,7 +46,8 @@ def recommend_product(request, product_id):
         except User.DoesNotExist:
             template = 'list.html'
             return render(request, template, {"error": 
-                "Username '{}' does not exist".format(user)})
+                "Username '{}' does not exist".format(user),
+                "page_title": "Error"})
         receiver_profile_instance = Profile.objects.get(user = 
             receiver_user_instance)
         upr = UserProductRecommendation(

@@ -9,6 +9,7 @@
     </ul>  
     <ul class="nav navbar-nav navbar-right">
       <li>
+      <div style="display:flex;align-items:center;">
         <label class="form-check-label" for="search_location_checkbox" style="font-size: .83em; font-weight: normal; color: gray">Search Product Locations: <input id="search_location_checkbox" title="Search Product Locations" type="checkbox" label="Search Product Locations: " /></label>
         <form class="navbar-form" id="product_search_form" type="get" action= "{% url 'website:search_products' %}">
           <div class="form-group">
@@ -22,12 +23,10 @@
           </div>
           <button class="btn btn-default" id="search_submit" type="submit" >Submit</button>
         </form>
+        </div>
       </li>
       <li>
         <a href="{% url 'website:list_product_categories' %}">Categories</a>
-      </li>
-      <li>
-        <a href="/products">All Products</a>
       </li>
       <li>
         <a href="/my-account/{{ user.id }}">My Account</a>
@@ -57,9 +56,6 @@
     <ul class="nav navbar-nav navbar-right">
       <li>
         <a href="{% url 'website:list_product_categories' %}">Categories</a>
-      </li>
-      <li>
-        <a href="/products">All Products</a>
       </li>
     </ul>
     {% endif %}

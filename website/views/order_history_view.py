@@ -8,7 +8,7 @@ def order_history(request):
         profile = Profile.objects.get(pk=request.user.id)
 
         # user_orders = Order.objects.filter(user=request.user)
-        user_completed_orders = Order.objects.filter(user=request.user).exclude(payment_type__isnull=True)
+        user_completed_orders = Order.objects.filter(user=request.user).exclude(payment_type__isnull=True).order_by('-pk')
 
 
         return render(request, 'order_history.html', {"profile":profile, 'orders':user_completed_orders})
