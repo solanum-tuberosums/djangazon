@@ -3,13 +3,22 @@
 {% block content%}
     <div class="jumbotron">
         <img style="float:right; height: 9em; border: 8px solid #fff;" src="{{ product.image.url }}" alt="">
+        
         <h1 class="text-capitalize">{{ product.title }}
+        {% if liked %}
+            <small><i>(Liked)</i></small>
+        {% endif %}
+        {% if disliked %}
+            <small><i>(Disliked)</i></small>
+        {% endif %}
+
         {% if product.is_active == 0 %}
             <span style="font-size:.3em;" class="text-danger text-center">* This product has been removed by seller.</span>
         {% endif %}
         </h1>
         <a href="/product-categories/{{product.product_category.id}}/" class="lead text-primary">from {{ product.product_category.title }}
         </a>
+        
         <hr>
         <p class="lead text-right">{{ product.description }}</p>
         <hr>
@@ -25,9 +34,15 @@
                     {% csrf_token %}
                     <input class="btn btn-success" name="detail_button" type="submit"  value="Add to Cart"/>
                     {% if current_users_product %}
-                        <input class="btn btn-danger" name="detail_button" type="submit" value="Remove for Sale">
+                        <input class="btn btn-warning" name="detail_button" type="submit" value="Remove for Sale">
                     {% endif %}
+                    <div>
+                        <br>
+                        <input class="btn btn-info" name="like_dislike_button" type="submit" value="Like">
+                        <input class="btn btn-danger" name="like_dislike_button" type="submit" value="Dislike">
+                    </div>
                 </form>
+                <form action="{% url 'website:recommend_product' product.id%}"><input class="btn btn-primary pull-right" type="submit" style="margin-top: 5px" value="Recommend to a Friend"></input></form>
             {% endif %}
             </p>
     </div>

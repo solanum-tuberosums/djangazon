@@ -24,5 +24,5 @@ class UserProductRecommendation (models.Model):
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
-    reciever = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    receiver = models.ForeignKey(Profile, on_delete=models.CASCADE)
     viewed = models.BooleanField()
