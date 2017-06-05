@@ -2,19 +2,24 @@
 {% load staticfiles %}
 
 	{% block content %}
-		<h1 class="text-center">My Account</h1>
-		<p class="text-center lead">for {{ request.user.first_name }} {{ request.user.last_name }}</p>
-        
-        <div class="col-xs-6 col-xs-offset-3"> 
-        <h4>First Name: {{ first_name }}</h4>
-        <h4>Last Name: {{ last_name }} </h4>
-        <h4>Street Address: {{ street_address }}</h4>
-        <h4>City: {{ city }}</h4>
-        <h4>State: {{ state }}</h4>
-        <h4>Postal Code: {{ postal_code }}</h4>
-        <h4>Phone: {{ phone }}</h4>
-        <a href="/edit-my-account/{{ user.id }}/">Edit Account Info</a>
-
+        <div class="jumbotron">
+    		<h1 class="text-center">My Account</h1>
+            <hr>
+            <div class="panel" style="padding:1.5em;width:50%;margin-left:25%;background-color:#e3f2fd;"> 
+            <h4>First Name: <span style="float:right;">{{ first_name }}</span></h4>
+            <h4>Last Name: <span style="float:right;">{{ last_name }}</span></h4>
+            <hr>
+            <h4>Street Address: <span style="float:right;">{{ street_address }}</span></h4>
+            <h4>City: <span style="float:right;">{{ city }}</span></h4>
+            <h4>State: <span style="float:right;">{{ state }}</span></h4>
+            <h4>Postal Code: <span style="float:right;">{{ postal_code }}</span></h4>
+            <hr>
+            <h4>Phone: <span style="float:right;">{{ phone }}</span></h4>
+            <hr>
+            <h4>Average Rating: <span style="float:right;">{{ average_rating }}</span></h4>
+            <a class="btn btn-info" href="/edit-my-account/{{ user.id }}/">Edit Account Info</a>
+            </div>
+            <hr>
         {% if payment_types %}
             <h4>Payment Types:</h4>
         {% else %}
@@ -45,5 +50,6 @@
 		<div><a class="btn btn-primary" href="{% url 'website:payment_type' %}">Create Payment Type</a></div>
         <br>
         <div><a class="btn btn-primary" href="{% url 'website:order_history' %}">Order History</a></div>
+        </div>
         </div>
 	{% endblock %}

@@ -40,7 +40,7 @@ def list_my_products(request, user_id):
         sold_units_list = list()
         for product in user_products:
             units_sold = int()
-            completed_orders = product.order_set.filter(payment_type__isnull=False)
+            completed_orders = product.products_on_order.filter(payment_type__isnull=False)
             for order in completed_orders:
                 units_sold += ProductOrder.objects.filter(product=product, order=order).count()
             sold_units_list.append((product, units_sold))

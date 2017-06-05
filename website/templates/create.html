@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content%}
+  <div class="jumbotron">
     <h1 class="text-center lead">Sell Product</h1>
+  </div>
     <form class="col-xs-6 col-xs-offset-3" 
     action="{% url 'website:sell' %}" method="post" 
     enctype="multipart/form-data">

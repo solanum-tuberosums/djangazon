@@ -3,6 +3,7 @@ djangazon model configuration for product
 """
 
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth.models import User
 from website.models.product_category_model import ProductCategory
 import locale
@@ -34,6 +35,7 @@ class Product (models.Model):
                             price, without any decimal places
     - seller_string(): returns the first name and last name of the person selling 
     the product as a string
+    - get_rating(): returns the average rating for a product
 
     Author: Jessica Younker and Jeremy Bakker
     """
@@ -54,12 +56,18 @@ class Product (models.Model):
     dislikes = models.ManyToManyField(User, related_name='dislikes')
     is_active = models.BooleanField()
 
+    def get_rating(self):
+        count = self.product_ratings.count()
+        try:
+            total = self.product_ratings.aggregate(Sum('rating'))
+            average = total['rating__sum']/count
+            return round(average, 2)
+        except TypeError:
+            average = 'Not Yet Rated'
+            return average
+
     def formatted_price(self):
         return str(locale.currency(self.price, grouping=True))
-
-    def formatted_price_no_decimals(self):
-        temp_price = locale.currency(round(self.price), grouping=True)
-        return temp_price[:-3]
 
     def seller_string(self):
         return " ".join([self.seller.first_name, self.seller.last_name])
