@@ -85,7 +85,6 @@ def order_detail(request, order_id):
             <img src="/website/static/other.jpg">''')
 
 def delete_product_from_order(request, product_id, order_id):
-
     """
     This function is invoked to delete a product from a user's order.
 
@@ -111,6 +110,19 @@ def delete_product_from_order(request, product_id, order_id):
             <img src="/website/static/other.jpg">''')
 
 def give_product_rating(request, order_id, product_id):
+    """
+    This function is invoked to add a rating to a product on a completed order
+
+    ---Arguments---
+    request: the full HTTP request object
+    order_id(integer): the id of the order
+    product_id(integer): the id of the product
+
+    ---Return---
+    Returns HttpResponseRedirect to order_detail
+
+    Author: Blaise Roberts
+    """
     form_data = request.POST
     order = Order.objects.get(pk=order_id)
     product = Product.objects.get(pk=product_id)
@@ -119,6 +131,19 @@ def give_product_rating(request, order_id, product_id):
             args=[order.id]))
 
 def change_product_rating(request, order_id, product_id):
+    """
+    This function is invoked to update a rating to a product on a completed order
+
+    ---Arguments---
+    request: the full HTTP request object
+    order_id(integer): the id of the order
+    product_id(integer): the id of the product
+
+    ---Return---
+    Returns HttpResponseRedirect to order_detail
+
+    Author: Blaise Roberts
+    """
     form_data = request.POST
     order = Order.objects.get(pk=order_id)
     product = Product.objects.get(pk=product_id)

@@ -35,6 +35,7 @@ class Product (models.Model):
                             price, without any decimal places
     - seller_string(): returns the first name and last name of the person selling 
     the product as a string
+    - get_rating(): returns the average rating for a product
 
     Author: Jessica Younker and Jeremy Bakker
     """
