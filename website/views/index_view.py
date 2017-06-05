@@ -25,6 +25,7 @@ def index(request):
     template_name = 'index.html'
     my_product_list = Product.objects.filter(current_inventory__gt=0, 
         is_active=1).order_by('-id')[:20]
+    possible_recommendations = []
 
 
     if request.user.is_authenticated():
@@ -34,32 +35,39 @@ def index(request):
         possible_products = all_products.difference(user_liked_products, 
             user_disliked_products)
         
-        possible_recommendations = []
-        sum_user_similarity_indices_of_likes = 0
-        sum_user_similarity_indices_of_dislikes = 0
         for product in possible_products:
+            sum_user_similarity_indices_of_likes = 0
+            sum_user_similarity_indices_of_dislikes = 0
+            print("possible product--",product.title)
             users_who_have_liked = product.likes.all()
             users_who_have_disliked = product.dislikes.all()
             product_interaction_count = product.likes.all().count() +\
                 product.dislikes.all().count()
-            for user in users_who_have_liked:
-                sum_user_similarity_indices_of_likes += get_similarity_index(request.user, user)
-            for user in users_who_have_disliked:
-                sum_user_similarity_indices_of_dislikes += get_similarity_index(request.user, user)
-            try:
-                product_possibility_coefficient_index = (sum_user_similarity_indices_of_likes - sum_user_similarity_indices_of_dislikes) / product_interaction_count
-            except ZeroDivisionError:
-                product_possibility_coefficient_index = 0
+            print("product interaction count--",product_interaction_count)
+            if product_interaction_count == 0:
                 pass
-            if product_possibility_coefficient_index > .25:
-                possible_recommendations.append(product)
+            else:
+                for user in users_who_have_liked:
+                    sum_user_similarity_indices_of_likes += get_similarity_index(request.user, user)
+                    print("new sum of likes indices--", sum_user_similarity_indices_of_likes)
+                for user in users_who_have_disliked:
+                    sum_user_similarity_indices_of_dislikes += get_similarity_index(request.user, user)
+                    print("new sum of DISlikes indices--", sum_user_similarity_indices_of_dislikes)
+                
+                product_possibility_coefficient_index = (sum_user_similarity_indices_of_likes - sum_user_similarity_indices_of_dislikes) / product_interaction_count
+                print("possibility coefficient--", product_possibility_coefficient_index)
+                
+                if product_possibility_coefficient_index > .25:
+                    possible_recommendations.append(product)
+                print("possible recommendation list of products", possible_recommendations)
 
     if my_product_list:
         return render(request, template_name, 
-            {'product_dict_list': my_product_list})
+            {'product_dict_list': my_product_list, 'product_recommendations':possible_recommendations})
     else:
         return render(request, template_name, {'product_dict_list': [], 
             "error": "No products are available."})
+
 
 def get_similarity_index(user_one, user_two):
     user_one_likes = user_one.likes.all()

@@ -50,7 +50,7 @@ def product_detail(request, product_id):
 
         return render(request, template_name, {'product': product, 
             "current_users_product": current_users_product, 
-            "liked":product.liked_by_current_user, "disliked":product.disliked_by_current_user})
+            "liked":product.liked_by_current_user(request.user.id), "disliked":product.disliked_by_current_user(request.user.id)})
 
     elif request.method == 'POST':
 
