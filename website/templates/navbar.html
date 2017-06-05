@@ -39,6 +39,9 @@
         <a href="/my-products/{{ user.id }}">My Products</a>
       </li>
       <li>
+        <a href="/recommendations/{{ user.id }}">Recommended<span class="badge" style="margin-left: 2px">{{ user.profile.get_user_recommendations }}</span></a><br>
+      </li>
+      <li>
         <a href="/order/{{ request.user.profile.get_user_order }}">
         Shopping Cart</a>
       </li>
