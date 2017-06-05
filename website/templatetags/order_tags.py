@@ -11,6 +11,17 @@ def get_product_rating(order, product):
         return pr.rating
     except:
         return "Not Rated Yet"
+@register.assignment_tag
+def get_order_total(order):
+    order_total = 0.0
+    try:
+        products = order.products.all()
+        for product in products:
+            product_count = product.product_on_order.filter(order=order).count()
+            order_total += float(product.price*product_count)
+        return order_total
+    except:
+        return 0
 
 @register.simple_tag
 def get_product_count(order, product):
@@ -27,7 +38,7 @@ def get_product_subtotal(order, product, as_string=False):
         return str(locale.currency(subtotal, grouping=True))
 
 @register.simple_tag
-def get_order_total(order, as_string=False):
+def order_total(order, as_string=False):
     order_total = 0.0
     products = order.products.all()
     for product in products:
@@ -37,3 +48,5 @@ def get_order_total(order, as_string=False):
         return order_total
     else:
         return str(locale.currency(order_total, grouping=True))
+
+
