@@ -75,8 +75,7 @@ def order_detail(request, order_id):
             total_string = "$0"
             empty_order = True
             return render(request, template_name, {'order': order, "valid_order":valid_order, 
-                "invalid_products":products_no_longer_available, "empty_order":empty_order, 
-                "order_completed":order_completed})
+                "empty_order":empty_order, "order_completed":order_completed})
     else:
         return HttpResponseForbidden('''<h1>Not your order, bruh!</h1>
             <img src="/website/static/other.jpg">''')
