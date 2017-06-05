@@ -41,6 +41,7 @@
                         <input class="btn btn-danger" name="like_dislike_button" type="submit" value="Dislike">
                     </div>
                 </form>
+                <form action="{% url 'website:recommend_product' product.id%}"><input class="btn btn-primary pull-right" type="submit" style="margin-top: 5px" value="Recommend to a Friend"></input></form>
             {% endif %}
             </p>
     </div>
