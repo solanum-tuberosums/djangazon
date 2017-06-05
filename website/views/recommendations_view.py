@@ -40,4 +40,4 @@ def recommendations(request, user_id):
 
     template='list.html'
 
-    return render(request, template, {"items":product_instance_list, "error": "You have no current recommendations"})
+    return render(request, template, {"items":product_instance_list, "error": "You have no current recommendations."})
