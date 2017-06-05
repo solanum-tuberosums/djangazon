@@ -45,8 +45,9 @@ def product_detail(request, product_id):
     if request.method == 'GET':
         template_name = 'detail.html'
 
-        return render(request, template_name, {'product': product, "current_users_product": current_users_product, 
-                "liked":product.liked_by_current_user, "disliked":product.disliked_by_current_user})
+        return render(request, template_name, {'product': product, 
+            "current_users_product": current_users_product, 
+            "liked":product.liked_by_current_user, "disliked":product.disliked_by_current_user})
 
     elif request.method == 'POST':
 
@@ -78,13 +79,15 @@ def product_detail(request, product_id):
                 'posted_object_identifier': product.title})
         elif behavior_button_clicked == 'Remove for Sale':
             template_name = 'success/success.html'
-            num_times_product_has_been_ordered = ProductOrder.objects.filter(product=product_id).count()
+            num_times_product_has_been_ordered = \
+                ProductOrder.objects.filter(product=product_id).count()
 
 
             if num_times_product_has_been_ordered == 0:
                 # soft delete
                 Product.objects.get(pk=product_id).delete()
-                return render(request, template_name, {"posted_object":"Deleted Product", "posted_object_identifier":product_id})
+                return render(request, template_name, {"posted_object":"Deleted Product", 
+                    "posted_object_identifier":product_id})
 
             else:
                 # hard delete
@@ -92,7 +95,8 @@ def product_detail(request, product_id):
                     prod = Product.objects.get(pk=product_id)
                     prod.is_active = 0
                     prod.save()
-                    return render(request, template_name, {"posted_object":"Removed Product ", "posted_object_identifier":product_id})
+                    return render(request, template_name, {"posted_object":"Removed Product ", 
+                        "posted_object_identifier":product_id})
                 except:
                     return ObjectDoesNotExist('''<h1>Product not found in database</h1>''')
         else:
