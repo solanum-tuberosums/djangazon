@@ -63,3 +63,20 @@ class Product (models.Model):
 
     def seller_string(self):
         return " ".join([self.seller.first_name, self.seller.last_name])
+
+    def liked_by_current_user(self):
+        likes = self.likes.all()
+
+        # If user has liked this product
+        if likes:
+            return True
+        # If user has disliekd this product
+        else:
+            return False
+    def disliked_by_current_user(self):
+        dislikes = self.dislikes.all()
+
+        if dislikes:
+            return True
+        else:
+            return False
