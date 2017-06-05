@@ -42,6 +42,9 @@ def product_detail(request, product_id):
     liked_bool = False
     disliked_bool = False
 
+    if request.user == product.seller:
+        current_users_product = True
+
     if request.method == 'GET':
         template_name = 'detail.html'
 
