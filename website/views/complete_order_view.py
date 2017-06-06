@@ -38,7 +38,6 @@ def complete_order(request):
             "complete_order_form": complete_order_form})
 
     elif request.method == 'POST':
-        print("post")
         form_data = request.POST
         order = Order.objects.get(user=request.user, payment_type_id=None)
         open_order_id = order.id
@@ -50,6 +49,7 @@ def complete_order(request):
             product_count = (ProductOrder.objects.filter(product=product,
                     order=order).count())
             product.current_inventory = product.current_inventory - product_count 
+            product.likes.add(request.user)
             product.save()
         o= Order(
             id = open_order_id,
