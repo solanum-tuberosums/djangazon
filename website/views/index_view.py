@@ -37,8 +37,8 @@ def index(request):
         
         for product in possible_products:
             possibility_coefficient = 0
-            sum_user_similarity_indices_of_likes = 0
-            sum_user_similarity_indices_of_dislikes = 0
+            likes_sum = 0
+            dislikes_sum = 0
             print("possible product--",product.title)
             users_who_have_liked = product.likes.all()
             users_who_have_disliked = product.dislikes.all()
@@ -49,18 +49,19 @@ def index(request):
                 pass
             else:
                 for user in users_who_have_liked:
-                    sum_user_similarity_indices_of_likes += get_similarity_index(request.user, user)
-                    print("new sum of likes indices--", sum_user_similarity_indices_of_likes)
+                    likes_sum += get_similarity_index(request.user, user)
+                    print("new sum of Likes indices--", likes_sum)
                 for user in users_who_have_disliked:
-                    sum_user_similarity_indices_of_dislikes += get_similarity_index(request.user, user)
-                    print("new sum of DISlikes indices--", sum_user_similarity_indices_of_dislikes)
+                    dislikes_sum += get_similarity_index(request.user, user)
+                    print("new sum of DISlikes indices--", dislikes_sum)
                 
-                possibility_coefficient = (sum_user_similarity_indices_of_likes - sum_user_similarity_indices_of_dislikes) / product_interaction_count
+                possibility_coefficient = (likes_sum - dislikes_sum) / product_interaction_count
                 print("possibility coefficient--", possibility_coefficient)
                 
                 if possibility_coefficient > .25:
                     product_tuple = (product, possibility_coefficient)
                     possible_list.append(product_tuple)
+
         if possible_list:
             for product_tuple in possible_list:
                 print("possible products unsorted--\n", product_tuple[0].title, product_tuple[1])    
@@ -95,14 +96,14 @@ def get_similarity_index(user_one, user_two):
     user_two_likes_user_one_dislikes_intersection = \
         len(user_two_likes.intersection(user_one_dislikes))
 
+    print('user_one', user_one)
+    print('user_two', user_two)
     divisor = len(user_one_likes.union(user_two_likes, user_one_dislikes, user_two_dislikes))
     print('divisor', divisor)
     dividend =  users_likes_intersection + users_dislikes_intersection - user_one_like_user_two_dislike_intersection - user_two_likes_user_one_dislikes_intersection
     print('dividend', dividend)
     user_similarity_index = dividend/divisor
     print('user_similarity_index', user_similarity_index)
-    print('user_one', user_one)
-    print('user_two', user_two)
     return user_similarity_index
 
 

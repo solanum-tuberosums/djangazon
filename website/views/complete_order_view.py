@@ -49,7 +49,9 @@ def complete_order(request):
         for product in line_items:
             product_count = (ProductOrder.objects.filter(product=product,
                     order=order).count())
-            product.current_inventory = product.current_inventory - product_count 
+            product.current_inventory = product.current_inventory - product_count
+            product.dislikes.clear()
+            product.likes.add(request.user) 
             product.save()
         o= Order(
             id = open_order_id,
