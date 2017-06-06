@@ -12,9 +12,9 @@
   {% if order_products %}
     <div class="col-xs-8 col-xs-offset-2">
     <div class="list-group">
+      <li class="list-group-item list-group-item-danger text-center lead">Shopping Cart</li>
     {% for product in order_products %}
-      <li class="list-group-item list-group-item-danger lead">Shopping Cart</li>
-      <a class="list-group-item list-group-item-danger text-right text-capitalize" href="/products/{{ product.id }}">{{ product.title }}</a>
+      <a class="list-group-item list-group-item-danger text-center text-capitalize" href="/products/{{ product.id }}">{{ product.title }}</a>
 
     {% empty %}
       <h4>{{ error }}</h4>
