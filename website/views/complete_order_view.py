@@ -38,7 +38,6 @@ def complete_order(request):
             "complete_order_form": complete_order_form})
 
     elif request.method == 'POST':
-        print("post")
         form_data = request.POST
         order = Order.objects.get(user=request.user, payment_type_id=None)
         open_order_id = order.id

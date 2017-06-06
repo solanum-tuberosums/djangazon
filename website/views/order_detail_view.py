@@ -13,8 +13,6 @@ import locale
 
 locale.setlocale( locale.LC_ALL, '' )
 
-
-
 def order_detail(request, order_id):
     """
     This function is invoked to display the details of a user's order.
@@ -48,8 +46,6 @@ def order_detail(request, order_id):
     if request.user == order.user:
         # Get seller object
         line_items = order.products.distinct()
-        product_list = list()
-        total = float()
 
         if order.payment_type is not None:
             order_completed = True
@@ -66,20 +62,14 @@ def order_detail(request, order_id):
                 if product.current_inventory < product_count:
                     valid_order = False
                     products_no_longer_available.append(product)
-                subtotal = product.price * product_count
-                total += float(subtotal)
-                total_string = locale.currency(total, grouping=True)
-                product_list.append((product, product_count, locale.currency(subtotal, grouping=True)))
-            return render(request, template_name, {'order': order, "orderproducts":
-                product_list, "total":total, "total_string":total_string, "valid_order":valid_order, 
-                    "invalid_products":products_no_longer_available, "order_completed":order_completed})
+
+            return render(request, template_name, {'order': order, "valid_order":valid_order, 
+                "invalid_products":products_no_longer_available, 
+                "order_completed":order_completed, "empty_order":empty_order})
         else:
-            total = 0.0
-            total_string = "$0"
             empty_order = True
-            return render(request, template_name, {'order': order, "total":total, 
-                "total_string":total_string, "valid_order":valid_order,
-                "invalid_products":products_no_longer_available, "empty_order":empty_order})
+            return render(request, template_name, {'order': order, "valid_order":valid_order, 
+                "empty_order":empty_order, "order_completed":order_completed})
     else:
         return HttpResponseForbidden('''<h1>Not your order, bruh!</h1>
             <img src="/website/static/other.jpg">''')

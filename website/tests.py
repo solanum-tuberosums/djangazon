@@ -8,6 +8,8 @@ from .models import Product, ProductCategory, Order, PaymentType, ProductOrder
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
+from django.db.models.query import QuerySet
+
 ########################################
 ####            Methods             ####
 ####    - Used to create objects    ####
@@ -48,11 +50,15 @@ def create_product_order(order_id, product_id):
 
 def create_payment_type(user):
     return PaymentType.objects.create(
-        account_nickname = "Test Payment Type",
-        account_type = "Visa",
-        account_number = "1223122312331231",
-        is_active = 1,
+        account_nickname="Test Payment Type",
+        account_type="Visa",
+        account_number="1223122312331231",
+        is_active=1,
         cardholder=user)
+
+def complete_order(order, payment_type):
+    order.payment_type = payment_type
+    order.save()
 
 
 ####################
@@ -152,10 +158,10 @@ class WebsiteViewTests(TestCase):
         create_product_order(order.id, product_3.id)
         response = client.get(reverse('website:order_detail', args=[order.id]))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['orderproducts'], \
-            ["(<Product: Product object>, 2, '$20.00')", \
-            "(<Product: Product object>, 1, '$10.00')", \
-            "(<Product: Product object>, 1, '$10.00')"])
+        self.assertEqual(response.context['order'], order)
+        for product in order.products.all():
+            self.assertIn(product, response.context['order'].products.all())
+
         client.logout()
 
 
@@ -212,3 +218,28 @@ class WebsiteViewTests(TestCase):
         self.assertContains(response, product.description)
         self.assertContains(response, product.price)
         self.assertContains(response, product.current_inventory)
+
+    #################################
+    ###   ORDER HISTORY VIEW    ####
+    #################################
+
+    def test_order_history_view_has_all_orders(self):
+        client = Client()
+        my_user = create_user()
+        client.force_login(my_user, backend=None)
+        category = create_product_category()
+        product_1 = create_product(user=my_user, category=category)
+        order_1 = create_order(my_user)
+        order_2 = create_order(my_user)
+        create_product_order(order_1.id, product_1.id)
+        create_product_order(order_2.id, product_1.id)
+        payment_type_1 = create_payment_type(my_user)
+        complete_order(order_1, payment_type_1)
+        complete_order(order_2, payment_type_1)
+    
+        response = client.get(reverse('website:order_history'))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(response.context['orders'], [repr(order_2), repr(order_1)])
+
+
+        
