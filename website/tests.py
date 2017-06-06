@@ -8,6 +8,8 @@ from .models import Product, ProductCategory, Order, PaymentType, ProductOrder
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
+from django.db.models.query import QuerySet
+
 ########################################
 ####            Methods             ####
 ####    - Used to create objects    ####
@@ -152,10 +154,10 @@ class WebsiteViewTests(TestCase):
         create_product_order(order.id, product_3.id)
         response = client.get(reverse('website:order_detail', args=[order.id]))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['orderproducts'], \
-            ["(<Product: Product object>, 2, '$20.00')", \
-            "(<Product: Product object>, 1, '$10.00')", \
-            "(<Product: Product object>, 1, '$10.00')"])
+        self.assertEqual(response.context['order'], order)
+        for product in order.products.all():
+            self.assertIn(product, response.context['order'].products.all())
+
         client.logout()
 
 
