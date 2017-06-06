@@ -27,7 +27,6 @@ class Order (models.Model):
     products = models.ManyToManyField(Product, through='ProductOrder', related_name='products_on_order')
     ratings = models.ManyToManyField(Product, through='ProductRating', related_name='ratings_on_order')
 
-    def __str__(self):
-        return "ORDER: " + str(self.pk) + " | User: " + self.user.first_name
+
 
 

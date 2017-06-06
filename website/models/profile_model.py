@@ -62,7 +62,6 @@ class Profile (models.Model):
     def get_user_recommendations(self):
 
         profile = Profile.objects.get(user=self.user)
-        print("profile", profile)
         upr_count = profile.userproductrecommendation_set.filter(viewed=False).count()
         return upr_count
         # except:
