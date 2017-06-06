@@ -116,6 +116,9 @@ def give_product_rating(request, order_id, product_id):
     form_data = request.POST
     order = Order.objects.get(pk=order_id)
     product = Product.objects.get(pk=product_id)
+    if int(form_data['rating']) < 3:
+        product.likes.clear()
+        product.dislikes.add(request.user)
     ProductRating.objects.create(product=product, order=order, rating=form_data['rating'])
     return HttpResponseRedirect(reverse('website:order_detail', 
             args=[order.id]))
@@ -137,6 +140,12 @@ def change_product_rating(request, order_id, product_id):
     form_data = request.POST
     order = Order.objects.get(pk=order_id)
     product = Product.objects.get(pk=product_id)
+    if int(form_data['rating']) < 3:
+        product.likes.clear()
+        product.dislikes.add(request.user)
+    else:
+        product.dislikes.clear()
+        product.likes.add(request.user)
     ProductRating.objects.filter(product=product, order=order).update(rating=form_data['rating'])
     return HttpResponseRedirect(reverse('website:order_detail', 
             args=[order.id]))
