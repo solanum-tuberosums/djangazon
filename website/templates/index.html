@@ -34,6 +34,7 @@
     {% endfor %}
     </div>
   </div>
+  {% if user.is_authenticated %}
   <div class="col-xs-6">
   <h2 class="text-right">Recommended Products</h2>
     <div class="list-group">
@@ -46,4 +47,5 @@
     {% endfor %}
     </div>
   </div>
+  {% endif %}
   {% endblock %}

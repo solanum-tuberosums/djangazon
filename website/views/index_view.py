@@ -25,7 +25,10 @@ def index(request):
     template_name = 'index.html'
     my_product_list = Product.objects.filter(current_inventory__gt=0, 
         is_active=1).order_by('-id')[:20]
-    order_id = request.user.profile.get_user_order()
+    try:
+        order_id = request.user.profile.get_user_order()
+    except: 
+        order_id = ''
     active_order_products = []
     if order_id != '':
         active_order = Order.objects.get(pk=order_id)
