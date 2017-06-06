@@ -13,8 +13,6 @@ import locale
 
 locale.setlocale( locale.LC_ALL, '' )
 
-
-
 def order_detail(request, order_id):
     """
     This function is invoked to display the details of a user's order.

@@ -152,10 +152,21 @@ class WebsiteViewTests(TestCase):
         create_product_order(order.id, product_3.id)
         response = client.get(reverse('website:order_detail', args=[order.id]))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['orderproducts'], \
-            ["(<Product: Product object>, 2, '$20.00')", \
-            "(<Product: Product object>, 1, '$10.00')", \
-            "(<Product: Product object>, 1, '$10.00')"])
+        print("\n\n\n")
+        for z in response.context['order'].products.all():
+            print(z.title)
+        print("---")
+        for x in order.products.all():
+            print(x.title)
+        print("\n\n\n")
+
+        # self.assertQuerysetEqual(response.context['orders'], [repr(order_2), repr(order_1)])
+        self.assertEqual(response.context['order'], order)
+        my_products = order.products.all()
+        self.assertQuerysetEqual(response.context['order'].products.all(), [repr(order.products.all())])
+        # self.assertEqual(response.context['order'].products.all(), [repr(my_products[0]), repr(my_products[1]), repr(my_products[2]), repr(my_products[3]) ])
+
+        # self.assertEqual(response.context['order'].product_set, order.product_set)
         client.logout()
 
 
