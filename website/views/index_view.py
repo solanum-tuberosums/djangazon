@@ -26,7 +26,7 @@ def index(request):
     my_product_list = Product.objects.filter(current_inventory__gt=0, 
         is_active=1).order_by('-id')[:20]
     possible_recommendations = []
-
+    possible_list = []
 
     if request.user.is_authenticated():
         all_products = Product.objects.all()
@@ -36,6 +36,7 @@ def index(request):
             user_disliked_products)
         
         for product in possible_products:
+            possibility_coefficient = 0
             sum_user_similarity_indices_of_likes = 0
             sum_user_similarity_indices_of_dislikes = 0
             print("possible product--",product.title)
@@ -54,12 +55,20 @@ def index(request):
                     sum_user_similarity_indices_of_dislikes += get_similarity_index(request.user, user)
                     print("new sum of DISlikes indices--", sum_user_similarity_indices_of_dislikes)
                 
-                product_possibility_coefficient_index = (sum_user_similarity_indices_of_likes - sum_user_similarity_indices_of_dislikes) / product_interaction_count
-                print("possibility coefficient--", product_possibility_coefficient_index)
+                possibility_coefficient = (sum_user_similarity_indices_of_likes - sum_user_similarity_indices_of_dislikes) / product_interaction_count
+                print("possibility coefficient--", possibility_coefficient)
                 
-                if product_possibility_coefficient_index > .25:
-                    possible_recommendations.append(product)
-                print("possible recommendation list of products", possible_recommendations)
+                if possibility_coefficient > .25:
+                    product_tuple = (product, possibility_coefficient)
+                    possible_list.append(product_tuple)
+        if possible_list:
+            for product_tuple in possible_list:
+                print("possible products unsorted--\n", product_tuple[0].title, product_tuple[1])    
+            possible_list.sort(key=lambda tup: tup[1], reverse=True)
+            for product_tuple in possible_list:
+                print("possible products sorted--\n", product_tuple[0].title)
+                possible_recommendations.append(product_tuple[0]) 
+        print("possible recommendation list of products", possible_recommendations)
 
     if my_product_list:
         return render(request, template_name, 
