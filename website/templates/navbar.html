@@ -29,9 +29,6 @@
         <a href="{% url 'website:list_product_categories' %}">Categories</a>
       </li>
       <li>
-        <a href="/my-account/{{ user.id }}">My Account</a>
-      </li>
-      <li>
         <a href="{% url 'website:sell' %}">Sell Product</a>
       </li>
       <li>
@@ -41,8 +38,11 @@
         <a href="/recommendations/{{ user.id }}">Recommended<span class="badge" style="margin-left: 2px">{{ user.profile.get_user_recommendations }}</span></a><br>
       </li>
       <li>
+        <a href="/my-account/{{ user.id }}"><i style="font-size:1.8em;" class="fi-torso"></i></a>
+      </li>
+      <li>
         <a href="/order/{{ request.user.profile.get_user_order }}">
-        Shopping Cart</a>
+        <i style="font-size:1.8em;" class="fi-shopping-cart"></i></a>
       </li>
     </ul>
     {% else %}

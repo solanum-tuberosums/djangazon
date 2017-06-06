@@ -24,6 +24,7 @@
         <hr>
         <p class="lead text-center">Price per Unit<span style="float:right">{{ product.formatted_price }}</span></p>
         <p class="lead text-center">Quantity  <span style="float:right">{{ product.current_inventory }}</span></p>
+        <p class="lead text-center">Average Rating  <span style="float:right">{{ product.get_rating }}</span></p>
         <hr>
         <blockquote class="blockquote-reverse">
           <footer>Added {{ product.date_added }} by <span class="text-capitalize">{{ product.seller.first_name }} {{ product.seller.last_name}}</span></footer>

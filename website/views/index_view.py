@@ -25,6 +25,11 @@ def index(request):
     template_name = 'index.html'
     my_product_list = Product.objects.filter(current_inventory__gt=0, 
         is_active=1).order_by('-id')[:20]
+    order_id = request.user.profile.get_user_order()
+    active_order_products = []
+    if order_id != '':
+        active_order = Order.objects.get(pk=order_id)
+        active_order_products = active_order.products.distinct()
     possible_recommendations = []
     possible_list = []
 
@@ -73,7 +78,7 @@ def index(request):
 
     if my_product_list:
         return render(request, template_name, 
-            {'product_dict_list': my_product_list, 'product_recommendations':possible_recommendations})
+            {'product_dict_list': my_product_list, 'product_recommendations':possible_recommendations, 'order_products':active_order_products})
     else:
         return render(request, template_name, {'product_dict_list': [], 
             "error": "No products are available."})
