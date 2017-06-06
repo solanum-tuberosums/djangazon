@@ -48,8 +48,6 @@ def order_detail(request, order_id):
     if request.user == order.user:
         # Get seller object
         line_items = order.products.distinct()
-        product_list = list()
-        total = float()
 
         if order.payment_type is not None:
             order_completed = True
@@ -71,8 +69,6 @@ def order_detail(request, order_id):
                 "invalid_products":products_no_longer_available, 
                 "order_completed":order_completed, "empty_order":empty_order})
         else:
-            total = 0.0
-            total_string = "$0"
             empty_order = True
             return render(request, template_name, {'order': order, "valid_order":valid_order, 
                 "empty_order":empty_order, "order_completed":order_completed})
