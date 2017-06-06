@@ -8,6 +8,8 @@ from .models import Product, ProductCategory, Order, PaymentType, ProductOrder
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
+from django.db.models.query import QuerySet
+
 ########################################
 ####            Methods             ####
 ####    - Used to create objects    ####
@@ -152,21 +154,10 @@ class WebsiteViewTests(TestCase):
         create_product_order(order.id, product_3.id)
         response = client.get(reverse('website:order_detail', args=[order.id]))
         self.assertEqual(response.status_code, 200)
-        print("\n\n\n")
-        for z in response.context['order'].products.all():
-            print(z.title)
-        print("---")
-        for x in order.products.all():
-            print(x.title)
-        print("\n\n\n")
-
-        # self.assertQuerysetEqual(response.context['orders'], [repr(order_2), repr(order_1)])
         self.assertEqual(response.context['order'], order)
-        my_products = order.products.all()
-        self.assertQuerysetEqual(response.context['order'].products.all(), [repr(order.products.all())])
-        # self.assertEqual(response.context['order'].products.all(), [repr(my_products[0]), repr(my_products[1]), repr(my_products[2]), repr(my_products[3]) ])
+        for product in order.products.all():
+            self.assertIn(product, response.context['order'].products.all())
 
-        # self.assertEqual(response.context['order'].product_set, order.product_set)
         client.logout()
 
 
