@@ -31,6 +31,7 @@ def index(request):
     template_name = 'index.html'
     my_product_list = Product.objects.filter(current_inventory__gt=0, 
         is_active=1).order_by('-id')[:20]
+    ## Getting info for shopping cart
     try:
         order_id = request.user.profile.get_user_order()
     except: 
@@ -39,6 +40,8 @@ def index(request):
     if order_id != '':
         active_order = Order.objects.get(pk=order_id)
         active_order_products = active_order.products.distinct()
+
+    ## Getting product recommendations
     possible_recommendations = []
     possible_list = []
     # Get all users' liked and dislked products
@@ -55,9 +58,10 @@ def index(request):
             possibility_coefficient = 0
             likes_sum = 0
             dislikes_sum = 0
+            # Get list of users who have liked/disliked product
             users_who_have_liked = product.likes.all()
             users_who_have_disliked = product.dislikes.all()
-            # Count "interaction" (likes and dislikes) for products
+            # Count "interaction" (likes and dislikes) for product
             product_interaction_count = product.likes.all().count() +\
                 product.dislikes.all().count()
             # If user has no interaction with a product, ignore
@@ -74,18 +78,20 @@ def index(request):
                 for user in users_who_have_disliked:
                     dislikes_sum += get_similarity_index(request.user, user)
                 # Possibility coefficient is the likelihood that the current 
-                # user will feel similarly to a product it has not yet 
+                # user will be recommended a product they have not yet 
                 # interacted with relative to other users who have interacted 
-                # with it. 
+                # with it.  This should be higher for a product that similar
+                # users have liked or for a product that dissimilar users have 
+                # disliked.
                 possibility_coefficient = (likes_sum - dislikes_sum) / product_interaction_count
                 
                 if possibility_coefficient > .25:
                     product_tuple = (product, possibility_coefficient)
                     possible_list.append(product_tuple)
 
+        #sorts the possible_list to show highest possibility at the top
         if possible_list:
-            for product_tuple in possible_list:
-                possible_list.sort(key=lambda tup: tup[1], reverse=True)
+            possible_list.sort(key=lambda tup: tup[1], reverse=True)
             for product_tuple in possible_list:
                 possible_recommendations.append(product_tuple[0])
     if my_product_list:
@@ -105,39 +111,39 @@ def get_similarity_index(user_one, user_two):
 
     ---Arguments---
     user_one: current user
-    user_two: any other user who has interacted with the same products as the
-    current user
+    user_two: any other user who has interacted with the product for which we 
+    are calculating the possibility coefficient.
 
     Author: Jeremy Bakker, Blaise Roberts, Will Sims, Jessica Younker
     """
-    #All liked and disliked products for current user
+    # All liked and disliked products for current user
     user_one_likes = user_one.likes.all()
     user_one_dislikes = user_one.dislikes.all()
 
-    #All liked and disliked products for another user
+    # All liked and disliked products for another user
     user_two_likes = user_two.likes.all()
     user_two_dislikes = user_two.dislikes.all()
 
-    #Number of matching liked products between the 2 users
+    # Number of matching liked products between the 2 users
     users_likes_intersection = len(user_one_likes.intersection(
         user_two_likes))
-    #Number of matching disliked products between the 2 users
+    # Number of matching disliked products between the 2 users
     users_dislikes_intersection = len(user_one_dislikes.intersection(
         user_two_dislikes))
 
-    #Number of products liked by user 1 but dislked by user 2
+    # Number of products liked by user 1 but dislked by user 2
     user_one_like_user_two_dislike_intersection = \
         len(user_one_likes.intersection(user_two_dislikes))
-    #Number of products liked by user 2 but dislked by user 1
+    # Number of products liked by user 2 but dislked by user 1
     user_two_likes_user_one_dislikes_intersection = \
         len(user_two_likes.intersection(user_one_dislikes))
 
     # Total number of likes and dislikes in common between the two users (the 
-    # actual divisor in the equation for the Jaccard Index)    
+    # actual divisor in the equation for this piece of the Jaccard Index)    
     divisor = len(user_one_likes.union(user_two_likes, user_one_dislikes, user_two_dislikes))
     # Total number of likes and dislikes in common between the two users minus
     # the total number of opposite ratings between them (the actual dividend
-    # in the equation for the Jaccard Index)
+    # in the equation for this piece of the Jaccard Index)
     dividend =  users_likes_intersection + users_dislikes_intersection - user_one_like_user_two_dislike_intersection - user_two_likes_user_one_dislikes_intersection
     # The Jaccard Index:
     user_similarity_index = dividend/divisor
