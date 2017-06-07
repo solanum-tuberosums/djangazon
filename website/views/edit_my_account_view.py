@@ -1,13 +1,38 @@
 from django.shortcuts import render
-from website.models.profile_model import Profile
-from website.forms import MyAccountForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.urls import reverse
+from website.models.profile_model import Profile
+from website.forms import MyAccountForm
 
 
 
 def edit_my_account(request, user_id):
+    """
+    Function allowing a user to edit User and Profile information on My Account
+    page. 
+
+    ---Arguments---
+    request: the full HTTP request object
+    user_id: id of current user
+
+    ---GET---
+    renders my_account_form.py and prepopulates the fields with info for
+    current user. Apart from first name and last name, fields will be empty the
+    first time user is accessing this form.
+
+    ---Context---
+    'edit_my_account_form': (form): instance of user's current Profile and User
+        information
+
+    ---POST---
+    Updates my account instance and redirects user back to My Account page
+
+    ---Context---
+    'form': instance of user's updated Profile and User information
+
+    Author: Jessica Younker
+    """
     if request.method == 'GET':
         template_name = 'edit_my_account.html'
         current_account_info = {
