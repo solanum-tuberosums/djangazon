@@ -85,7 +85,7 @@ def index(request):
 
         if possible_list:
             for product_tuple in possible_list:
-            possible_list.sort(key=lambda tup: tup[1], reverse=True)
+                possible_list.sort(key=lambda tup: tup[1], reverse=True)
             for product_tuple in possible_list:
                 possible_recommendations.append(product_tuple[0])
     if my_product_list:
