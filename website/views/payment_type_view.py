@@ -74,7 +74,7 @@ def delete_payment_type(request, payment_type_id):
 
     if request.method == 'POST':
         if 'delete_payment_type' in request.POST:
-            pt = PaymentType.objects.get(pk=payment_type_id)
+            pt = PaymentType.objects.get(pk=payment_type_id, )
             if pt.cardholder == request.user:
                 pt.is_active = 0
                 pt.save()
@@ -112,26 +112,28 @@ def edit_payment_type(request, payment_type_id):
 
 	Author: Jessica Younker
 	"""
+	pt_to_edit = PaymentType.objects.get(pk=payment_type_id)
 	if request.method == 'GET':
-		pt_to_edit = PaymentType.objects.get(pk=payment_type_id)
-		payment_type_form = PaymentTypeForm(instance=pt_to_edit)
-		template_name = 'payment_type_update_form.html'
-		return render(request, template_name, {"payment_type_form": 
-		    payment_type_form, "payment_type": pt_to_edit})
+		if request.user == pt_to_edit.cardholder:
+			payment_type_form = PaymentTypeForm(instance=pt_to_edit)
+			template_name = 'payment_type_update_form.html'
+			
+			return render(request, template_name, {"payment_type_form": 
+			    payment_type_form, "payment_type": pt_to_edit})
 
-	elif request.method == 'POST':
+	if request.method == 'POST':
 		form = PaymentTypeForm(request.POST)
-	if form.is_valid():
-		form_data = request.POST
+		if form.is_valid():
+			form_data = request.POST
 
-		updated_pt = PaymentType.objects.get(pk=payment_type_id)
-		updated_pt.account_nickname = form.cleaned_data['account_nickname']
-		updated_pt.account_type = form.cleaned_data['account_type']
-		updated_pt.account_number = form.cleaned_data['account_number']
-		updated_pt.save()
+			updated_pt = PaymentType.objects.get(pk=payment_type_id)
+			updated_pt.account_nickname = form.cleaned_data['account_nickname']
+			updated_pt.account_type = form.cleaned_data['account_type']
+			updated_pt.account_number = form.cleaned_data['account_number']
+			updated_pt.save()
 
-		return HttpResponseRedirect(reverse('website:my_account',
-			args=[request.user.id]))
+			return HttpResponseRedirect(reverse('website:my_account',
+				args=[request.user.id]))
 
 	else:
 		return HttpResponseForbidden('''<h1>Not your payments.</h1>

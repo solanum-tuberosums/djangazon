@@ -8,7 +8,8 @@ from django.urls import reverse
 
 
 def edit_my_account(request, user_id):
-    if request.method == 'GET':
+    if str(request.user.id) == user_id:
+        request.method == 'GET'
         template_name = 'edit_my_account.html'
         current_account_info = {
             "first_name": request.user.first_name, 

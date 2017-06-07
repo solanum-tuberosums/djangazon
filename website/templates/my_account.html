@@ -30,7 +30,6 @@
                     {{ payment_type }}
                     <span style="float: right">
                         <form style="display: inline" method="GET" action="{% url 'website:edit_payment_type' payment_type.id %}">
-                            {% csrf_token %}
                             <input type="submit" class="btn btn-sm btn-success" value="Edit" name="edit_payment_type"></input>
                         </form>
                         <form style="display: inline" method="POST" action="{% url 'website:delete_payment_type' payment_type.id %}">
