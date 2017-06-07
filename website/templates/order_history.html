@@ -13,7 +13,7 @@
         <ul class="list-group">
         {% for product in order.products.distinct %}
             {% get_product_rating order product  as product_rating_flag %}
-            <li style="margin-left:5em" class="list-group-item list-group-item-warning"><a class="text-capitalize" href="/products/{{ product.id }}">{{ product.title }}</a><small style="margin-left:1em"><i>Quantity:{% get_product_count order product %}</i></small><span style="float:right;">Rating: {{ product_rating_flag }}</span></li>
+            <li style="margin-left:5em" class="list-group-item list-group-item-warning"><a class="text-capitalize" href="/products/{{ product.id }}">{{ product.title }}</a><small style="margin-left:1em"><i>Quantity:{% get_product_count_for_order order product %}</i></small><span style="float:right;">Rating: {{ product_rating_flag }}</span></li>
         {% endfor %}
         </ul>
             

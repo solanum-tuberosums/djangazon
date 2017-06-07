@@ -64,7 +64,7 @@
 
 
         <td><a href="/products/{{ product.id }}">{{ product.title }}</a></td>
-        <td class="text-center">{% get_product_count order product %}</td>
+        <td class="text-center">{% get_product_count_for_order order product %}</td>
         <td class="text-right">{{ product.formatted_price }}</td>
         <td class="text-right">{% get_product_subtotal order product as_string %}</td>
         {% if order_completed %}

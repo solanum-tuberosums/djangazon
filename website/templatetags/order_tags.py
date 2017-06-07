@@ -3,7 +3,7 @@ import locale
 
 register = template.Library()
 
-
+# Returns a given product's rating
 @register.assignment_tag
 def get_product_rating(order, product):
     try:
@@ -11,6 +11,8 @@ def get_product_rating(order, product):
         return pr.rating
     except:
         return "Not Rated Yet"
+
+# Returns a given order's total to be compared against in HTML
 @register.assignment_tag
 def get_order_total(order):
     order_total = 0.0
@@ -23,10 +25,15 @@ def get_order_total(order):
     except:
         return 0
 
+
+# Returns the number of times a given product is on a given order
 @register.simple_tag
-def get_product_count(order, product):
+def get_product_count_for_order(order, product):
     return product.product_on_order.filter(order=order).count()
 
+# Returns a given products subtotal for an order
+#   (price * quantity ordered) to be compared 
+#    against in the HTML template
 @register.simple_tag
 def get_product_subtotal(order, product, as_string=False):
     product_count = product.product_on_order.filter(order=order).count()
@@ -37,6 +44,7 @@ def get_product_subtotal(order, product, as_string=False):
     else:
         return str(locale.currency(subtotal, grouping=True))
 
+# Returns the total price of an order
 @register.simple_tag
 def order_total(order, as_string=False):
     order_total = 0.0

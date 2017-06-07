@@ -29,7 +29,7 @@ def order_detail(request, order_id):
     'orderproducts'(list): a list of the products on the order 
     'total'(integer): the total cost of an order
 
-    Author: Blaise Roberts
+    Author: Blaise Roberts & Will Sims
     """
 
     template_name = 'order_detail.html'
