@@ -60,7 +60,7 @@ def my_account(request, user_id):
             street_address, "city": city, "state": state, "postal_code": 
             postal_code, "phone": phone, "user": user, "average_rating": rating_average})            
     else:
-        return HttpResponseForbidden('''<h1>Not your account, homie.</h1>
+        return HttpResponseForbidden('''<h1>Not your account.</h1>
             <img src="/website/static/other.jpg">''')
 
 

@@ -44,7 +44,7 @@ def edit_my_account(request, user_id):
                     args=[request.user.id]))
 
     else:
-        return HttpResponseForbidden('''<h1>Not your account, dawg.</h1>
+        return HttpResponseForbidden('''<h1>Not your account.</h1>
         <img src="/website/static/other.jpg">''')
 
    

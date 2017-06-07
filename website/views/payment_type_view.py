@@ -134,7 +134,7 @@ def edit_payment_type(request, payment_type_id):
 			args=[request.user.id]))
 
 	else:
-		return HttpResponseForbidden('''<h1>Not your payments, dawg.</h1>
+		return HttpResponseForbidden('''<h1>Not your payments.</h1>
 		<img src="/website/static/other.jpg">''')
 
 

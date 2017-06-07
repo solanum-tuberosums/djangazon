@@ -71,7 +71,7 @@ def order_detail(request, order_id):
             return render(request, template_name, {'order': order, "valid_order":valid_order, 
                 "empty_order":empty_order, "order_completed":order_completed})
     else:
-        return HttpResponseForbidden('''<h1>Not your order, bruh!</h1>
+        return HttpResponseForbidden('''<h1>Not your order.</h1>
             <img src="/website/static/other.jpg">''')
 
 def delete_product_from_order(request, product_id, order_id):
@@ -96,7 +96,7 @@ def delete_product_from_order(request, product_id, order_id):
         return HttpResponseRedirect(reverse('website:order_detail', 
             args=[order.id]))
     else:
-        return HttpResponseForbidden('''<h1>Not your order, bruh!</h1>
+        return HttpResponseForbidden('''<h1>Not your order.</h1>
             <img src="/website/static/other.jpg">''')
 
 def give_product_rating(request, order_id, product_id):
