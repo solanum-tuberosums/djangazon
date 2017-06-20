@@ -64,8 +64,9 @@ class Profile (models.Model):
         profile = Profile.objects.get(user=self.user)
         upr_count = profile.userproductrecommendation_set.filter(viewed=False).count()
         return upr_count
-        # except:
-        #     return 0
+
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
